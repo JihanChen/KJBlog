@@ -1,6 +1,6 @@
-package org.kymjs.blog.ui.widget;
+package org.kymjs.blog.ui.widget.listview;
 
-import org.kymjs.blog.ui.widget.PullToRefreshBase.OnRefreshListener;
+import org.kymjs.blog.ui.widget.listview.PullToRefreshBase.OnRefreshListener;
 
 import android.content.Context;
 import android.util.AttributeSet;

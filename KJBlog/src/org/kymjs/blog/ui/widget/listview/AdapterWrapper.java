@@ -1,4 +1,4 @@
-package org.kymjs.blog.ui.widget;
+package org.kymjs.blog.ui.widget.listview;
 
 import java.util.LinkedList;
 import java.util.List;

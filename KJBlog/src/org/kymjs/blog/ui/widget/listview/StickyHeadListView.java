@@ -1,7 +1,7 @@
-package org.kymjs.blog.ui.widget;
+package org.kymjs.blog.ui.widget.listview;
 
 import org.kymjs.blog.R;
-import org.kymjs.blog.ui.widget.WrapperViewList.LifeCycleListener;
+import org.kymjs.blog.ui.widget.listview.WrapperViewList.LifeCycleListener;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

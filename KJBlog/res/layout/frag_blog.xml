@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <org.kymjs.blog.ui.widget.PullToRefreshListView
+    <org.kymjs.blog.ui.widget.listview.PullToRefreshListView
         android:id="@+id/blog_swiperefreshlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -1,4 +1,4 @@
-package org.kymjs.blog.ui.widget;
+package org.kymjs.blog.ui.widget.listview;
 
 import android.content.Context;
 import android.widget.SectionIndexer;

@@ -1,6 +1,6 @@
-package org.kymjs.blog.ui.widget;
+package org.kymjs.blog.ui.widget.listview;
 
-import org.kymjs.blog.ui.widget.ILoadingLayout.State;
+import org.kymjs.blog.ui.widget.listview.ILoadingLayout.State;
 
 import android.content.Context;
 import android.util.AttributeSet;

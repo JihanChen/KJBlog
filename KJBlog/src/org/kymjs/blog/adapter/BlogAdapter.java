@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.kymjs.blog.R;
 import org.kymjs.blog.domain.Blog;
-import org.kymjs.blog.ui.widget.StickyHeadAdapter;
+import org.kymjs.blog.ui.widget.listview.StickyHeadAdapter;
 import org.kymjs.kjframe.KJBitmap;
 import org.kymjs.kjframe.utils.StringUtils;
 
