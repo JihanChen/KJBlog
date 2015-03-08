@@ -1,13 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
 
-    <Button
-        android:id="@+id/button1"
+    <ImageView
+        android:id="@+id/find_img_zone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_home_bg"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY" />
+
+    <RelativeLayout
+        android:id="@+id/find_layout_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:layout_alignBottom="@+id/find_img_zone"
+        android:layout_alignTop="@+id/find_img_zone"
+        android:layout_centerInParent="true"
+        android:paddingBottom="5dp" >
 
-</LinearLayout>
+        <org.kymjs.kjframe.widget.RoundImageView
+            android:id="@+id/find_img_head"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:src="@drawable/main_head" />
+
+        <TextView
+            android:id="@+id/find_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/find_img_head"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="你好"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
+    </RelativeLayout>
+    <!-- 头像部分下面的阴影线 -->
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/find_img_zone"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_more_line_1" />
+
+    <!-- 整体菜单网格 -->
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/find_layout_head" >
+
+        <!-- 画列分割线 (如果是三行就是362) -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="242.0dip"
+            android:orientation="horizontal" >
+
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_more_line_3" />
+
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_more_line_3" />
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0" />
+        </LinearLayout>
+
+        <!-- 每行数据 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <!-- 第一行数据 -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="120.0dip"
+                android:baselineAligned="false"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <RelativeLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@null" >
+
+                    <TextView
+                        android:id="@+id/find_plugin_1"
+                        style="@style/textview_more"
+                        android:drawableTop="@drawable/ic_launcher"
+                        android:text="第一个" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@null" >
+
+                    <TextView
+                        android:id="@+id/find_plugin_2"
+                        style="@style/textview_more"
+                        android:drawableTop="@drawable/ic_launcher"
+                        android:text="第二个" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@null" >
+
+                    <TextView
+                        android:id="@+id/find_plugin_3"
+                        style="@style/textview_more"
+                        android:drawableTop="@drawable/ic_launcher"
+                        android:text="第三个" />
+
+                    <ImageView
+                        android:id="@+id/find_plugin_tip"
+                        android:layout_width="8.0dip"
+                        android:layout_height="8.0dip"
+                        android:layout_alignRight="@+id/find_plugin_3"
+                        android:layout_alignTop="@+id/find_plugin_3"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/bg_count_tip"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_more_line_2" />
+
+            <!-- 第二行数据 -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="120.0dip"
+                android:baselineAligned="false"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <RelativeLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@null" >
+
+                    <TextView
+                        android:id="@+id/find_plugin_4"
+                        style="@style/textview_more"
+                        android:drawableTop="@drawable/ic_launcher"
+                        android:text="第四个" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@null" >
+
+                    <TextView
+                        android:id="@+id/find_plugin_5"
+                        style="@style/textview_more"
+                        android:drawableTop="@drawable/ic_launcher"
+                        android:text="问卷调查" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@null" >
+
+                    <TextView
+                        android:id="@+id/find_plugin_6"
+                        style="@style/textview_more"
+                        android:drawableTop="@drawable/ic_launcher"
+                        android:text="第几个" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_more_line_2" />
+        </LinearLayout>
+    </FrameLayout>
+
+</RelativeLayout>

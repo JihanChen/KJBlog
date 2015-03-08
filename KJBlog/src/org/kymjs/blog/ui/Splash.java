@@ -7,7 +7,6 @@ import org.kymjs.blog.utils.KJAnimations;
 import org.kymjs.kjframe.KJActivity;
 import org.kymjs.kjframe.KJBitmap;
 import org.kymjs.kjframe.ui.BindView;
-import org.kymjs.kjframe.utils.DensityUtils;
 import org.kymjs.kjframe.utils.FileUtils;
 import org.kymjs.kjframe.utils.PreferenceHelper;
 import org.kymjs.kjframe.utils.StringUtils;
@@ -39,7 +38,6 @@ public class Splash extends KJActivity {
     private RoundImageView mImgHead;
     @BindView(id = R.id.splash_btn_go, click = true)
     private Button mBtnGo;
-    private AppContext application;
 
     @Override
     public void setRootView() {
@@ -49,18 +47,11 @@ public class Splash extends KJActivity {
     @Override
     public void initData() {
         super.initData();
-        initApplicationData();
         String cacheTime = PreferenceHelper.readString(aty, TAG,
                 AppConfig.CACHE_TIME_KEY, "");
         if (!StringUtils.getDataTime("yyyymmdd").equalsIgnoreCase(cacheTime)) {
             PreferenceHelper.clean(aty, TAG);
         }
-    }
-
-    private void initApplicationData() {
-        application = (AppContext) getApplication();
-        application.screenW = DensityUtils.getScreenW(aty);
-        application.screenH = DensityUtils.getScreenH(aty);
     }
 
     @Override
@@ -78,20 +69,20 @@ public class Splash extends KJActivity {
     private void screenAdaptation() {
         RelativeLayout.LayoutParams boxParams = (LayoutParams) mRlBox
                 .getLayoutParams();
-        boxParams.width = (int) (application.screenW * 0.8);
-        boxParams.height = (int) (application.screenH * 0.6);
+        boxParams.width = (int) (AppContext.screenW * 0.8);
+        boxParams.height = (int) (AppContext.screenH * 0.6);
         mRlBox.setLayoutParams(boxParams);
 
         RelativeLayout.LayoutParams goParams = (LayoutParams) mBtnGo
                 .getLayoutParams();
-        goParams.width = (int) (application.screenW * 0.7);
+        goParams.width = (int) (AppContext.screenW * 0.7);
         goParams.height = (int) getResources().getDimension(
                 R.dimen.splash_btn_go_height);
         mBtnGo.setLayoutParams(goParams);
 
         RelativeLayout.LayoutParams headParams = (RelativeLayout.LayoutParams) mImgHead
                 .getLayoutParams();
-        headParams.topMargin = (int) ((application.screenH * 0.16) / 2);
+        headParams.topMargin = (int) ((AppContext.screenH * 0.16) / 2);
         mImgHead.setLayoutParams(headParams);
     }
 

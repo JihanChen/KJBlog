@@ -8,6 +8,6 @@ import android.app.Application;
  * @since 2015-3
  */
 public class AppContext extends Application {
-    public int screenW;
-    public int screenH;
+    public static int screenW;
+    public static int screenH;
 }

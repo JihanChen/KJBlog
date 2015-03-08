@@ -1,7 +1,9 @@
 package org.kymjs.blog.ui;
 
+import org.kymjs.blog.AppContext;
 import org.kymjs.blog.R;
 import org.kymjs.kjframe.KJActivity;
+import org.kymjs.kjframe.utils.DensityUtils;
 import org.kymjs.kjframe.utils.PreferenceHelper;
 
 import android.content.Intent;
@@ -37,6 +39,8 @@ public class AppStart extends KJActivity {
         });
         image.setAnimation(anim);
         setContentView(image);
+        AppContext.screenH = DensityUtils.getScreenH(aty);
+        AppContext.screenW = DensityUtils.getScreenW(aty);
     }
 
     private void jumpTo() {

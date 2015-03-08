@@ -1,5 +1,6 @@
 package org.kymjs.blog.ui.fragment;
 
+import org.kymjs.blog.AppContext;
 import org.kymjs.blog.ui.TitleBarActivity;
 import org.kymjs.kjframe.ui.KJFragment;
 
@@ -28,13 +29,15 @@ public abstract class TitleBarFragment extends KJFragment {
     }
 
     private final ActionBarRes actionBarRes = new ActionBarRes();
-    private TitleBarActivity outsideAty;
+    protected TitleBarActivity outsideAty;
+    protected AppContext app;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (getActivity() instanceof TitleBarActivity) {
             outsideAty = (TitleBarActivity) getActivity();
         }
+        app = (AppContext) getActivity().getApplication();
         super.onCreate(savedInstanceState);
     }
 
