@@ -80,7 +80,7 @@ public class CurtainView {
      * 
      * @return
      */
-    public View getSlidingView() {
+    public View getContentView() {
         return curtainItem.getSlidingView();
     }
 
