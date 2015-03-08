@@ -2,10 +2,9 @@ package org.kymjs.blog.ui;
 
 import org.kymjs.blog.AppContext;
 import org.kymjs.blog.R;
-import org.kymjs.blog.ui.widget.dobmenu.DobSlidingMenu;
-import org.kymjs.blog.ui.widget.dobmenu.OnCollapsedListener;
-import org.kymjs.blog.ui.widget.dobmenu.OnExpandedListener;
-import org.kymjs.blog.ui.widget.dobmenu.SlidingItem.SlidingType;
+import org.kymjs.blog.ui.widget.dobmenu.CurtainItem.OnSwitchListener;
+import org.kymjs.blog.ui.widget.dobmenu.CurtainItem.SlidingType;
+import org.kymjs.blog.ui.widget.dobmenu.CurtainView;
 import org.kymjs.kjframe.KJActivity;
 
 import android.content.pm.ActivityInfo;
@@ -32,7 +31,7 @@ public abstract class TitleBarActivity extends KJActivity {
     protected AppContext app;
 
     // Sliding menu object
-    private DobSlidingMenu vSlidingMenu;
+    private CurtainView vSlidingMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,10 +83,9 @@ public abstract class TitleBarActivity extends KJActivity {
 
     private void initDobSlidMenu() {
 
-        vSlidingMenu = new DobSlidingMenu(this);
+        vSlidingMenu = new CurtainView(this, R.id.titlebar);
         vSlidingMenu.setSlidingType(SlidingType.SIZE);
         vSlidingMenu.setSlidingView(R.layout.dob_sliding_menu);
-        vSlidingMenu.setUseHandle(true);
         vSlidingMenu.setMaxDuration(1000);
         View slidingView = vSlidingMenu.getSlidingView();
         slidingView.findViewById(R.id.clickMe).setOnClickListener(
@@ -97,14 +95,11 @@ public abstract class TitleBarActivity extends KJActivity {
                         vSlidingMenu.finish();
                     }
                 });
-        vSlidingMenu.setOnCollapsedListener(new OnCollapsedListener() {
+        vSlidingMenu.setOnSwitchListener(new OnSwitchListener() {
             @Override
             public void onCollapsed() {
                 Log.i("kymjs", "onCollapsed");
             }
-        });
-
-        vSlidingMenu.setOnExpandedListener(new OnExpandedListener() {
 
             @Override
             public void onExpanded() {

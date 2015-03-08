@@ -5,17 +5,20 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.FrameLayout;
 
+/**
+ * @author kymjs (https://github.com/kymjs)
+ * @since 2015-3
+ */
 public class OnMovingTouchListener implements OnTouchListener {
 
-    private final VSlidingMenuController vSlidingMenuController;
+    private final CurtainViewController vSlidingMenuController;
 
     private FrameLayout slidingParent;
     private FrameLayout.LayoutParams slidingLayoutParams;
 
-    public OnMovingTouchListener(VSlidingMenuController vSlidingMenuController) {
+    public OnMovingTouchListener(CurtainViewController vSlidingMenuController) {
         super();
         this.vSlidingMenuController = vSlidingMenuController;
-
         init();
     }
 
@@ -37,30 +40,22 @@ public class OnMovingTouchListener implements OnTouchListener {
                 if (slidingLayoutParams.bottomMargin > 0) {
                     return false;
                 }
-
                 break;
-
             case MotionEvent.ACTION_MOVE:
                 slidingLayoutParams.topMargin = (int) y
                         - slidingParent.getHeight();
                 slidingParent.setLayoutParams(slidingLayoutParams);
                 break;
-
             case MotionEvent.ACTION_UP:
                 if (y > vSlidingMenuController.getJumpLine()) {
                     vSlidingMenuController.animateSliding((int) y,
                             slidingParent.getHeight());
-
                 } else {
                     vSlidingMenuController.animateSliding((int) y, 0);
                 }
-
                 break;
-
             }
-
         }
-
         return true;
     }
 

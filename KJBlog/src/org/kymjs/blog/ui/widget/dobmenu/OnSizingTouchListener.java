@@ -5,14 +5,19 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.FrameLayout;
 
+/**
+ * 
+ * @author kymjs (https://github.com/kymjs)
+ * @since 2015-3
+ */
 public class OnSizingTouchListener implements OnTouchListener {
 
-    private final VSlidingMenuController vSlidingMenuController;
+    private final CurtainViewController vSlidingMenuController;
 
     private FrameLayout slidingParent;
     private FrameLayout.LayoutParams slidingLayoutParams;
 
-    public OnSizingTouchListener(VSlidingMenuController vSlidingMenuController) {
+    public OnSizingTouchListener(CurtainViewController vSlidingMenuController) {
         super();
         this.vSlidingMenuController = vSlidingMenuController;
 
@@ -57,9 +62,7 @@ public class OnSizingTouchListener implements OnTouchListener {
                 break;
 
             }
-
         }
-
         return true;
     }
 

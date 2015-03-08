@@ -3,15 +3,20 @@ package org.kymjs.blog.ui.widget.dobmenu;
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 
-public class VSlidingAnimatorListener implements AnimatorListener {
+/**
+ * 动画移动过程监听器
+ * 
+ * @author kymjs (https://github.com/kymjs)
+ * @since 2015-3
+ */
+public class CurtainAnimatorListener implements AnimatorListener {
 
-    private final VSlidingMenuController vSlidingMenuController;
+    private final CurtainViewController mCurtainViewController;
     private AnimationExecutor.MovingType movingType;
 
-    public VSlidingAnimatorListener(
-            VSlidingMenuController vSlidingMenuController) {
+    public CurtainAnimatorListener(CurtainViewController vSlidingMenuController) {
         super();
-        this.vSlidingMenuController = vSlidingMenuController;
+        this.mCurtainViewController = vSlidingMenuController;
     }
 
     public AnimationExecutor.MovingType getMovingType() {
@@ -27,23 +32,19 @@ public class VSlidingAnimatorListener implements AnimatorListener {
 
     @Override
     public void onAnimationEnd(Animator animation) {
-        if (vSlidingMenuController != null) {
+        if (mCurtainViewController != null) {
             if (movingType == AnimationExecutor.MovingType.BOTTOM_TO_TOP) {
-
-                if (vSlidingMenuController.getSlidingItem()
-                        .getOnCollapsedListener() != null) {
-
-                    vSlidingMenuController.getSlidingItem()
-                            .getOnCollapsedListener().onCollapsed();
+                if (mCurtainViewController.getSlidingItem()
+                        .getOnSwitchListener() != null) {
+                    mCurtainViewController.getSlidingItem()
+                            .getOnSwitchListener().onCollapsed();
                 }
 
             } else if (movingType == AnimationExecutor.MovingType.TOP_TO_BOTTOM) {
-
-                if (vSlidingMenuController.getSlidingItem()
-                        .getOnExpandedListener() != null) {
-
-                    vSlidingMenuController.getSlidingItem()
-                            .getOnExpandedListener().onExpanded();
+                if (mCurtainViewController.getSlidingItem()
+                        .getOnSwitchListener() != null) {
+                    mCurtainViewController.getSlidingItem()
+                            .getOnSwitchListener().onExpanded();
                 }
             }
         }
