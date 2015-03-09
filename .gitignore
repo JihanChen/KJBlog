@@ -8,9 +8,15 @@
 # Java class files
 *.class
 
+#properties
+*.properties
+proguard-project.txt
+.gitignore
+
 # Generated files
 bin/
 gen/
+
 
 # Gradle files
 .gradle/
