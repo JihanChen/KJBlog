@@ -2,14 +2,14 @@ package org.kymjs.blog.ui.widget.dobmenu;
 
 import org.kymjs.blog.AppContext;
 import org.kymjs.blog.ui.widget.dobmenu.CurtainItem.SlidingType;
+import org.kymjs.kjframe.utils.KJLoger;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.os.Build;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.View.OnTouchListener;
@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
 /**
  * 窗帘控件代理类控制器，这个才是控件的核心类
@@ -168,10 +167,14 @@ public class CurtainViewController {
     /**
      * 滑动动画
      */
-    public void animateSliding(int fromY, int toY) {
+    public void animateSliding(int duration, int fromY, int toY) {
         if (curtainItem.isEnabled()) {
-            animationExecutor.animateView(fromY, toY);
+            animationExecutor.animateView(duration, fromY, toY);
         }
+    }
+
+    public void animateSliding(int fromY, int toY) {
+        animateSliding(500, fromY, toY);
     }
 
     public CurtainItem getSlidingItem() {
@@ -272,18 +275,46 @@ public class CurtainViewController {
         }
     }
 
-    public static final ImageView initHandle(Context context,
-            CurtainViewController slidingMenuController, CurtainItem slidingItem) {
-        ImageView handle = new ImageView(context);
-        handle.setScaleType(ImageView.ScaleType.CENTER);
-        handle.setContentDescription("");
+    /** 用于计算手指滑动的速度。 */
+    private VelocityTracker mVelocityTracker;
 
-        FrameLayout.LayoutParams handleLayoutParams = new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.WRAP_CONTENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM
-                        | Gravity.CENTER_HORIZONTAL);
-        handle.setLayoutParams(handleLayoutParams);
-        return handle;
+    /** 手指滑动需要达到的速度。 */
+    public static final int SNAP_VELOCITY = 200;
+
+    /**
+     * 获取手指在content界面滑动的速度。
+     * 
+     * @author kymjs (https://github.com/kymjs)
+     * @return 滑动速度，以每秒钟移动了多少像素值为单位。
+     */
+    private int getScrollVelocity() {
+        mVelocityTracker.computeCurrentVelocity(1000);
+        int velocity = (int) mVelocityTracker.getYVelocity();
+        // return Math.abs(velocity);
+
+        return velocity;
+    }
+
+    /**
+     * 创建VelocityTracker对象，并将触摸content界面的滑动事件加入到VelocityTracker当中。
+     * 
+     * @author kymjs (https://github.com/kymjs)
+     */
+    private void createVelocityTracker(MotionEvent event) {
+        if (mVelocityTracker == null) {
+            mVelocityTracker = VelocityTracker.obtain();
+        }
+        mVelocityTracker.addMovement(event);
+    }
+
+    /**
+     * 回收VelocityTracker对象。
+     * 
+     * @author kymjs (https://github.com/kymjs)
+     */
+    private void recycleVelocityTracker() {
+        mVelocityTracker.recycle();
+        mVelocityTracker = null;
     }
 
     /**
@@ -328,8 +359,10 @@ public class CurtainViewController {
      * @since 2015-3
      */
     public class OnMovingTouchListener implements OnTouchListener {
+
         @Override
         public boolean onTouch(View v, MotionEvent event) {
+            createVelocityTracker(event);
             if (getSlidingItem().isEnabled()) {
                 float y = event.getY();
 
@@ -337,6 +370,7 @@ public class CurtainViewController {
                 case MotionEvent.ACTION_DOWN:
                     focusOnSliding();
                     if (curtainLayoutParams.bottomMargin > 0) {
+                        recycleVelocityTracker();
                         return false;
                     }
                     break;
@@ -346,11 +380,14 @@ public class CurtainViewController {
                     curtainParent.setLayoutParams(curtainLayoutParams);
                     break;
                 case MotionEvent.ACTION_UP:
-                    if (y > getJumpLine()) {
+                    KJLoger.debug("getScrollVelocity" + getScrollVelocity());
+                    if (y > getJumpLine()
+                            || getScrollVelocity() > SNAP_VELOCITY) {
                         animateSliding((int) y, curtainParent.getHeight());
                     } else {
                         animateSliding((int) y, 0);
                     }
+                    recycleVelocityTracker();
                     break;
                 }
             }
@@ -370,11 +407,13 @@ public class CurtainViewController {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             float y = event.getY();
+            createVelocityTracker(event);
             switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 downY = event.getY();
                 focusOnSliding();
                 if (curtainLayoutParams.bottomMargin > 0) {
+                    recycleVelocityTracker();
                     return false;
                 }
                 break;
@@ -389,13 +428,15 @@ public class CurtainViewController {
                 int moveY = (int) (downY - y);
                 if (moveY < 50) {
                     v.performClick();
-                } else if (moveY > AppContext.screenH) {
+                } else if (moveY > AppContext.screenH
+                        || getScrollVelocity() > SNAP_VELOCITY) {
                     animateSliding(curtainLayoutParams.topMargin
                             + curtainHeight, curtainParent.getHeight());
                 } else {
                     animateSliding(curtainLayoutParams.topMargin
                             + curtainHeight, 0);
                 }
+                recycleVelocityTracker();
                 break;
             default:
                 break;
@@ -403,5 +444,4 @@ public class CurtainViewController {
             return true;
         }
     }
-
 }

@@ -30,8 +30,7 @@ public class AnimationExecutor {
         TOP_TO_BOTTOM, BOTTOM_TO_TOP
     }
 
-    public void animateView(int fromY, int toY) {
-        int duration = Math.abs(toY - fromY);
+    public void animateView(int duration, int fromY, int toY) {
         if (mCurtainViewController.getSlidingItem().getMaxDuration() > CurtainViewController.DEFAULT_INT) {
             duration = Math.min(duration, mCurtainViewController
                     .getSlidingItem().getMaxDuration());

@@ -146,8 +146,11 @@ public class KJScrollView extends ScrollView {
                     || (canPullUp && deltaY < 0) // 可以上拉， 并且手指向上移动
                     || (canPullUp && canPullDown); // 既可以上拉也可以下拉（这种情况出现在ScrollView包裹的控件比ScrollView还小）
 
-            if (canPullDown && deltaY > 0 && pullListener != null) {
+            if (canPullDown && deltaY > 200 && pullListener != null) {
+                // 调用监听器
                 pullListener.onPull();
+            }
+            if (canPullDown && deltaY > 0) { // 关闭下拉
                 shouldMove = false;
             }
 
