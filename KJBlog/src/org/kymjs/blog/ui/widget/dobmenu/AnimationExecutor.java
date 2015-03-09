@@ -2,11 +2,13 @@ package org.kymjs.blog.ui.widget.dobmenu;
 
 import org.kymjs.blog.ui.widget.dobmenu.CurtainItem.SlidingType;
 
+import android.animation.Animator;
+import android.animation.Animator.AnimatorListener;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 
 /**
- * 执行动画方法类
+ * 执行开关窗帘的动画
  * 
  * @author kymjs (https://github.com/kymjs)
  * @since 2015-3
@@ -14,11 +16,11 @@ import android.animation.ValueAnimator;
  */
 public class AnimationExecutor {
 
-    private final CurtainViewController vSlidingMenuController;
+    private final CurtainViewController mCurtainViewController;
 
     public AnimationExecutor(CurtainViewController vSlidingMenuController) {
         super();
-        this.vSlidingMenuController = vSlidingMenuController;
+        this.mCurtainViewController = vSlidingMenuController;
     }
 
     /**
@@ -30,29 +32,54 @@ public class AnimationExecutor {
 
     public void animateView(int fromY, int toY) {
         int duration = Math.abs(toY - fromY);
-        if (vSlidingMenuController.getSlidingItem().getMaxDuration() > CurtainViewController.DEFAULT_INT) {
-            duration = Math.min(duration, vSlidingMenuController
+        if (mCurtainViewController.getSlidingItem().getMaxDuration() > CurtainViewController.DEFAULT_INT) {
+            duration = Math.min(duration, mCurtainViewController
                     .getSlidingItem().getMaxDuration());
         }
 
-        CurtainAnimatorListener animatorListener = new CurtainAnimatorListener(
-                vSlidingMenuController);
-
-        MovingType movingType = toY == 0 ? MovingType.BOTTOM_TO_TOP
+        // 移动方式
+        final MovingType movingType = toY == 0 ? MovingType.BOTTOM_TO_TOP
                 : MovingType.TOP_TO_BOTTOM;
-        animatorListener.setMovingType(movingType);
 
         String propertyName = "";
-        if (vSlidingMenuController.getSlidingItem().getSlidingType() == SlidingType.SIZE) {
+        if (mCurtainViewController.getSlidingItem().getSlidingType() == SlidingType.SIZE) {
             propertyName = "viewHeight";
 
-        } else if (vSlidingMenuController.getSlidingItem().getSlidingType() == SlidingType.MOVE) {
+        } else if (mCurtainViewController.getSlidingItem().getSlidingType() == SlidingType.MOVE) {
             propertyName = "viewTop";
         }
-        ValueAnimator sizeAnim = ObjectAnimator.ofInt(vSlidingMenuController,
+
+        ValueAnimator sizeAnim = ObjectAnimator.ofInt(mCurtainViewController,
                 propertyName, fromY, toY);
         sizeAnim.setDuration(duration);
-        sizeAnim.addListener(animatorListener);
+        sizeAnim.addListener(new AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {}
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {}
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                if (movingType == AnimationExecutor.MovingType.BOTTOM_TO_TOP) {
+                    if (mCurtainViewController.getSlidingItem()
+                            .getOnSwitchListener() != null) {
+                        mCurtainViewController.getSlidingItem()
+                                .getOnSwitchListener().onCollapsed();
+                    }
+                } else if (movingType == AnimationExecutor.MovingType.TOP_TO_BOTTOM) {
+                    if (mCurtainViewController.getSlidingItem()
+                            .getOnSwitchListener() != null) {
+                        mCurtainViewController.getSlidingItem()
+                                .getOnSwitchListener().onExpanded();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {}
+        });
         sizeAnim.start();
     }
 }

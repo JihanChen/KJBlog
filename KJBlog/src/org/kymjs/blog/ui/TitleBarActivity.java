@@ -8,7 +8,6 @@ import org.kymjs.kjframe.KJActivity;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -77,14 +76,10 @@ public abstract class TitleBarActivity extends KJActivity {
         mCurtainView.setMaxDuration(1000);
         mCurtainView.setOnSwitchListener(new OnSwitchListener() {
             @Override
-            public void onCollapsed() {
-                Log.i("kymjs", "onCollapsed");
-            }
+            public void onCollapsed() {}
 
             @Override
-            public void onExpanded() {
-                Log.i("kymjs", "onExpanded");
-            }
+            public void onExpanded() {}
         });
     }
 

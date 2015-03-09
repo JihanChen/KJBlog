@@ -7,6 +7,7 @@ import org.kymjs.blog.ui.widget.dobmenu.CurtainViewController.SlidingStatus;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 
 /**
  * 尊重原创感谢开源：本控件是由Startappz的DobSliding(https://github.com/Startappz/DobSliding)
@@ -92,7 +93,6 @@ public class CurtainView {
     public void setSlidingView(int slidingResId) {
         View slidingView = LayoutInflater.from(activity).inflate(slidingResId,
                 null, false);
-
         setSlidingView(slidingView);
     }
 
@@ -121,7 +121,7 @@ public class CurtainView {
         curtainItem.setJumpLinePercentage(jumpLinePercentage);
     }
 
-    public OnSwitchListener getOnCollapsedListener() {
+    public OnSwitchListener getOnSwitchListener() {
         return curtainItem.getOnSwitchListener();
     }
 
@@ -129,4 +129,12 @@ public class CurtainView {
         curtainItem.setOnSwitchListener(onSwitchListener);
     }
 
+    /**
+     * 点击窗帘View时回调
+     * 
+     * @param l
+     */
+    public void setOnClickListener(OnClickListener l) {
+        curtainViewController.getSlidingParent().setOnClickListener(l);
+    }
 }

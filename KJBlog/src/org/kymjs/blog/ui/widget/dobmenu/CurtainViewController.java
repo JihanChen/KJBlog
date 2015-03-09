@@ -1,5 +1,6 @@
 package org.kymjs.blog.ui.widget.dobmenu;
 
+import org.kymjs.blog.AppContext;
 import org.kymjs.blog.ui.widget.dobmenu.CurtainItem.SlidingType;
 
 import android.annotation.SuppressLint;
@@ -19,12 +20,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 /**
- * 控件代理类控制器，这个才是控件的核心类
+ * 窗帘控件代理类控制器，这个才是控件的核心类
  * 
  * @author kymjs (https://github.com/kymjs)
  * @since 2015-3
  */
-@SuppressLint("NewApi")
 public class CurtainViewController {
 
     public enum SlidingStatus {
@@ -45,9 +45,6 @@ public class CurtainViewController {
     protected int curtainHeight;
 
     private float jumpLine;
-
-    private OnSizingTouchListener sizingTouchListener;
-    private OnMovingTouchListener movingTouchListener;
     private AnimationExecutor animationExecutor;
 
     public CurtainViewController(Activity activity, CurtainItem slidingItem,
@@ -65,10 +62,7 @@ public class CurtainViewController {
 
         actionBarView = activity.findViewById(actionBarId); // 设置ActionBar
         setSlidingType(curtainItem.getSlidingType()); // 设置开关动画模式：卷动或平移
-
         animationExecutor = new AnimationExecutor(this);
-        sizingTouchListener = new OnSizingTouchListener(this);
-        movingTouchListener = new OnMovingTouchListener(this);
     }
 
     public void setCurtainView(View curtainView) {
@@ -94,12 +88,12 @@ public class CurtainViewController {
         ViewTreeObserver vto = curtainParent.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
             @Override
+            @SuppressLint("NewApi")
             public void onGlobalLayout() {
                 hideCurtainLayout();
                 ViewTreeObserver obs = curtainParent.getViewTreeObserver();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     obs.removeOnGlobalLayoutListener(this);
-
                 } else {
                     obs.removeGlobalOnLayoutListener(this);
                 }
@@ -107,13 +101,7 @@ public class CurtainViewController {
 
         });
 
-        curtainParent.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                finish();
-                return true;
-            }
-        });
+        curtainParent.setOnTouchListener(new OnContentTouchListener());
 
         curtainParent.setOnKeyListener(new OnKeyListener() {
             @Override
@@ -222,12 +210,10 @@ public class CurtainViewController {
 
     public void setSlidingType(SlidingType slidingType) {
         if (slidingType == SlidingType.SIZE) {
-            actionBarView.setOnTouchListener(sizingTouchListener);
-
+            actionBarView.setOnTouchListener(new OnSizingTouchListener());
         } else if (slidingType == SlidingType.MOVE) {
-            actionBarView.setOnTouchListener(movingTouchListener);
+            actionBarView.setOnTouchListener(new OnMovingTouchListener());
         }
-
         if (curtainItem.getSlidingView() != null) {
             hideCurtainLayout();
         }
@@ -246,20 +232,20 @@ public class CurtainViewController {
     }
 
     public static final CurtainViewController.SlidingStatus getSlidingStatus(
-            CurtainViewController vSlidingMenuController) {
+            CurtainViewController mCurtainViewController) {
 
-        FrameLayout slidingParent = vSlidingMenuController.getSlidingParent();
+        FrameLayout slidingParent = mCurtainViewController.getSlidingParent();
         FrameLayout.LayoutParams slidingLayoutParams = (FrameLayout.LayoutParams) slidingParent
                 .getLayoutParams();
 
-        if (vSlidingMenuController.getSlidingItem().getSlidingType() == SlidingType.SIZE) {
+        if (mCurtainViewController.getSlidingItem().getSlidingType() == SlidingType.SIZE) {
 
             int currentSlidingHeight = slidingParent.getHeight();
 
             if (currentSlidingHeight == 0) {
                 return CurtainViewController.SlidingStatus.COLLAPSED;
 
-            } else if (currentSlidingHeight >= vSlidingMenuController
+            } else if (currentSlidingHeight >= mCurtainViewController
                     .getSlidingHeight()) {
                 return CurtainViewController.SlidingStatus.EXPANDED;
 
@@ -267,11 +253,11 @@ public class CurtainViewController {
                 return CurtainViewController.SlidingStatus.ANIMATING;
             }
 
-        } else if (vSlidingMenuController.getSlidingItem().getSlidingType() == SlidingType.MOVE) {
+        } else if (mCurtainViewController.getSlidingItem().getSlidingType() == SlidingType.MOVE) {
 
             int currentSlidingTop = slidingLayoutParams.topMargin;
 
-            if (currentSlidingTop <= -vSlidingMenuController.getSlidingHeight()) {
+            if (currentSlidingTop <= -mCurtainViewController.getSlidingHeight()) {
                 return CurtainViewController.SlidingStatus.COLLAPSED;
 
             } else if (currentSlidingTop >= 0) {
@@ -298,6 +284,124 @@ public class CurtainViewController {
                         | Gravity.CENTER_HORIZONTAL);
         handle.setLayoutParams(handleLayoutParams);
         return handle;
+    }
+
+    /**
+     * 缩放模式开窗帘的ActionBar触摸事件监听器
+     * 
+     * @author kymjs (https://github.com/kymjs)
+     * @since 2015-3
+     */
+    public class OnSizingTouchListener implements OnTouchListener {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (getSlidingItem().isEnabled()) {
+                float y = event.getY();
+                switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    focusOnSliding();
+                    if (curtainParent.getHeight() > 0) {
+                        return false;
+                    }
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    curtainLayoutParams.height = (int) y;
+                    curtainParent.setLayoutParams(curtainLayoutParams);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    if (y > getJumpLine()) {
+                        animateSliding((int) y, getSlidingHeight());
+                    } else {
+                        animateSliding((int) y, 0);
+                    }
+                    break;
+                }
+            }
+            return true;
+        }
+    }
+
+    /**
+     * 平移模式开窗帘的ActionBar触摸事件监听器
+     * 
+     * @author kymjs (https://github.com/kymjs)
+     * @since 2015-3
+     */
+    public class OnMovingTouchListener implements OnTouchListener {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (getSlidingItem().isEnabled()) {
+                float y = event.getY();
+
+                switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    focusOnSliding();
+                    if (curtainLayoutParams.bottomMargin > 0) {
+                        return false;
+                    }
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    curtainLayoutParams.topMargin = (int) y
+                            - curtainParent.getHeight();
+                    curtainParent.setLayoutParams(curtainLayoutParams);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    if (y > getJumpLine()) {
+                        animateSliding((int) y, curtainParent.getHeight());
+                    } else {
+                        animateSliding((int) y, 0);
+                    }
+                    break;
+                }
+            }
+            return true;
+        }
+    }
+
+    /**
+     * 平移模式关窗帘的Content触摸事件监听器（卷动模式的就不写了，需要的时候再说）
+     * 
+     * @author kymjs (https://github.com/kymjs)
+     * @since 2015-3
+     */
+    public class OnContentTouchListener implements OnTouchListener {
+        float downY;
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            float y = event.getY();
+            switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                downY = event.getY();
+                focusOnSliding();
+                if (curtainLayoutParams.bottomMargin > 0) {
+                    return false;
+                }
+                break;
+            case MotionEvent.ACTION_MOVE:
+                int move = (int) (downY - y);
+                if (move > 0) {
+                    curtainLayoutParams.topMargin = -move;
+                    curtainParent.setLayoutParams(curtainLayoutParams);
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                int moveY = (int) (downY - y);
+                if (moveY < 50) {
+                    v.performClick();
+                } else if (moveY > AppContext.screenH) {
+                    animateSliding(curtainLayoutParams.topMargin
+                            + curtainHeight, curtainParent.getHeight());
+                } else {
+                    animateSliding(curtainLayoutParams.topMargin
+                            + curtainHeight, 0);
+                }
+                break;
+            default:
+                break;
+            }
+            return true;
+        }
     }
 
 }
