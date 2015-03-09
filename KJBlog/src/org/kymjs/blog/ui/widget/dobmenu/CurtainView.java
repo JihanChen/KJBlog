@@ -33,14 +33,14 @@ public class CurtainView {
     }
 
     /**
-     * 窗帘拉上去
+     * 窗帘拉下来
      */
     public void expand() {
         curtainViewController.expand();
     }
 
     /**
-     * 窗帘拉下来
+     * 窗帘推上去
      */
     public void collapse() {
         curtainViewController.collapse();

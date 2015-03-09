@@ -69,12 +69,12 @@ public class CurtainItem {
      */
     public interface OnSwitchListener {
         /**
-         * 掉下时回调
+         * 卷起时回调
          */
         public void onCollapsed();
 
         /**
-         * 卷起时回调
+         * 掉下时回调
          */
         public void onExpanded();
     }

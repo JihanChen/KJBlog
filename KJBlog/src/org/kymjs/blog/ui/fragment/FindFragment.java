@@ -3,6 +3,7 @@ package org.kymjs.blog.ui.fragment;
 import org.kymjs.blog.AppContext;
 import org.kymjs.blog.R;
 import org.kymjs.blog.ui.Main;
+import org.kymjs.blog.ui.TitleBarActivity;
 import org.kymjs.blog.ui.widget.KJScrollView;
 import org.kymjs.blog.ui.widget.KJScrollView.OnViewTopPull;
 import org.kymjs.kjframe.ui.BindView;
@@ -51,8 +52,8 @@ public class FindFragment extends TitleBarFragment {
         rootView.setOnViewTopPullListener(new OnViewTopPull() {
             @Override
             public void onPull() {
-                if (outsideAty instanceof Main) {
-                    ((Main) outsideAty).initViews();
+                if (outsideAty instanceof TitleBarActivity) {
+                    ((TitleBarActivity) outsideAty).getCurtainView().expand();
                 }
             }
         });
