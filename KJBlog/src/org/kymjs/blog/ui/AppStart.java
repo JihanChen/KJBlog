@@ -1,19 +1,19 @@
 package org.kymjs.blog.ui;
 
+import android.content.Intent;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+
 import org.kymjs.blog.AppContext;
 import org.kymjs.blog.R;
 import org.kymjs.kjframe.KJActivity;
 import org.kymjs.kjframe.utils.DensityUtils;
 import org.kymjs.kjframe.utils.PreferenceHelper;
 
-import android.content.Intent;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-
 /**
  * 开机界面
- * 
+ *
  * @author kymjs (https://github.com/kymjs)
  * @since 2015-3
  */
@@ -27,7 +27,8 @@ public class AppStart extends KJActivity {
         Animation anim = AnimationUtils.loadAnimation(aty, R.anim.splash_start);
         anim.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationStart(Animation animation) {}
+            public void onAnimationStart(Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(Animation animation) {
@@ -35,7 +36,8 @@ public class AppStart extends KJActivity {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {}
+            public void onAnimationRepeat(Animation animation) {
+            }
         });
         image.setAnimation(anim);
         setContentView(image);
