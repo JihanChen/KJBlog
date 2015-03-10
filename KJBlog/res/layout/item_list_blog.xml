@@ -4,44 +4,45 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white" >
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/item_blog_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
         android:paddingLeft="15dp"
         android:paddingRight="15dp" >
-
-        <ImageView
-            android:id="@+id/item_blog_tip_tody"
-            android:layout_width="20dp"
-            android:layout_height="25dp"
-            android:layout_marginRight="2dip"
-            android:contentDescription="@null"
-            android:padding="2dip"
-            android:src="@drawable/blog_item_today_icon"
-            android:visibility="visible" />
 
         <ImageView
             android:id="@+id/item_blog_tip_recommend"
             android:layout_width="20dp"
             android:layout_height="25dp"
-            android:layout_marginRight="2dip"
             android:contentDescription="@null"
-            android:src="@drawable/blog_item_recommend_icon"
-            android:visibility="visible" />
+            android:src="@drawable/blog_item_recommend_icon" />
+
+        <ImageView
+            android:id="@+id/item_blog_tip_tody"
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@+id/item_blog_tip_recommend"
+            android:contentDescription="@null"
+            android:padding="2dp"
+            android:src="@drawable/blog_item_today_icon" />
 
         <TextView
             android:id="@+id/item_blog_tv_title"
-            style="@style/list_text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="4dp"
-            android:singleLine="true" />
-    </LinearLayout>
+            android:layout_alignTop="@+id/item_blog_tip_tody"
+            android:layout_toRightOf="@+id/item_blog_tip_tody"
+            android:gravity="top"
+            android:paddingTop="1dp"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/item_blog_tv_description"

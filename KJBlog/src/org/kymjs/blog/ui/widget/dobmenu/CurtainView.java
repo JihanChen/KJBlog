@@ -85,6 +85,15 @@ public class CurtainView {
         return curtainItem.getSlidingView();
     }
 
+    /**
+     * 获取到窗帘布局的父控件
+     * 
+     * @return
+     */
+    public View getContentParentView() {
+        return curtainViewController.getSlidingParent();
+    }
+
     public void setSlidingView(View slidingView) {
         curtainItem.setSlidingView(slidingView);
         curtainViewController.setCurtainView(slidingView);

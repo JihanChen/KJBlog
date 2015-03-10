@@ -1,6 +1,5 @@
 package org.kymjs.blog.utils;
 
-import android.graphics.drawable.AnimationDrawable;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -77,26 +76,40 @@ public class KJAnimations {
         set.addAnimation(getAlphaAnimation(0.8F, 1, 600));
         v.setAnimation(set);
     }
-    
+
     public static void shakeCurtain(View v) {
-    	 AnimationSet set = new AnimationSet(false);
-    	 Animation anim1 = getTranslateAnimation(0, 0, 0, -200,
-                 110);
-    	 Animation anim2 = getTranslateAnimation(0, 0, -200, 0,
-                 80);
-    	 Animation anim3 = getTranslateAnimation(0, 0, 0, -50,
-                 25);
-    	 Animation anim4 = getTranslateAnimation(0, 0, -50, 0,
-                 25);
-    	 anim2.setStartOffset(210);
-    	 anim3.setStartOffset(340);
-    	 anim4.setStartOffset(380);
-    	 set.addAnimation(anim1);
-    	 set.addAnimation(anim2);
-    	 set.addAnimation(anim3);
-    	 set.addAnimation(anim4);
-    	 v.setAnimation(set);
-	}
+        AnimationSet set = new AnimationSet(false);
+        Animation anim1 = getTranslateAnimation(0, 0, 0, -200, 110);
+        Animation anim2 = getTranslateAnimation(0, 0, -200, 0, 80);
+        Animation anim3 = getTranslateAnimation(0, 0, 0, -50, 25);
+        Animation anim4 = getTranslateAnimation(0, 0, -50, 0, 25);
+        anim1.setStartOffset(20);
+        anim2.setStartOffset(230);
+        anim3.setStartOffset(360);
+        anim4.setStartOffset(400);
+        set.addAnimation(anim1);
+        set.addAnimation(anim2);
+        set.addAnimation(anim3);
+        set.addAnimation(anim4);
+        v.startAnimation(set);
+    }
+
+    public static void clickCurtain(View v) {
+        AnimationSet set = new AnimationSet(false);
+        Animation anim1 = getTranslateAnimation(0, 0, 0, -50, 110);
+        Animation anim2 = getTranslateAnimation(0, 0, -50, 0, 80);
+        Animation anim3 = getTranslateAnimation(0, 0, 0, -25, 25);
+        Animation anim4 = getTranslateAnimation(0, 0, -25, 0, 25);
+        anim1.setStartOffset(20);
+        anim2.setStartOffset(230);
+        anim3.setStartOffset(360);
+        anim4.setStartOffset(400);
+        set.addAnimation(anim1);
+        set.addAnimation(anim2);
+        set.addAnimation(anim3);
+        set.addAnimation(anim4);
+        v.startAnimation(set);
+    }
 
     /**
      * 打开的动画
