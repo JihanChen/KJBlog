@@ -103,17 +103,17 @@ public abstract class TitleBarActivity extends KJActivity {
             @Override
             public void onExpanded() {
                 onCurtainPull();
-                mHandler.postDelayed(timerRunnable, 5000);
+                mHandler.postDelayed(timerRunnable, 3000);
                 count++;
-                if (count > 3) {
+                if (count > 2) {
                     Toast.makeText(
                             aty,
                             PullTip.toast[(int) (Math.random() * PullTip.toast.length)],
                             Toast.LENGTH_SHORT).show();
                     count = 0;
-                } else if (count > 2) {
+                } else if (count > 1) {
                     mHandler.removeCallbacks(timerRunnable);
-                    mHandler.postDelayed(timerRunnable, 5000);
+                    mHandler.postDelayed(timerRunnable, 3000);
                 }
             }
         });

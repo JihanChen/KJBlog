@@ -16,53 +16,31 @@
             android:contentDescription="@string/app_name"
             android:scaleType="fitXY" />
 
-        <RelativeLayout
-            android:id="@+id/find_layout_head"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/find_img_zone"
-            android:layout_alignTop="@+id/find_img_zone"
-            android:layout_centerInParent="true"
-            android:paddingBottom="5dp" >
-
-            <org.kymjs.kjframe.widget.RoundImageView
-                android:id="@+id/find_img_head"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerInParent="true"
-                android:contentDescription="@string/app_name"
-                android:scaleType="fitXY"
-                android:src="@drawable/main_head" />
-
-            <TextView
-                android:id="@+id/find_tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/find_img_head"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="4dp"
-                android:gravity="center"
-                android:text="你好"
-                android:textColor="@android:color/white"
-                android:textSize="22sp" />
-        </RelativeLayout>
-        <!-- 头像部分下面的阴影线 -->
-
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/find_img_zone"
+        <org.kymjs.kjframe.widget.RoundImageView
+            android:id="@+id/find_img_head"
+            android:layout_width="@dimen/space_65"
+            android:layout_height="@dimen/space_65"
+            android:layout_centerHorizontal="true"
             android:contentDescription="@string/app_name"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_more_line_1" />
+            android:src="@drawable/main_head" />
+
+        <TextView
+            android:id="@+id/find_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="你好"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
 
         <!-- 整体菜单网格 -->
 
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@+id/find_layout_head" >
+            android:layout_below="@+id/find_img_zone" >
 
             <!-- 画列分割线 (如果是三行就是362) -->
 

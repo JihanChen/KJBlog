@@ -3,6 +3,7 @@ package org.kymjs.blog.ui;
 import org.kymjs.blog.R;
 import org.kymjs.blog.ui.fragment.BlogFragment;
 import org.kymjs.blog.ui.fragment.FindFragment;
+import org.kymjs.blog.ui.fragment.MineFragment;
 import org.kymjs.blog.ui.fragment.TitleBarFragment;
 import org.kymjs.kjframe.ui.BindView;
 
@@ -39,7 +40,7 @@ public class Main extends TitleBarActivity {
         super.initData();
         contentFragment1 = new BlogFragment();
         contentFragment2 = new FindFragment();
-        contentFragment3 = new BlogFragment();
+        contentFragment3 = new MineFragment();
     }
 
     @Override

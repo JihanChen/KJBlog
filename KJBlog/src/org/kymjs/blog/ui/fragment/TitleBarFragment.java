@@ -52,9 +52,9 @@ public abstract class TitleBarFragment extends KJFragment {
             setBackImage(actionBarRes.backImageId);
         }
         if (actionBarRes.menuImageId == 0) {
-            setBackImage(actionBarRes.menuImageDrawable);
+            setMenuImage(actionBarRes.menuImageDrawable);
         } else {
-            setBackImage(actionBarRes.menuImageId);
+            setMenuImage(actionBarRes.menuImageId);
         }
     }
 
