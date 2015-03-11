@@ -1,15 +1,15 @@
 package org.kymjs.blog.ui;
 
+import android.content.Intent;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+
 import org.kymjs.blog.AppContext;
 import org.kymjs.blog.R;
 import org.kymjs.kjframe.KJActivity;
 import org.kymjs.kjframe.utils.DensityUtils;
 import org.kymjs.kjframe.utils.PreferenceHelper;
-
-import android.content.Intent;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 
 /**
  * 开机界面
