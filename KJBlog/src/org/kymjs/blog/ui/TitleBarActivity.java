@@ -106,6 +106,7 @@ public abstract class TitleBarActivity extends KJActivity {
                 mHandler.postDelayed(timerRunnable, 3000);
                 count++;
                 if (count > 2) {
+                    mHandler.removeCallbacks(timerRunnable);
                     Toast.makeText(
                             aty,
                             PullTip.toast[(int) (Math.random() * PullTip.toast.length)],
@@ -124,6 +125,7 @@ public abstract class TitleBarActivity extends KJActivity {
                 mHandler.postDelayed(timerRunnable, 2000);
                 count++;
                 if (count > 2) {
+                    mHandler.removeCallbacks(timerRunnable);
                     Toast.makeText(
                             aty,
                             PullTip.toast[(int) (Math.random() * PullTip.toast.length)],

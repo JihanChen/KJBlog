@@ -45,19 +45,19 @@
         <item name="android:gravity">bottom|center_horizontal</item>
     </style>
 
-     <style name="list_text_title" >
+    <style name="list_text_title">
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">17sp</item>
         <item name="android:textStyle">normal</item>
     </style>
-    
-     <style name="list_text_info"  >
+
+    <style name="list_text_info">
         <item name="android:textColor">#9a9a9a</item>
         <item name="android:textSize">14sp</item>
         <item name="android:drawablePadding">3dp</item>
     </style>
-    
-     <style name="textview_more">
+
+    <style name="textview_more">
         <item name="android:textSize">16.0sp</item>
         <item name="android:textColor">#ff7b7b7b</item>
         <item name="android:gravity">center</item>
@@ -68,5 +68,14 @@
         <item name="android:drawablePadding">12.0dip</item>
         <item name="android:layout_centerInParent">true</item>
     </style>
-     
+
+    <style name="option_item_rl">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/item_background</item>
+        <item name="android:clickable">true</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
 </resources>

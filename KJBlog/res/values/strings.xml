@@ -16,6 +16,8 @@
     <!-- 博客界面 -->
     <string name="everyday_message">【每日资讯】</string>
     <string name="everyday_message_description">每日最新开发技术与业界资讯头条，时刻掌握前沿技术，不做OUT程序猿</string>
+    <string name="my_collect">我的收藏</string>
+    <string name="join_qgroup">一起进步</string>
     
 
 </resources>

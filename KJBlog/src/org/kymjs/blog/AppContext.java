@@ -10,4 +10,5 @@ import android.app.Application;
 public class AppContext extends Application {
     public static int screenW;
     public static int screenH;
+
 }
