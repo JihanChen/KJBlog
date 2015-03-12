@@ -52,7 +52,7 @@ public class MineFragment extends TitleBarFragment {
 
     private void doJoin() {
         // intent.setData(Uri.parse("http://weixin.qq.com/r/Q0gBGfTEsqnNrbB69x1R"));
-        // 怎样才能打开微信指定的Activity？通过反编译已经获取到Activity的参数key但是没有启动权限
+        // 怎样才能打开指定的Activity？通过反编译已经获取到Activity的参数key但是没有启动权限
         // ComponentName componetName = new ComponentName("com.tencent.mm",
         // "com.tencent.mm.ui.tools.ShowImageUI");
         //
