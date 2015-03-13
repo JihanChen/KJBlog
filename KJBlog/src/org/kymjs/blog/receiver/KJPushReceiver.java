@@ -18,7 +18,7 @@ import android.os.Handler;
  */
 public class KJPushReceiver extends PushReceiver {
 
-    Handler handle = new Handler() {};
+    static Handler handle = new Handler() {};
     Runnable stopPush = new Runnable() {
         @Override
         public void run() {

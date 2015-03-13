@@ -1,6 +1,7 @@
 package org.kymjs.blog.ui.fragment;
 
 import org.kymjs.blog.R;
+import org.kymjs.blog.adapter.WeChatAdapter;
 import org.kymjs.kjframe.ui.BindView;
 
 import android.app.Activity;
@@ -38,5 +39,6 @@ public class WeChatFragment extends TitleBarFragment {
     @Override
     protected void initWidget(View parentView) {
         super.initWidget(parentView);
+        mList.setAdapter(new WeChatAdapter(aty));
     }
 }
