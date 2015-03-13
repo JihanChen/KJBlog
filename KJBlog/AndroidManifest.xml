@@ -7,7 +7,7 @@
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="21" />
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -30,9 +30,25 @@
         <activity
             android:name="org.kymjs.blog.ui.Splash"
             android:theme="@android:style/Theme.NoTitleBar" />
-        
         <activity android:name="org.kymjs.blog.ui.Main" />
         <activity android:name="org.kymjs.blog.ui.SimpleBackActivity" />
+
+        <!-- KJPush，一个广播一个Service -->
+
+        <service
+            android:name="org.kymjs.push.core.PullService"
+            android:exported="true"
+            android:persistent="true"
+            android:process=":kymjs_pullservice" >
+            <intent-filter android:priority="1000" >
+                <action android:name="org.kymjs.push.service.pull_service" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="org.kymjs.blog.receiver.KJPushReceiver"
+            android:process=":kymjs_pullservice" >
+        </receiver>
     </application>
 
 </manifest>

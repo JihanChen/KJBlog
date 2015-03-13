@@ -10,9 +10,8 @@
 
         <LinearLayout
             android:id="@+id/mine_title_ll"
-            android:layout_width="match_parent"
+            style="@style/mine_item_style"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:orientation="horizontal" >
 
             <TextView
@@ -48,57 +47,68 @@
 
         <RelativeLayout
             android:id="@+id/mine_rl_push"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp" >
+            style="@style/mine_item_style" >
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:id="@+id/mine_tv_push"
+                style="@style/mine_item_text_style"
+                android:text="每日晨读" />
+
+            <CheckBox
+                android:id="@+id/mine_cbox_push"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/mine_rl_about"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp" >
+            style="@style/mine_item_style" >
 
             <TextView
+                android:id="@+id/mine_tv_about"
+                style="@style/mine_item_text_style"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="关于我们" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/mine_rl_clean"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp" >
+            style="@style/mine_item_style" >
 
             <TextView
+                android:id="@+id/mine_tv_clean"
+                style="@style/mine_item_text_style"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="清空缓存" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/mine_rl_feedback"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp" >
+            style="@style/mine_item_style" >
 
             <TextView
+                android:id="@+id/mine_tv_feedback"
+                style="@style/mine_item_text_style"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="意见反馈" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/mine_rl_exit"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp" >
+            style="@style/mine_item_style" >
 
             <TextView
+                android:id="@+id/mine_tv_exit"
+                style="@style/mine_item_text_style"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="暂别爱看" />
         </RelativeLayout>
 
         <TextView
@@ -107,7 +117,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:padding="20dp" />
+            android:padding="20dp"
+            android:text="当前版本V1.01" />
     </LinearLayout>
 
 </org.kymjs.kjframe.widget.KJScrollView>
