@@ -1,13 +1,5 @@
 package org.kymjs.blog.ui.fragment;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout.LayoutParams;
-import android.widget.TextView;
-
 import org.kymjs.blog.AppContext;
 import org.kymjs.blog.R;
 import org.kymjs.blog.domain.SimpleBackPage;
@@ -17,6 +9,14 @@ import org.kymjs.blog.ui.widget.KJScrollView;
 import org.kymjs.blog.ui.widget.KJScrollView.OnViewTopPull;
 import org.kymjs.kjframe.ui.BindView;
 import org.kymjs.kjframe.widget.RoundImageView;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
 
 /**
  * 发现界面
