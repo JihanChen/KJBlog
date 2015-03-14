@@ -3,7 +3,7 @@ package org.kymjs.blog.bean;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by thinkfeed#gmail.com on 13-6-21.
+ * Created by lody  on 2015/3/13.
  */
 public class Level {
     @SerializedName("code")

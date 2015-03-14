@@ -12,6 +12,7 @@ import org.kymjs.kjframe.KJHttp;
 import org.kymjs.kjframe.http.HttpCallBack;
 import org.kymjs.kjframe.http.HttpConfig;
 import org.kymjs.kjframe.http.HttpParams;
+import org.kymjs.kjframe.ui.ViewInject;
 import org.kymjs.kjframe.utils.KJLoger;
 
 import java.lang.reflect.Type;
@@ -51,7 +52,7 @@ public class CityApi {
             @Override
             public void onFailure(Throwable t, int errorNo, String strMsg) {
                 super.onFailure(t, errorNo, strMsg);
-
+                ViewInject.toast("(-｡-;)，数据加载失败了，请检查网络。");
             }
 
             @Override
@@ -77,7 +78,7 @@ public class CityApi {
     }
 
     /**
-     * 发送搜索完成的事件
+     * 发送城市搜索完成的事件
      *
      * @param places
      */

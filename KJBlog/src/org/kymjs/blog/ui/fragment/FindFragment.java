@@ -11,6 +11,7 @@ import android.widget.TextView;
 import org.kymjs.blog.AppContext;
 import org.kymjs.blog.R;
 import org.kymjs.blog.ui.TitleBarActivity;
+import org.kymjs.blog.ui.WeatherActivity;
 import org.kymjs.blog.ui.widget.KJScrollView;
 import org.kymjs.blog.ui.widget.KJScrollView.OnViewTopPull;
 import org.kymjs.kjframe.ui.BindView;
@@ -87,6 +88,7 @@ public class FindFragment extends TitleBarFragment {
         super.widgetClick(v);
         switch (v.getId()) {
             case R.id.find_plugin_1:
+                ((TitleBarActivity)getActivity()).showActivity(getActivity(), WeatherActivity.class);
                 break;
 
         }
