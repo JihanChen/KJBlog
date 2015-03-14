@@ -39,6 +39,6 @@ public class WeChatFragment extends TitleBarFragment {
     @Override
     protected void initWidget(View parentView) {
         super.initWidget(parentView);
-        mList.setAdapter(new WeChatAdapter(aty));
+        mList.setAdapter(new WeChatAdapter(aty, null));
     }
 }
