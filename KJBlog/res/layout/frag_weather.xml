@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/weather_background">
-    <include
-        android:id="@+id/titlebar"
-        layout="@layout/main_titlebar" />
 
     <ImageView
         android:id="@+id/weather_icon"
@@ -36,7 +32,7 @@
         android:id="@+id/weather_condition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="N/A"
+        android:text="未知"
         android:layout_below="@+id/weather_icon"
         android:textColor="@android:color/darker_gray"
         android:layout_marginLeft="40dp"
@@ -46,7 +42,7 @@
         android:id="@+id/weather_lowhigh_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="N/A"
+        android:text="未知"
         android:layout_below="@+id/weather_condition"
         android:layout_alignLeft="@+id/weather_condition"
         android:textColor="@android:color/primary_text_dark"
@@ -59,11 +55,9 @@
         android:layout_alignLeft="@+id/weather_lowhigh_temp"
         android:layout_below="@+id/weather_lowhigh_temp"
         android:gravity="center_vertical"
-        android:layout_marginTop="20dp"
-        android:id="@+id/linearLayout">
+        android:layout_marginTop="50dp">
 
         <ImageView
-            android:id="@+id/search_city"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:src="@drawable/ic_humidity" />
@@ -105,15 +99,5 @@
             android:textColor="@android:color/darker_gray"
             android:layout_marginLeft="5dp" />
     </LinearLayout>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@drawable/ic_search"
-        android:layout_above="@+id/weather_condition"
-        android:layout_alignRight="@+id/weather_lowhigh_temp"
-        android:layout_alignEnd="@+id/weather_lowhigh_temp"
-        android:adjustViewBounds="false" />
 
 </RelativeLayout>

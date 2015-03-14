@@ -1,5 +1,6 @@
 package org.kymjs.blog.api;
 
+import org.kymjs.blog.AppConfig;
 import org.kymjs.blog.bean.WeatherForecast;
 import org.kymjs.blog.bean.WeatherToday;
 import org.kymjs.blog.utils.JsonParser;
@@ -13,12 +14,18 @@ import de.greenrobot.event.EventBus;
 
 /**
  * Created by lody  on 2015/3/14.
+ *
+ * 单元测试:PASS
  */
 public class WeatherApi {
     private static final String TAG = WeatherApi.class.getSimpleName();
+    /** 今日天气 */
     private static final String WEATHER_TODAY_SUFFIX_URL = "/data/2.5/weather";
+    /**天气预告*/
     private static final String WEATHER_FORECAST_SUFFIX_URL = "/data/2.5/forecast/daily";
-    private static final String APPID = "89516341f251e02d934e044d09d5001d";
+
+
+    /**Base URL*/
     public static String base_url = "http://api.openweathermap.org";
 
     public static void getTodayWeather(final String city,String lang){
@@ -28,7 +35,7 @@ public class WeatherApi {
 
         HttpParams params = new HttpParams();
         params.put("q",city);
-        params.put("appid",APPID);
+        params.put("appid", AppConfig.APPID);
         params.put("lang",lang);
         params.put("units","metric");
 
@@ -57,7 +64,7 @@ public class WeatherApi {
 
         HttpParams params = new HttpParams();
         params.put("q",city);
-        params.put("appid",APPID);
+        params.put("appid",AppConfig.APPID);
         params.put("lang",lang);
         params.put("units","metric");
         params.put("cnt",String.valueOf(cnt));

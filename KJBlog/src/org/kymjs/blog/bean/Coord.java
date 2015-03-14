@@ -3,7 +3,7 @@ package org.kymjs.blog.bean;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by think on 13-5-18.
+ * Created by lody  on 2015/3/13.
  */
 public class Coord {
     @SerializedName("lon")

@@ -105,7 +105,16 @@
                             android:id="@+id/find_plugin_1"
                             style="@style/textview_more"
                             android:drawableTop="@drawable/ic_weather"
-                            android:text="天气" />
+                            android:text="爱看天气" />
+                        <ImageView
+                            android:id="@+id/find_plugin_tip"
+                            android:layout_width="8.0dip"
+                            android:layout_height="8.0dip"
+                            android:layout_alignRight="@+id/find_plugin_1"
+                            android:layout_alignTop="@+id/find_plugin_1"
+                            android:contentDescription="@string/app_name"
+                            android:src="@drawable/bg_count_tip" />
+
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -118,7 +127,7 @@
                             android:id="@+id/find_plugin_2"
                             style="@style/textview_more"
                             android:drawableTop="@drawable/ic_launcher"
-                            android:text="第二个" />
+                            android:text="敬请期待" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -131,16 +140,8 @@
                             android:id="@+id/find_plugin_3"
                             style="@style/textview_more"
                             android:drawableTop="@drawable/ic_launcher"
-                            android:text="第三个" />
+                            android:text="敬请期待" />
 
-                        <ImageView
-                            android:id="@+id/find_plugin_tip"
-                            android:layout_width="8.0dip"
-                            android:layout_height="8.0dip"
-                            android:layout_alignRight="@+id/find_plugin_3"
-                            android:layout_alignTop="@+id/find_plugin_3"
-                            android:contentDescription="@string/app_name"
-                            android:src="@drawable/bg_count_tip" />
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -170,7 +171,7 @@
                             android:id="@+id/find_plugin_4"
                             style="@style/textview_more"
                             android:drawableTop="@drawable/ic_launcher"
-                            android:text="第四个" />
+                            android:text="敬请期待" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -196,7 +197,7 @@
                             android:id="@+id/find_plugin_6"
                             style="@style/textview_more"
                             android:drawableTop="@drawable/ic_launcher"
-                            android:text="第几个" />
+                            android:text="敬请期待" />
                     </RelativeLayout>
                 </LinearLayout>
 

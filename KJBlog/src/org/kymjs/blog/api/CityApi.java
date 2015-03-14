@@ -12,7 +12,6 @@ import org.kymjs.kjframe.KJHttp;
 import org.kymjs.kjframe.http.HttpCallBack;
 import org.kymjs.kjframe.http.HttpConfig;
 import org.kymjs.kjframe.http.HttpParams;
-import org.kymjs.kjframe.ui.ViewInject;
 import org.kymjs.kjframe.utils.KJLoger;
 
 import java.lang.reflect.Type;
@@ -22,17 +21,17 @@ import de.greenrobot.event.EventBus;
 
 /**
  * Created by lody  on 2015/3/13.
- */
-
-/**
+ * 单元测试:PASS
+ *
  * 城市搜索功能类
  * <p/>
  * 使用雅虎的YQL进行数据筛选
  */
 public class CityApi {
     protected static final String TAG = CityApi.class.getSimpleName();
-
+    /** URL */
     private static final String SEARCH_CITY_URL = "http://query.yahooapis.com/v1/public/yql";
+    /** YQL语句 */
     private static final String YQL_GEO_PLACES = "select * from geo.places where text=";
 
     public static void searchCity(String city) {
@@ -52,7 +51,7 @@ public class CityApi {
             @Override
             public void onFailure(Throwable t, int errorNo, String strMsg) {
                 super.onFailure(t, errorNo, strMsg);
-                ViewInject.toast("(-｡-;)，数据加载失败了，请检查网络。");
+
             }
 
             @Override
@@ -78,7 +77,7 @@ public class CityApi {
     }
 
     /**
-     * 发送城市搜索完成的事件
+     * 发送搜索完成的事件
      *
      * @param places
      */

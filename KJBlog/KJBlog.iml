@@ -18,6 +18,7 @@
     <orderEntry type="library" name="KJPush_v1.0" level="project" />
     <orderEntry type="library" name="gson-v2" level="project" />
     <orderEntry type="library" name="eventbus-2.4.0" level="project" />
+    <orderEntry type="library" name="android-support-v4 (3)" level="project" />
   </component>
 </module>
 

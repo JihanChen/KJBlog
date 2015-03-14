@@ -7,6 +7,9 @@ package org.kymjs.blog;
  * @since 2015-3
  */
 public class AppConfig {
+
+    public static final String APPID = "89516341f251e02d934e044d09d5001d";
+
     public static String saveFolder = "KJBlog";
     public static String CACHE_TIME_KEY = "cache_time_key";
 
@@ -14,4 +17,5 @@ public class AppConfig {
     public static String SPLASH_BACKGROUND_KEY = "main_background_key";
     public static String SPLASH_BOX_KEY = "main_box_key";
     public static String SPLASH_CONTENT_KEY = "main_content_key";
+
 }

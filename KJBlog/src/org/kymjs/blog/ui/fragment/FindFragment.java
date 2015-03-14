@@ -10,8 +10,9 @@ import android.widget.TextView;
 
 import org.kymjs.blog.AppContext;
 import org.kymjs.blog.R;
+import org.kymjs.blog.domain.SimpleBackPage;
+import org.kymjs.blog.ui.SimpleBackActivity;
 import org.kymjs.blog.ui.TitleBarActivity;
-import org.kymjs.blog.ui.WeatherActivity;
 import org.kymjs.blog.ui.widget.KJScrollView;
 import org.kymjs.blog.ui.widget.KJScrollView.OnViewTopPull;
 import org.kymjs.kjframe.ui.BindView;
@@ -19,7 +20,7 @@ import org.kymjs.kjframe.widget.RoundImageView;
 
 /**
  * 发现界面
- *
+ * 
  * @author kymjs (https://github.com/kymjs)
  * @since 2015-3
  */
@@ -34,11 +35,11 @@ public class FindFragment extends TitleBarFragment {
     @BindView(id = R.id.find_root)
     private KJScrollView rootView;
     @BindView(id = R.id.find_plugin_1, click = true)
-    private TextView find_plugin_1;
+    private TextView mTvWeather;
 
     @Override
     protected View inflaterView(LayoutInflater inflater, ViewGroup container,
-                                Bundle bundle) {
+            Bundle bundle) {
         View view = View.inflate(getActivity(), R.layout.frag_find, null);
         return view;
     }
@@ -87,10 +88,9 @@ public class FindFragment extends TitleBarFragment {
     protected void widgetClick(View v) {
         super.widgetClick(v);
         switch (v.getId()) {
-            case R.id.find_plugin_1:
-                ((TitleBarActivity)getActivity()).showActivity(getActivity(), WeatherActivity.class);
-                break;
-
+        case R.id.find_plugin_1:
+            SimpleBackActivity.postShowWith(outsideAty, SimpleBackPage.WEATHER);
+            break;
         }
     }
 }
