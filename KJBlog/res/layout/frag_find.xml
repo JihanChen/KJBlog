@@ -2,11 +2,11 @@
 <org.kymjs.blog.ui.widget.KJScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/find_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/find_img_zone"
@@ -40,14 +40,14 @@
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@+id/find_img_zone" >
+            android:layout_below="@+id/find_img_zone">
 
             <!-- 画列分割线 (如果是三行就是362) -->
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="242.0dip"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <View
                     android:layout_width="0.0dip"
@@ -84,7 +84,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <!-- 第一行数据 -->
 
@@ -93,26 +93,26 @@
                     android:layout_height="120.0dip"
                     android:baselineAligned="false"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <RelativeLayout
                         android:layout_width="0.0dip"
                         android:layout_height="fill_parent"
                         android:layout_weight="1.0"
-                        android:background="@null" >
+                        android:background="@null">
 
                         <TextView
                             android:id="@+id/find_plugin_1"
                             style="@style/textview_more"
-                            android:drawableTop="@drawable/ic_launcher"
-                            android:text="第一个" />
+                            android:drawableTop="@drawable/ic_weather"
+                            android:text="天气" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="0.0dip"
                         android:layout_height="fill_parent"
                         android:layout_weight="1.0"
-                        android:background="@null" >
+                        android:background="@null">
 
                         <TextView
                             android:id="@+id/find_plugin_2"
@@ -125,7 +125,7 @@
                         android:layout_width="0.0dip"
                         android:layout_height="fill_parent"
                         android:layout_weight="1.0"
-                        android:background="@null" >
+                        android:background="@null">
 
                         <TextView
                             android:id="@+id/find_plugin_3"
@@ -158,13 +158,13 @@
                     android:layout_height="120.0dip"
                     android:baselineAligned="false"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <RelativeLayout
                         android:layout_width="0.0dip"
                         android:layout_height="fill_parent"
                         android:layout_weight="1.0"
-                        android:background="@null" >
+                        android:background="@null">
 
                         <TextView
                             android:id="@+id/find_plugin_4"
@@ -177,7 +177,7 @@
                         android:layout_width="0.0dip"
                         android:layout_height="fill_parent"
                         android:layout_weight="1.0"
-                        android:background="@null" >
+                        android:background="@null">
 
                         <TextView
                             android:id="@+id/find_plugin_5"
@@ -190,7 +190,7 @@
                         android:layout_width="0.0dip"
                         android:layout_height="fill_parent"
                         android:layout_weight="1.0"
-                        android:background="@null" >
+                        android:background="@null">
 
                         <TextView
                             android:id="@+id/find_plugin_6"

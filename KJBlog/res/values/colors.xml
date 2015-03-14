@@ -2,8 +2,12 @@
 <resources>
 
     <color name="titlebar_color">#ddffaf60</color>
-    
+
     <color name="list_item_background_normal">#ffff</color>
     <color name="list_item_background_pressed">#efefef</color>
+
+    <color name="weather_background">#313131</color>
+    <color name="color_dark_grey">#313131</color>
+    <color name="weather_keyword">#03a9f4</color>
 
 </resources>

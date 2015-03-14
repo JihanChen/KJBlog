@@ -1,2 +1,2 @@
 # KJBlog
-A personal blog client
+A personal blog client for Android.

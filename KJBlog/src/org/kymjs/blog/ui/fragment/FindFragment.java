@@ -1,13 +1,5 @@
 package org.kymjs.blog.ui.fragment;
 
-import org.kymjs.blog.AppContext;
-import org.kymjs.blog.R;
-import org.kymjs.blog.ui.TitleBarActivity;
-import org.kymjs.blog.ui.widget.KJScrollView;
-import org.kymjs.blog.ui.widget.KJScrollView.OnViewTopPull;
-import org.kymjs.kjframe.ui.BindView;
-import org.kymjs.kjframe.widget.RoundImageView;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +8,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
+import org.kymjs.blog.AppContext;
+import org.kymjs.blog.R;
+import org.kymjs.blog.ui.TitleBarActivity;
+import org.kymjs.blog.ui.widget.KJScrollView;
+import org.kymjs.blog.ui.widget.KJScrollView.OnViewTopPull;
+import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.widget.RoundImageView;
+
 /**
  * 发现界面
- * 
+ *
  * @author kymjs (https://github.com/kymjs)
  * @since 2015-3
  */
@@ -32,10 +32,12 @@ public class FindFragment extends TitleBarFragment {
     private TextView mTvName;
     @BindView(id = R.id.find_root)
     private KJScrollView rootView;
+    @BindView(id = R.id.find_plugin_1, click = true)
+    private TextView find_plugin_1;
 
     @Override
     protected View inflaterView(LayoutInflater inflater, ViewGroup container,
-            Bundle bundle) {
+                                Bundle bundle) {
         View view = View.inflate(getActivity(), R.layout.frag_find, null);
         return view;
     }
@@ -72,10 +74,21 @@ public class FindFragment extends TitleBarFragment {
                 }
             }
         });
+
     }
 
     @Override
     public void onMenuClick() {
         super.onMenuClick();
+    }
+
+    @Override
+    protected void widgetClick(View v) {
+        super.widgetClick(v);
+        switch (v.getId()) {
+            case R.id.find_plugin_1:
+                break;
+
+        }
     }
 }
