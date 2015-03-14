@@ -1,5 +1,6 @@
 package org.kymjs.blog.domain;
 
+import org.kymjs.blog.bean.Weather;
 import org.kymjs.blog.ui.fragment.WeChatFragment;
 
 /**
@@ -9,7 +10,9 @@ import org.kymjs.blog.ui.fragment.WeChatFragment;
  * @since 2015-3
  */
 public enum SimpleBackPage {
-    COMMENT(1, WeChatFragment.class);
+    COMMENT(1, WeChatFragment.class),
+
+    WEATHER(2, Weather.class);
 
     private Class<?> clazz;
     private int value;
