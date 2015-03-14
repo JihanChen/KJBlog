@@ -1,6 +1,5 @@
 package org.kymjs.blog.domain;
 
-import org.kymjs.blog.bean.Weather;
 import org.kymjs.blog.ui.fragment.WeChatFragment;
 import org.kymjs.blog.ui.fragment.WeatherFragment;
 
@@ -13,11 +12,7 @@ import org.kymjs.blog.ui.fragment.WeatherFragment;
 public enum SimpleBackPage {
     COMMENT(1, WeChatFragment.class),
 
-<<<<<<< HEAD
     WEATHER(2, WeatherFragment.class);
-=======
-    WEATHER(2, Weather.class);
->>>>>>> origin/dev
 
     private Class<?> clazz;
     private int value;

@@ -1,13 +1,5 @@
 package org.kymjs.blog.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.kymjs.blog.R;
-import org.kymjs.blog.domain.EverydayMessage;
-import org.kymjs.kjframe.KJBitmap;
-import org.kymjs.kjframe.utils.StringUtils;
-
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-<<<<<<< HEAD
 
 import org.kymjs.blog.R;
 import org.kymjs.blog.domain.EverydayMessage;
@@ -25,8 +16,6 @@ import org.kymjs.kjframe.KJBitmap;
 
 import java.util.ArrayList;
 import java.util.List;
-=======
->>>>>>> origin/dev
 
 /**
  * 每日推送界面列表适配器
@@ -119,11 +108,7 @@ public class WeChatAdapter extends BaseAdapter {
             holder.singleTitle.setText(data.getTitle());
             kjb.display(holder.singleImg, data.getImgUrl());
         }
-<<<<<<< HEAD
         //holder.tiem.setText(StringUtils.friendlyTime(data.getTime()));
-=======
-        holder.tiem.setText(StringUtils.friendlyTime(data.getTime()));
->>>>>>> origin/dev
         return v;
     }
 

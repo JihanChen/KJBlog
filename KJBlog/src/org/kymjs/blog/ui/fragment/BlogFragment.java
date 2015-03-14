@@ -1,8 +1,14 @@
 package org.kymjs.blog.ui.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import org.kymjs.blog.AppConfig;
 import org.kymjs.blog.R;
 import org.kymjs.blog.adapter.BlogAdapter;
 import org.kymjs.blog.domain.Blog;
@@ -17,13 +23,8 @@ import org.kymjs.kjframe.ui.BindView;
 import org.kymjs.kjframe.utils.PreferenceHelper;
 import org.kymjs.kjframe.utils.StringUtils;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 主界面博客模块
@@ -121,8 +122,8 @@ public class BlogFragment extends TitleBarFragment {
             public void onHeaderClick(StickyHeadListView l, View header,
                     int itemPosition, String headerId, boolean currentlySticky) {
                 SimpleBackActivity.postShowWith(aty, SimpleBackPage.COMMENT);
-                PreferenceHelper.write(aty, TAG, "is_clicked_msg", true);
-                PreferenceHelper.write(aty, TAG, "prev_click_date",
+                PreferenceHelper.write(aty, TAG, AppConfig.BLOG_IS_CLICK_MSG, true);
+                PreferenceHelper.write(aty, TAG, AppConfig.PREV_CLICK_DATA,
                         StringUtils.getDataTime("yyyy-MM-dd"));
                 mFakeList.setOpenStickyHead(false);
             }
@@ -133,9 +134,9 @@ public class BlogFragment extends TitleBarFragment {
     protected void initData() {
         super.initData();
         boolean isClickedMessage = PreferenceHelper.readBoolean(aty, TAG,
-                "is_clicked_msg", false);
+                AppConfig.BLOG_IS_CLICK_MSG, false);
         boolean isCurrentDate = (PreferenceHelper.readString(aty, TAG,
-                "prev_click_date", "")).equals(StringUtils
+                AppConfig.PREV_CLICK_DATA, "")).equals(StringUtils
                 .getDataTime("yyyy-MM-dd"));
         showStickyHead = !isClickedMessage || !isCurrentDate;
     }

@@ -1,5 +1,12 @@
 package org.kymjs.blog.ui;
 
+import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
+
 import org.kymjs.blog.AppConfig;
 import org.kymjs.blog.AppContext;
 import org.kymjs.blog.R;
@@ -11,13 +18,6 @@ import org.kymjs.kjframe.utils.FileUtils;
 import org.kymjs.kjframe.utils.PreferenceHelper;
 import org.kymjs.kjframe.utils.StringUtils;
 import org.kymjs.kjframe.widget.RoundImageView;
-
-import android.content.Intent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
-import android.widget.TextView;
 
 /**
  * 应用欢迎界面(动态适配模式)
@@ -59,7 +59,7 @@ public class Splash extends KJActivity {
         super.initWidget();
         screenAdaptation();
         KJAnimations.openLoginAnim(mRlBox);
-        mImgHead.setAnimation(KJAnimations.getRotateAnimation(360, 0, 600));
+        mImgHead.setAnimation(KJAnimations.getRotateAnimation(360, 0, 100/**DEBUG MODE*/));
         setUserInterface();
     }
 
@@ -103,7 +103,7 @@ public class Splash extends KJActivity {
      * 动态设置用户界面
      */
     private void setUserInterface() {
-        String sdCardPath = FileUtils.getSavePath(AppConfig.saveFolder);
+        String sdCardPath = FileUtils.getSavePath(AppConfig.SAVE_FOLDER);
         String headImgPath = sdCardPath
                 + PreferenceHelper.readString(aty, TAG,
                         AppConfig.SPLASH_HEAD_IMG_KEY, "");

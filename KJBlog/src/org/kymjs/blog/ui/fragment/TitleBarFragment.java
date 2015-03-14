@@ -1,17 +1,20 @@
 package org.kymjs.blog.ui.fragment;
 
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+
 import org.kymjs.blog.AppContext;
 import org.kymjs.blog.ui.TitleBarActivity;
 import org.kymjs.kjframe.ui.KJFragment;
-
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 
 /**
  * 具有ActionBar的Activity的基类
  * 
  * @author kymjs (https://github.com/kymjs)
+ * @author lody
  * @since 2015-3
+ *
+ * FIX ME:onMenuClick() and onBackClick() don't call back.
  */
 public abstract class TitleBarFragment extends KJFragment {
 
@@ -40,6 +43,7 @@ public abstract class TitleBarFragment extends KJFragment {
         app = (AppContext) getActivity().getApplication();
         super.onCreate(savedInstanceState);
     }
+
 
     @Override
     public void onResume() {
@@ -122,4 +126,6 @@ public abstract class TitleBarFragment extends KJFragment {
             outsideAty.mImgMenu.setImageDrawable(drawable);
         }
     }
+
+
 }

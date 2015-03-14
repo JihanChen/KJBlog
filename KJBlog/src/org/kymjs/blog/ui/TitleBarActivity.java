@@ -1,13 +1,5 @@
 package org.kymjs.blog.ui;
 
-import org.kymjs.blog.R;
-import org.kymjs.blog.ui.widget.dobmenu.CurtainItem.OnSwitchListener;
-import org.kymjs.blog.ui.widget.dobmenu.CurtainItem.SlidingType;
-import org.kymjs.blog.ui.widget.dobmenu.CurtainView;
-import org.kymjs.blog.utils.KJAnimations;
-import org.kymjs.blog.utils.PullTip;
-import org.kymjs.kjframe.KJActivity;
-
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,9 +11,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.kymjs.blog.R;
+import org.kymjs.blog.ui.widget.dobmenu.CurtainItem.OnSwitchListener;
+import org.kymjs.blog.ui.widget.dobmenu.CurtainItem.SlidingType;
+import org.kymjs.blog.ui.widget.dobmenu.CurtainView;
+import org.kymjs.blog.utils.KJAnimations;
+import org.kymjs.blog.utils.PullTip;
+import org.kymjs.kjframe.KJActivity;
+
 /**
  * 应用Activity基类
- * 
+ *
  * @author kymjs (https://github.com/kymjs)
  * @since 2015-3
  */
@@ -61,14 +61,14 @@ public abstract class TitleBarActivity extends KJActivity {
     public void widgetClick(View v) {
         super.widgetClick(v);
         switch (v.getId()) {
-        case R.id.titlebar_img_back:
-            onBackClick();
-            break;
-        case R.id.titlebar_img_menu:
-            onMenuClick();
-            break;
-        default:
-            break;
+            case R.id.titlebar_img_back:
+                onBackClick();
+                break;
+            case R.id.titlebar_img_menu:
+                onMenuClick();
+                break;
+            default:
+                break;
         }
     }
 
