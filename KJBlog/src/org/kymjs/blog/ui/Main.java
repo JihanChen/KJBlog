@@ -76,12 +76,6 @@ public class Main extends TitleBarActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        cancleExit();
-    }
-
-    @Override
     protected void onBackClick() {
         super.onBackClick();
         currentFragment.onBackClick();

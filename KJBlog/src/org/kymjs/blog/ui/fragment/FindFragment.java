@@ -2,6 +2,8 @@ package org.kymjs.blog.ui.fragment;
 
 import org.kymjs.blog.AppContext;
 import org.kymjs.blog.R;
+import org.kymjs.blog.domain.SimpleBackPage;
+import org.kymjs.blog.ui.SimpleBackActivity;
 import org.kymjs.blog.ui.TitleBarActivity;
 import org.kymjs.blog.ui.widget.KJScrollView;
 import org.kymjs.blog.ui.widget.KJScrollView.OnViewTopPull;
@@ -33,6 +35,11 @@ public class FindFragment extends TitleBarFragment {
     private TextView mTvName;
     @BindView(id = R.id.find_root)
     private KJScrollView rootView;
+
+    @BindView(id = R.id.find_plugin_2, click = true)
+    private TextView mTvTodayMessage;
+    @BindView(id = R.id.find_plugin_3, click = true)
+    private TextView mTvJokeList;
 
     @Override
     protected View inflaterView(LayoutInflater inflater, ViewGroup container,
@@ -73,6 +80,21 @@ public class FindFragment extends TitleBarFragment {
                 }
             }
         });
+    }
+
+    @Override
+    protected void widgetClick(View v) {
+        super.widgetClick(v);
+        switch (v.getId()) {
+        case R.id.find_plugin_2:
+            SimpleBackActivity.postShowWith(outsideAty, SimpleBackPage.COMMENT);
+            break;
+        case R.id.find_plugin_3:
+            break;
+
+        default:
+            break;
+        }
     }
 
     @Override
