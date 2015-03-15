@@ -69,7 +69,7 @@ public class WeatherFragment extends TitleBarFragment implements CityCallBack {
     protected void setActionBarRes(ActionBarRes actionBarRes) {
         actionBarRes.title = "爱看天气";
         actionBarRes.menuImageId = R.drawable.ic_search;
-        actionBarRes.backImageId = R.drawable.ic_back;
+        actionBarRes.backImageId = R.drawable.titlebar_back;
     }
 
     private void showSearchWindow() {
@@ -80,6 +80,12 @@ public class WeatherFragment extends TitleBarFragment implements CityCallBack {
     public void onMenuClick() {
         super.onMenuClick();
         showSearchWindow();
+    }
+
+    @Override
+    public void onBackClick() {
+        super.onBackClick();
+        aty.finish();
     }
 
     @Override
