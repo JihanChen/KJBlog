@@ -39,7 +39,7 @@
             android:layout_toRightOf="@+id/item_blog_tip_tody"
             android:gravity="top"
             android:singleLine="true"
-            android:text="@string/everyday_message"
+            android:text="@string/today_message"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             android:textStyle="normal" />

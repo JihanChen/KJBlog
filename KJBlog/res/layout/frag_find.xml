@@ -118,7 +118,7 @@
                             android:id="@+id/find_plugin_2"
                             style="@style/textview_more"
                             android:drawableTop="@drawable/selector_mine_news"
-                            android:text="@string/everyday_message" />
+                            android:text="@string/today_message" />
 
                         <ImageView
                             android:id="@+id/find_plugin_tip"
@@ -139,7 +139,7 @@
                         <TextView
                             android:id="@+id/find_plugin_3"
                             style="@style/textview_more"
-                            android:drawableTop="@drawable/ic_launcher"
+                            android:drawableTop="@drawable/selector_mine_joke"
                             android:text="@string/osc_joke" />
                     </RelativeLayout>
                 </LinearLayout>

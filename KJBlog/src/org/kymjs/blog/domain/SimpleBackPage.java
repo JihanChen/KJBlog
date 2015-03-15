@@ -1,5 +1,6 @@
 package org.kymjs.blog.domain;
 
+import org.kymjs.blog.ui.fragment.BlogDetailFragment;
 import org.kymjs.blog.ui.fragment.WeChatFragment;
 
 /**
@@ -9,7 +10,9 @@ import org.kymjs.blog.ui.fragment.WeChatFragment;
  * @since 2015-3
  */
 public enum SimpleBackPage {
-    COMMENT(1, WeChatFragment.class);
+    COMMENT(1, WeChatFragment.class),
+
+    BLOG_DETAIL(2, BlogDetailFragment.class);
 
     private Class<?> clazz;
     private int value;

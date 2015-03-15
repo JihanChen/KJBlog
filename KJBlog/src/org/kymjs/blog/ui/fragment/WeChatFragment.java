@@ -4,7 +4,6 @@ import org.kymjs.blog.R;
 import org.kymjs.blog.adapter.WeChatAdapter;
 import org.kymjs.kjframe.ui.BindView;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,19 +25,29 @@ public class WeChatFragment extends TitleBarFragment {
     @BindView(id = R.id.wechat_listview)
     private ListView mList;
 
-    private Activity aty;
-
     @Override
     protected View inflaterView(LayoutInflater inflater, ViewGroup container,
             Bundle bundle) {
-        aty = getActivity();
-        View root = View.inflate(aty, R.layout.frag_wechat, null);
+        View root = View.inflate(outsideAty, R.layout.frag_wechat, null);
         return root;
+    }
+
+    @Override
+    protected void setActionBarRes(ActionBarRes actionBarRes) {
+        super.setActionBarRes(actionBarRes);
+        actionBarRes.title = getString(R.string.today_message);
+        actionBarRes.backImageId = R.drawable.titlebar_back;
+    }
+
+    @Override
+    public void onBackClick() {
+        super.onBackClick();
+        outsideAty.finish();
     }
 
     @Override
     protected void initWidget(View parentView) {
         super.initWidget(parentView);
-        mList.setAdapter(new WeChatAdapter(aty, null));
+        mList.setAdapter(new WeChatAdapter(outsideAty, null));
     }
 }
