@@ -5,9 +5,13 @@ import org.kymjs.blog.ui.fragment.BlogFragment;
 import org.kymjs.blog.ui.fragment.FindFragment;
 import org.kymjs.blog.ui.fragment.MineFragment;
 import org.kymjs.blog.ui.fragment.TitleBarFragment;
+import org.kymjs.blog.utils.KJAnimations;
+import org.kymjs.blog.utils.UIHelper;
 import org.kymjs.kjframe.ui.BindView;
 
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.widget.RadioButton;
 
 /**
@@ -30,6 +34,9 @@ public class Main extends TitleBarActivity {
     private TitleBarFragment contentFragment3;
     private TitleBarFragment currentFragment;
 
+    private float titleBarHeight;
+    private boolean isOnKeyBacking;
+
     @Override
     public void setRootView() {
         setContentView(R.layout.aty_main);
@@ -41,6 +48,7 @@ public class Main extends TitleBarActivity {
         contentFragment1 = new BlogFragment();
         contentFragment2 = new FindFragment();
         contentFragment3 = new MineFragment();
+        titleBarHeight = getResources().getDimension(R.dimen.titlebar_height);
     }
 
     @Override
@@ -68,6 +76,12 @@ public class Main extends TitleBarActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        cancleExit();
+    }
+
+    @Override
     protected void onBackClick() {
         super.onBackClick();
         currentFragment.onBackClick();
@@ -83,4 +97,69 @@ public class Main extends TitleBarActivity {
         currentFragment = targetFragment;
         super.changeFragment(R.id.main_content, targetFragment);
     }
+
+    /********************** 再按一下退出 *****************************/
+
+    /**
+     * 取消退出
+     */
+    private void cancleExit() {
+        Animation anim = KJAnimations.getTranslateAnimation(0, 0,
+                titleBarHeight, 0, 300);
+        mTvTitle.startAnimation(anim);
+        Animation anim2 = KJAnimations.getTranslateAnimation(0, 0,
+                titleBarHeight, 300, 0);
+        anim2.setAnimationListener(new AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {}
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mTvDoubleClickTip.setVisibility(View.GONE);
+            }
+        });
+        mTvDoubleClickTip.startAnimation(anim2);
+    }
+
+    /**
+     * 显示退出提示
+     */
+    private void showExitTip() {
+        mTvDoubleClickTip.setVisibility(View.VISIBLE);
+        Animation anim = KJAnimations.getTranslateAnimation(0, 0, 0,
+                titleBarHeight, 300);
+        mTvTitle.startAnimation(anim);
+        Animation anim2 = KJAnimations.getTranslateAnimation(0, 0,
+                titleBarHeight, 0, 300);
+        mTvDoubleClickTip.startAnimation(anim2);
+    }
+
+    private final Runnable onBackTimeRunnable = new Runnable() {
+        @Override
+        public void run() {
+            isOnKeyBacking = false;
+            cancleExit();
+        }
+    };
+
+    @Override
+    public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
+        if (this instanceof Main) {
+            if (isOnKeyBacking) {
+                mMainLoopHandler.removeCallbacks(onBackTimeRunnable);
+                isOnKeyBacking = false;
+                UIHelper.toHome(aty);
+                return true;
+            } else {
+                isOnKeyBacking = true;
+                showExitTip();
+                mMainLoopHandler.postDelayed(onBackTimeRunnable, 2000);
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    };
 }
