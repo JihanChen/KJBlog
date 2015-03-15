@@ -121,7 +121,7 @@ public abstract class TitleBarActivity extends KJActivity {
                 onCurtainPull();
                 mMainLoopHandler.postDelayed(timerRunnable, 3000);
                 count++;
-                if (count > 2) {
+                if (count > 3) {
                     mMainLoopHandler.removeCallbacks(timerRunnable);
                     Toast.makeText(
                             aty,
@@ -140,14 +140,14 @@ public abstract class TitleBarActivity extends KJActivity {
                 KJAnimations.clickCurtain(mCurtainView.getContentParentView());
                 mMainLoopHandler.postDelayed(timerRunnable, 2000);
                 count++;
-                if (count > 2) {
+                if (count > 3) {
                     mMainLoopHandler.removeCallbacks(timerRunnable);
                     Toast.makeText(
                             aty,
                             PullTip.toast[(int) (Math.random() * PullTip.toast.length)],
                             Toast.LENGTH_SHORT).show();
                     count = 0;
-                } else if (count == 2) {
+                } else if (count > 1) {
                     mMainLoopHandler.removeCallbacks(timerRunnable);
                     mMainLoopHandler.postDelayed(timerRunnable, 2000);
                 }
