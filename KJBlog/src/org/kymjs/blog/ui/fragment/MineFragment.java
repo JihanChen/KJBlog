@@ -3,7 +3,6 @@ package org.kymjs.blog.ui.fragment;
 import org.kymjs.blog.AppConfig;
 import org.kymjs.blog.R;
 import org.kymjs.kjframe.ui.BindView;
-import org.kymjs.kjframe.ui.KJActivityStack;
 import org.kymjs.kjframe.utils.PreferenceHelper;
 import org.kymjs.kjframe.utils.SystemTool;
 import org.kymjs.push.core.KJPushManager;
@@ -103,7 +102,7 @@ public class MineFragment extends TitleBarFragment {
         case R.id.mine_rl_feedback:
             break;
         case R.id.mine_rl_exit:
-            KJActivityStack.create().AppExit(outsideAty);
+            // KJActivityStack.create().AppExit(outsideAty);
             break;
         default:
             break;

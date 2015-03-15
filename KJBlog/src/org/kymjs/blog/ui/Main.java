@@ -6,8 +6,8 @@ import org.kymjs.blog.ui.fragment.FindFragment;
 import org.kymjs.blog.ui.fragment.MineFragment;
 import org.kymjs.blog.ui.fragment.TitleBarFragment;
 import org.kymjs.blog.utils.KJAnimations;
-import org.kymjs.blog.utils.UIHelper;
 import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.ui.KJActivityStack;
 
 import android.view.View;
 import android.view.animation.Animation;
@@ -76,8 +76,8 @@ public class Main extends TitleBarActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         cancleExit();
     }
 
@@ -151,7 +151,8 @@ public class Main extends TitleBarActivity {
             if (isOnKeyBacking) {
                 mMainLoopHandler.removeCallbacks(onBackTimeRunnable);
                 isOnKeyBacking = false;
-                UIHelper.toHome(aty);
+                // UIHelper.toHome(aty);
+                KJActivityStack.create().AppExit(aty);
                 return true;
             } else {
                 isOnKeyBacking = true;
