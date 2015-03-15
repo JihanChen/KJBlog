@@ -1,5 +1,13 @@
 package org.kymjs.blog.ui.fragment;
 
+import java.util.List;
+
+import org.kymjs.blog.R;
+import org.kymjs.blog.api.CityApi;
+import org.kymjs.blog.api.CityCallBack;
+import org.kymjs.blog.bean.Place;
+import org.kymjs.kjframe.ui.ViewInject;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -10,14 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import org.kymjs.blog.R;
-import org.kymjs.blog.api.CityApi;
-import org.kymjs.blog.api.CityCallBack;
-import org.kymjs.blog.bean.Place;
-import org.kymjs.kjframe.ui.ViewInject;
-
-import java.util.List;
-
 /**
  * Created by lody on 2015/3/13.
  */
@@ -25,8 +25,7 @@ public class WeatherFragment extends TitleBarFragment implements CityCallBack {
 
     // TODO:天气插件
     // STATE:城市搜索初步完成，对话框还需美化
-    //NOTICE:回调注意线程
-
+    // NOTICE:回调注意线程
 
     public static final String TAG = WeatherFragment.class.getSimpleName();
 
@@ -37,55 +36,44 @@ public class WeatherFragment extends TitleBarFragment implements CityCallBack {
     private Button searchButton;
     private ListView cityList;
 
-
     @Override
     protected View inflaterView(LayoutInflater layoutInflater,
             ViewGroup viewGroup, Bundle bundle) {
 
         aty = getActivity();
         View root = View.inflate(aty, R.layout.frag_weather, null);
-        View searchCityView = View.inflate(getActivity(), R.layout.frag_search_city, null);
+        View searchCityView = View.inflate(getActivity(),
+                R.layout.frag_search_city, null);
         this.searchCityView = searchCityView;
         bindSearchView();
-
 
         return root;
     }
 
     private void bindSearchView() {
-        searchEdit = (EditText) searchCityView.findViewById(R.id.search_city_edit);
-        searchButton= (Button) searchCityView.findViewById(R.id.search_btn);
+        searchEdit = (EditText) searchCityView
+                .findViewById(R.id.search_city_edit);
+        searchButton = (Button) searchCityView.findViewById(R.id.search_btn);
         searchButton.setOnClickListener(this);
         cityList = (ListView) searchCityView.findViewById(R.id.list_city);
-
     }
-
-
 
     /**
      * 将搜索到的城市填充到ListView
      */
     private void fillListView(List<Place> places) {
-
-        //TODO:填充列表
         cityList.setVisibility(View.VISIBLE);
-
-
     }
-
 
     @Override
     protected void setActionBarRes(ActionBarRes actionBarRes) {
         actionBarRes.title = "爱看天气";
-        actionBarRes.menuImageDrawable = getActivity().getResources().getDrawable(R.drawable.ic_search);
+        actionBarRes.menuImageId = R.drawable.ic_search;
+        actionBarRes.backImageId = R.drawable.ic_back;
     }
 
-
-
     private void showSearchWindow() {
-
         new AlertDialog.Builder(getActivity()).setView(searchCityView).show();
-
     }
 
     @Override
@@ -97,11 +85,10 @@ public class WeatherFragment extends TitleBarFragment implements CityCallBack {
     @Override
     protected void widgetClick(View v) {
         super.widgetClick(v);
-        switch (v.getId()){
-            case R.id.search_btn:
-                applySearch();
-                break;
-            
+        switch (v.getId()) {
+        case R.id.search_btn:
+            applySearch();
+            break;
         }
     }
 
@@ -110,9 +97,9 @@ public class WeatherFragment extends TitleBarFragment implements CityCallBack {
      */
     private void applySearch() {
         final String content = searchEdit.getText().toString().trim();
-        if (content.isEmpty()) return;
+        if (content.isEmpty())
+            return;
         performSearchCity(content);
-        
     }
 
     /**
@@ -120,7 +107,7 @@ public class WeatherFragment extends TitleBarFragment implements CityCallBack {
      */
     private void performSearchCity(String city) {
         ViewInject.toast("搜索中...");
-        CityApi.searchCity(city,this);
+        CityApi.searchCity(city, this);
 
     }
 
@@ -130,22 +117,20 @@ public class WeatherFragment extends TitleBarFragment implements CityCallBack {
             @Override
             public void run() {
 
-                ViewInject.toast("搜索到"+places.size()+"个城市。");
+                ViewInject.toast("搜索到" + places.size() + "个城市。");
                 ViewInject.toast(places.get(0).name);
 
-                if(places.size() == 0){
+                if (places.size() == 0) {
                     return;
                 }
                 fillListView(places);
             }
         });
 
-
-
     }
 
     @Override
     public void onCitySearchFailture(String reason) {
-        //无视之
+        // 无视之
     }
 }
