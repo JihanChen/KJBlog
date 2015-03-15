@@ -10,8 +10,6 @@ import org.kymjs.kjframe.http.HttpConfig;
 import org.kymjs.kjframe.http.HttpParams;
 import org.kymjs.kjframe.utils.KJLoger;
 
-import de.greenrobot.event.EventBus;
-
 /**
  * Created by lody  on 2015/3/14.
  *
@@ -28,7 +26,7 @@ public class WeatherApi {
     /**Base URL*/
     public static String base_url = "http://api.openweathermap.org";
 
-    public static void getTodayWeather(final String city,String lang){
+    public static void getTodayWeather(final String city,String lang, final WeatherCallBack.TodayWeatherCallBack callBack){
 
         HttpConfig config = new HttpConfig();
         config.maxRetries = 4;// 出错重连次数
@@ -46,18 +44,19 @@ public class WeatherApi {
             @Override
             public void onFailure(Throwable t, int errorNo, String strMsg) {
                 super.onFailure(t, errorNo, strMsg);
+                callBack.onfailture(strMsg);
             }
 
             @Override
             public void onSuccess(int statusCode, String content) {
                 KJLoger.debug(content);
                 WeatherToday today = JsonParser.fromJsonObject(content, WeatherToday.class);
-                sendTodayWeatherSearchFinishEvent(today);
+                callBack.onTodayWeatherSearchSuccess(today);
             }
         });
     }
 
-    public static void getWeatherForecast(String city,String lang,int cnt){
+    public static void getWeatherForecast(String city,String lang,int cnt,  final WeatherCallBack.WeatherrForecastCallBack callBack){
 
         HttpConfig config = new HttpConfig();
         config.maxRetries = 4;// 出错重连次数
@@ -76,41 +75,20 @@ public class WeatherApi {
             @Override
             public void onFailure(Throwable t, int errorNo, String strMsg) {
                 super.onFailure(t, errorNo, strMsg);
+                callBack.onfailture(strMsg);
             }
 
             @Override
             public void onSuccess(int statusCode, String content) {
                 KJLoger.debug(content);
                 WeatherForecast forecast = JsonParser.fromJsonObject(content, WeatherForecast.class);
-                sendWeatherForecastSearchFinishEvent(forecast);
+                callBack.onWeatherrForecastSearchSuccess(forecast);
 
             }
         });
     }
 
-    /**
-     * 发送今日天气查询完成的事件
-     *
-     * @param today 天气
-     */
-    private static void sendTodayWeatherSearchFinishEvent(WeatherToday today) {
 
-
-        EventBus.getDefault().post(today);
-
-    }
-
-    /**
-     * 发送天气预报查询完成的事件
-     *
-     * @param forecast
-     */
-    private static void sendWeatherForecastSearchFinishEvent(WeatherForecast forecast) {
-
-
-        EventBus.getDefault().post(forecast);
-
-    }
 
     /**
      *

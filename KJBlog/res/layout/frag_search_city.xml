@@ -9,4 +9,18 @@
         android:layout_height="wrap_content"
         android:id="@+id/search_city_edit"
         android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="搜索城市"
+        android:id="@+id/search_btn"
+        android:layout_gravity="center_horizontal" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_city"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone" />
 </LinearLayout>

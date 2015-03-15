@@ -19,11 +19,17 @@ import org.kymjs.blog.utils.KJAnimations;
 import org.kymjs.blog.utils.PullTip;
 import org.kymjs.kjframe.KJActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 应用Activity基类
  *
  * @author kymjs (https://github.com/kymjs)
+ * @author lody
  * @since 2015-3
+ *
+ * FIX 2015/3/15 : 修复ActionBar点击不会调的问题。
  */
 public abstract class TitleBarActivity extends KJActivity {
 
@@ -62,19 +68,19 @@ public abstract class TitleBarActivity extends KJActivity {
         super.widgetClick(v);
         switch (v.getId()) {
             case R.id.titlebar_img_back:
-                onBackClick();
+               handleCallOnBackClick();
                 break;
             case R.id.titlebar_img_menu:
-                onMenuClick();
+                handleCallOnMenuClick();
                 break;
             default:
                 break;
         }
     }
 
-    protected void onBackClick() {}
+/*    protected void onBackClick() {}
 
-    protected void onMenuClick() {}
+    protected void onMenuClick() {}*/
 
     public void onCurtainPull() {}
 
@@ -148,4 +154,40 @@ public abstract class TitleBarActivity extends KJActivity {
             count = 0;
         }
     };
+
+
+    private final List<OnActionBarClickListener> onActionBarClickListeners = new ArrayList<OnActionBarClickListener>();
+
+    public void addOnActionBarClickListener(OnActionBarClickListener onActionBarClickListener) {
+        onActionBarClickListeners.add(onActionBarClickListener);
+    }
+
+    public void removeOnActionBarClickListener(OnActionBarClickListener onActionBarClickListener) {
+        onActionBarClickListeners.remove(onActionBarClickListener);
+    }
+
+
+
+    /**
+     * 回调所有onMenuClick()监听
+     */
+    private void handleCallOnMenuClick(){
+        for(OnActionBarClickListener onActionBarClickListener : onActionBarClickListeners){
+            onActionBarClickListener.onMenuClick();
+        }
+    }
+
+    /**
+     * 回调所有OnBackClick()监听
+     */
+    private void handleCallOnBackClick(){
+        for(OnActionBarClickListener onActionBarClickListener : onActionBarClickListeners){
+            onActionBarClickListener.onBackClick();
+        }
+    }
+
+    public static interface OnActionBarClickListener{
+        void onMenuClick();
+        void onBackClick();
+    }
 }

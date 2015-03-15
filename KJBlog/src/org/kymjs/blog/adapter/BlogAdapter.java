@@ -1,14 +1,5 @@
 package org.kymjs.blog.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.kymjs.blog.R;
-import org.kymjs.blog.domain.Blog;
-import org.kymjs.blog.ui.widget.listview.StickyHeadAdapter;
-import org.kymjs.kjframe.KJBitmap;
-import org.kymjs.kjframe.utils.StringUtils;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +7,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
+
+import org.kymjs.blog.R;
+import org.kymjs.blog.domain.Blog;
+import org.kymjs.blog.ui.widget.listview.StickyHeadAdapter;
+import org.kymjs.kjframe.KJBitmap;
+import org.kymjs.kjframe.utils.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 主界面博客模块列表适配器
@@ -77,7 +77,7 @@ public class BlogAdapter extends BaseAdapter implements StickyHeadAdapter,
     }
 
     static class ViewHolder {
-        ImageView img_tip_tody;
+        ImageView img_tip_today;
         ImageView img_tip_recommend;
         ImageView img_image;
         TextView tv_title;
@@ -95,7 +95,7 @@ public class BlogAdapter extends BaseAdapter implements StickyHeadAdapter,
             holder = new ViewHolder();
             holder.img_tip_recommend = (ImageView) convertView
                     .findViewById(R.id.item_blog_tip_recommend);
-            holder.img_tip_tody = (ImageView) convertView
+            holder.img_tip_today = (ImageView) convertView
                     .findViewById(R.id.item_blog_tip_tody);
             holder.img_image = (ImageView) convertView
                     .findViewById(R.id.item_blog_img);
@@ -115,11 +115,11 @@ public class BlogAdapter extends BaseAdapter implements StickyHeadAdapter,
         holder.img_tip_recommend
                 .setVisibility(data.getIsRecommend() == 0 ? View.GONE
                         : View.VISIBLE);
-        holder.img_tip_tody.setVisibility(data.getIsAuthor() == 0 ? View.GONE
+        holder.img_tip_today.setVisibility(data.getIsAuthor() == 0 ? View.GONE
                 : View.VISIBLE);
         holder.tv_title.setText(data.getTitle());
         holder.tv_description.setText(data.getDescription());
-        holder.tv_author.setText("张涛");
+        holder.tv_author.setText("Lody");
         holder.tv_date.setText(data.getDate());
         String url = data.getImageUrl();
         if (StringUtils.isEmpty(url)) {

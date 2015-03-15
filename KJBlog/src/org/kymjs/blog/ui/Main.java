@@ -1,14 +1,14 @@
 package org.kymjs.blog.ui;
 
+import android.view.View;
+import android.widget.RadioButton;
+
 import org.kymjs.blog.R;
 import org.kymjs.blog.ui.fragment.BlogFragment;
 import org.kymjs.blog.ui.fragment.FindFragment;
 import org.kymjs.blog.ui.fragment.MineFragment;
 import org.kymjs.blog.ui.fragment.TitleBarFragment;
 import org.kymjs.kjframe.ui.BindView;
-
-import android.view.View;
-import android.widget.RadioButton;
 
 /**
  * 应用主界面
@@ -67,17 +67,7 @@ public class Main extends TitleBarActivity {
         }
     }
 
-    @Override
-    protected void onBackClick() {
-        super.onBackClick();
-        currentFragment.onBackClick();
-    }
 
-    @Override
-    protected void onMenuClick() {
-        super.onMenuClick();
-        currentFragment.onMenuClick();
-    }
 
     public void changeFragment(TitleBarFragment targetFragment) {
         currentFragment = targetFragment;

@@ -14,7 +14,7 @@ import org.kymjs.kjframe.ui.KJFragment;
  * @author lody
  * @since 2015-3
  *
- * FIX ME:onMenuClick() and onBackClick() don't call back.
+ * FIX 2015/3/15 : 修复ActionBar点击不会调的问题。
  */
 public abstract class TitleBarFragment extends KJFragment {
 
@@ -41,8 +41,23 @@ public abstract class TitleBarFragment extends KJFragment {
             outsideAty = (TitleBarActivity) getActivity();
         }
         app = (AppContext) getActivity().getApplication();
+        if(outsideAty != null) {
+            outsideAty.addOnActionBarClickListener(new TitleBarActivity.OnActionBarClickListener() {
+                @Override
+                public void onMenuClick() {
+                    TitleBarFragment.this.onMenuClick();
+                }
+
+                @Override
+                public void onBackClick() {
+                    TitleBarFragment.this.onBackClick();
+                }
+            });
+        }
         super.onCreate(savedInstanceState);
     }
+
+
 
 
     @Override
