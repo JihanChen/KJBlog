@@ -21,6 +21,6 @@ public class AppConfig {
     public static String BLOG_IS_CLICK_MSG = "is_clicked_msg";
     public static String PREV_CLICK_DATA = "prev_click_date";
 
-
-
+    public static String PUSH_SWITCH_FILE = "push_switch_file";
+    public static String PUSH_SWITCH_KEY = "push_switch_key";
 }

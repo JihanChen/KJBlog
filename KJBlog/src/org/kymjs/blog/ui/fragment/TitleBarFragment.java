@@ -1,11 +1,11 @@
 package org.kymjs.blog.ui.fragment;
 
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-
 import org.kymjs.blog.AppContext;
 import org.kymjs.blog.ui.TitleBarActivity;
 import org.kymjs.kjframe.ui.KJFragment;
+
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 
 /**
  * 具有ActionBar的Activity的基类
@@ -13,8 +13,8 @@ import org.kymjs.kjframe.ui.KJFragment;
  * @author kymjs (https://github.com/kymjs)
  * @author lody
  * @since 2015-3
- *
- * FIX 2015/3/15 : 修复ActionBar点击不会调的问题。
+ * 
+ *        FIX 2015/3/15 : 修复ActionBar点击不会调的问题。
  */
 public abstract class TitleBarFragment extends KJFragment {
 
@@ -41,24 +41,8 @@ public abstract class TitleBarFragment extends KJFragment {
             outsideAty = (TitleBarActivity) getActivity();
         }
         app = (AppContext) getActivity().getApplication();
-        if(outsideAty != null) {
-            outsideAty.addOnActionBarClickListener(new TitleBarActivity.OnActionBarClickListener() {
-                @Override
-                public void onMenuClick() {
-                    TitleBarFragment.this.onMenuClick();
-                }
-
-                @Override
-                public void onBackClick() {
-                    TitleBarFragment.this.onBackClick();
-                }
-            });
-        }
         super.onCreate(savedInstanceState);
     }
-
-
-
 
     @Override
     public void onResume() {
@@ -141,6 +125,5 @@ public abstract class TitleBarFragment extends KJFragment {
             outsideAty.mImgMenu.setImageDrawable(drawable);
         }
     }
-
 
 }

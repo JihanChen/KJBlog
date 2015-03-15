@@ -1,10 +1,13 @@
 package org.kymjs.blog.ui;
 
+import org.kymjs.blog.AppConfig;
 import org.kymjs.blog.AppContext;
 import org.kymjs.blog.R;
 import org.kymjs.kjframe.KJActivity;
 import org.kymjs.kjframe.utils.DensityUtils;
 import org.kymjs.kjframe.utils.PreferenceHelper;
+import org.kymjs.push.core.KJPushManager;
+import org.kymjs.push.core.PushReceiver;
 
 import android.content.Intent;
 import android.view.animation.Animation;
@@ -43,7 +46,21 @@ public class AppStart extends KJActivity {
         AppContext.screenW = DensityUtils.getScreenW(aty);
     }
 
+    /**
+     * 根据设置启动推送进程
+     */
+    private void configPush() {
+        boolean isOpen = PreferenceHelper.readBoolean(aty,
+                AppConfig.PUSH_SWITCH_FILE, AppConfig.PUSH_SWITCH_KEY, true);
+        if (isOpen) {
+            KJPushManager.create().startWork(aty, PushReceiver.class);
+        } else {
+            KJPushManager.create().stopWork();
+        }
+    }
+
     private void jumpTo() {
+        configPush();
         boolean isFirst = PreferenceHelper.readBoolean(aty, TAG, "first_open",
                 true);
         Intent jumpIntent = new Intent();

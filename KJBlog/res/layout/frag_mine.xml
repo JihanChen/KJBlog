@@ -52,7 +52,7 @@
             <TextView
                 android:id="@+id/mine_tv_push"
                 style="@style/mine_item_text_style"
-                android:text="每日晨读" />
+                android:text="@string/push" />
 
             <CheckBox
                 android:id="@+id/mine_cbox_push"
@@ -72,7 +72,7 @@
                 style="@style/mine_item_text_style"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="关于我们" />
+                android:text="@string/about" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -84,7 +84,7 @@
                 style="@style/mine_item_text_style"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="清空缓存" />
+                android:text="@string/clean" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -96,7 +96,7 @@
                 style="@style/mine_item_text_style"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="意见反馈" />
+                android:text="@string/feedback" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -108,7 +108,7 @@
                 style="@style/mine_item_text_style"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="暂别爱看" />
+                android:text="@string/exit" />
         </RelativeLayout>
 
         <TextView
@@ -117,8 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:padding="20dp"
-            android:text="当前版本V1.01" />
+            android:padding="20dp" />
     </LinearLayout>
 
 </org.kymjs.kjframe.widget.KJScrollView>
