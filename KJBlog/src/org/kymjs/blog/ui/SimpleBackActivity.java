@@ -2,6 +2,7 @@ package org.kymjs.blog.ui;
 
 import org.kymjs.blog.R;
 import org.kymjs.blog.domain.SimpleBackPage;
+import org.kymjs.blog.ui.fragment.TitleBarFragment;
 import org.kymjs.kjframe.ui.KJFragment;
 
 import android.content.Context;
@@ -20,14 +21,17 @@ public class SimpleBackActivity extends TitleBarActivity {
     public static String CONTENT_KEY = "sba_content_key";
     public static String DATA_KEY = "sba_datat_key";
 
+    private TitleBarFragment currentFragment;
+
     @Override
     public void setRootView() {
         setContentView(R.layout.aty_simple_back);
         int value = getIntent().getIntExtra(CONTENT_KEY, -1);
         if (value != -1) {
             try {
-                changeFragment((KJFragment) SimpleBackPage
-                        .getPageByValue(value).newInstance());
+                currentFragment = (TitleBarFragment) SimpleBackPage
+                        .getPageByValue(value).newInstance();
+                changeFragment(currentFragment);
             } catch (InstantiationException e) {
             } catch (IllegalAccessException e) {
             }
@@ -40,6 +44,22 @@ public class SimpleBackActivity extends TitleBarActivity {
 
     public void changeFragment(KJFragment targetFragment) {
         super.changeFragment(R.id.main_content, targetFragment);
+    }
+
+    @Override
+    protected void onBackClick() {
+        super.onBackClick();
+        if (currentFragment != null) {
+            currentFragment.onBackClick();
+        }
+    }
+
+    @Override
+    protected void onMenuClick() {
+        super.onMenuClick();
+        if (currentFragment != null) {
+            currentFragment.onMenuClick();
+        }
     }
 
     /**
