@@ -6,6 +6,7 @@ import org.kymjs.blog.ui.TitleBarActivity;
 import org.kymjs.blog.ui.widget.KJScrollView;
 import org.kymjs.blog.ui.widget.KJScrollView.OnViewTopPull;
 import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.ui.ViewInject;
 import org.kymjs.kjframe.widget.RoundImageView;
 
 import android.os.Bundle;
@@ -77,5 +78,6 @@ public class FindFragment extends TitleBarFragment {
     @Override
     public void onMenuClick() {
         super.onMenuClick();
+        ViewInject.toast("点击了菜单");
     }
 }
