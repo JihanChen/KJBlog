@@ -14,4 +14,7 @@ public class AppConfig {
     public static String SPLASH_BACKGROUND_KEY = "main_background_key";
     public static String SPLASH_BOX_KEY = "main_box_key";
     public static String SPLASH_CONTENT_KEY = "main_content_key";
+
+    public static String PUSH_SWITCH_FILE = "push_switch_file";
+    public static String PUSH_SWITCH_KEY = "push_switch_key";
 }

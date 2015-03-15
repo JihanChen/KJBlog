@@ -6,6 +6,7 @@ import org.kymjs.blog.ui.widget.dobmenu.CurtainItem.SlidingType;
 import org.kymjs.blog.ui.widget.dobmenu.CurtainView;
 import org.kymjs.blog.utils.KJAnimations;
 import org.kymjs.blog.utils.PullTip;
+import org.kymjs.blog.utils.UIHelper;
 import org.kymjs.kjframe.KJActivity;
 
 import android.content.pm.ActivityInfo;
@@ -15,6 +16,8 @@ import android.os.Looper;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +32,13 @@ public abstract class TitleBarActivity extends KJActivity {
 
     public ImageView mImgBack;
     public TextView mTvTitle;
+    public TextView mTvDoubleClickTip;
     public ImageView mImgMenu;
+
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+
+    private float titleBarHeight;
+    private boolean isOnKeyBacking;
 
     // Sliding menu object
     private CurtainView mCurtainView;
@@ -42,10 +51,17 @@ public abstract class TitleBarActivity extends KJActivity {
     }
 
     @Override
+    public void initData() {
+        super.initData();
+        titleBarHeight = getResources().getDimension(R.dimen.titlebar_height);
+    }
+
+    @Override
     protected void onStart() {
         try {
             mImgBack = (ImageView) findViewById(R.id.titlebar_img_back);
             mTvTitle = (TextView) findViewById(R.id.titlebar_text_title);
+            mTvDoubleClickTip = (TextView) findViewById(R.id.titlebar_text_exittip);
             mImgMenu = (ImageView) findViewById(R.id.titlebar_img_menu);
             mImgBack.setOnClickListener(this);
             mImgMenu.setOnClickListener(this);
@@ -55,6 +71,12 @@ public abstract class TitleBarActivity extends KJActivity {
                     "TitleBar Notfound from Activity layout");
         }
         super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cancleExit();
     }
 
     @Override
@@ -79,6 +101,17 @@ public abstract class TitleBarActivity extends KJActivity {
     public void onCurtainPull() {}
 
     public void onCurtainPush() {}
+
+    /********************** 窗帘视图相关 *****************************/
+
+    private static int count = 0;
+
+    private final Runnable timerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            count = 0;
+        }
+    };
 
     public CurtainView getCurtainView() {
         return mCurtainView;
@@ -139,13 +172,68 @@ public abstract class TitleBarActivity extends KJActivity {
         });
     }
 
-    private final Handler mHandler = new Handler(Looper.getMainLooper());
-    private static int count = 0;
+    /********************** 再按一下退出 *****************************/
 
-    private final Runnable timerRunnable = new Runnable() {
+    /**
+     * 取消退出
+     */
+    private void cancleExit() {
+        Animation anim = KJAnimations.getTranslateAnimation(0, 0,
+                titleBarHeight, 0, 300);
+        mTvTitle.startAnimation(anim);
+        Animation anim2 = KJAnimations.getTranslateAnimation(0, 0,
+                titleBarHeight, 300, 0);
+        anim2.setAnimationListener(new AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {}
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mTvDoubleClickTip.setVisibility(View.GONE);
+            }
+        });
+        mTvDoubleClickTip.startAnimation(anim2);
+    }
+
+    /**
+     * 显示退出提示
+     */
+    private void showExitTip() {
+        mTvDoubleClickTip.setVisibility(View.VISIBLE);
+        Animation anim = KJAnimations.getTranslateAnimation(0, 0, 0,
+                titleBarHeight, 300);
+        mTvTitle.startAnimation(anim);
+        Animation anim2 = KJAnimations.getTranslateAnimation(0, 0,
+                titleBarHeight, 0, 300);
+        mTvDoubleClickTip.startAnimation(anim2);
+    }
+
+    private final Runnable onBackTimeRunnable = new Runnable() {
         @Override
         public void run() {
-            count = 0;
+            isOnKeyBacking = false;
+            cancleExit();
         }
+    };
+
+    @Override
+    public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
+        if (this instanceof Main) {
+            if (isOnKeyBacking) {
+                mHandler.removeCallbacks(onBackTimeRunnable);
+                isOnKeyBacking = false;
+                UIHelper.toHome(aty);
+                return true;
+            } else {
+                isOnKeyBacking = true;
+                showExitTip();
+                mHandler.postDelayed(onBackTimeRunnable, 2000);
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     };
 }
