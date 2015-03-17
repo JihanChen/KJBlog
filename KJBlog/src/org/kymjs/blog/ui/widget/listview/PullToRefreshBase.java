@@ -1,6 +1,7 @@
 package org.kymjs.blog.ui.widget.listview;
 
 import org.kymjs.blog.ui.widget.listview.ILoadingLayout.State;
+import org.kymjs.kjframe.utils.KJLoger;
 
 import android.content.Context;
 import android.util.AttributeSet;
