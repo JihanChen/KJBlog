@@ -7,6 +7,7 @@ import org.kymjs.blog.utils.Parser;
 import org.kymjs.blog.utils.UIHelper;
 import org.kymjs.kjframe.KJHttp;
 import org.kymjs.kjframe.http.HttpCallBack;
+import org.kymjs.kjframe.http.HttpConfig;
 import org.kymjs.kjframe.ui.BindView;
 import org.kymjs.kjframe.utils.StringUtils;
 
@@ -72,7 +73,8 @@ public class OSCBlogDetailFragment extends TitleBarFragment {
     protected void initWidget(View parentView) {
         super.initWidget(parentView);
         UIHelper.initWebView(mWebView);
-
+        HttpConfig config = new HttpConfig();
+        config.cacheTime = 300;
         KJHttp kjh = new KJHttp();
         kjh.get(OSCBLOG_HOST + OSCBLOG_ID, new HttpCallBack() {
             @Override
