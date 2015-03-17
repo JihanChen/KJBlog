@@ -30,7 +30,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/ic_mine_join"
+                android:drawableTop="@drawable/logo_kjframe"
                 android:gravity="center"
                 android:text="@string/join_qgroup" />
 

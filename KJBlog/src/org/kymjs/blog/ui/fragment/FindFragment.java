@@ -90,8 +90,10 @@ public class FindFragment extends TitleBarFragment {
             SimpleBackActivity.postShowWith(outsideAty, SimpleBackPage.COMMENT);
             break;
         case R.id.find_plugin_3:
+            Bundle bundle = new Bundle();
+            bundle.putInt("oscblog_id", 295001);
             SimpleBackActivity.postShowWith(outsideAty,
-                    SimpleBackPage.BLOG_DETAIL);
+                    SimpleBackPage.BLOG_DETAIL, bundle);
             break;
 
         default:
