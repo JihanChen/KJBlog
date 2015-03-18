@@ -18,7 +18,7 @@ import android.widget.TextView;
 public class OSCBlogAdapter extends BaseAdapter {
 
     private final Context cxt;
-    private final List<OSCBlog> datas;
+    private List<OSCBlog> datas;
 
     public OSCBlogAdapter(Context cxt, List<OSCBlog> datas) {
         this.cxt = cxt;
@@ -26,6 +26,15 @@ public class OSCBlogAdapter extends BaseAdapter {
             datas = new ArrayList<OSCBlog>(1);
         }
         this.datas = datas;
+    }
+
+    public void refresh(List<OSCBlog> datas) {
+        if (datas == null) {
+            datas = new ArrayList<OSCBlog>(1);
+        }
+        this.datas = datas;
+        notifyDataSetChanged();
+        notifyDataSetInvalidated();
     }
 
     @Override
