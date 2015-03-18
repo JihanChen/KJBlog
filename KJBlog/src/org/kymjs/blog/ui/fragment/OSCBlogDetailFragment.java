@@ -37,6 +37,9 @@ public class OSCBlogDetailFragment extends TitleBarFragment {
     private final String OSCBLOG_HOST = "http://www.oschina.net/action/api/blog_detail?id=";
     private int OSCBLOG_ID = 295001;
 
+    private KJHttp kjh;
+    private String cacheData;
+
     private SimpleBackActivity aty;
 
     @Override
@@ -67,21 +70,32 @@ public class OSCBlogDetailFragment extends TitleBarFragment {
         if (outData != null) {
             OSCBLOG_ID = outData.getInt("oscblog_id", 295001);
         }
+        HttpConfig config = new HttpConfig();
+        config.cacheTime = 300;
+        kjh = new KJHttp();
+        cacheData = kjh.getCache(OSCBLOG_HOST + OSCBLOG_ID, null);
     }
 
     @Override
     protected void initWidget(View parentView) {
         super.initWidget(parentView);
         UIHelper.initWebView(mWebView);
-        HttpConfig config = new HttpConfig();
-        config.cacheTime = 300;
-        KJHttp kjh = new KJHttp();
+
+        if (!StringUtils.isEmpty(cacheData)) {
+            OSCBlogEntity data = Parser.xmlToBean(OSCBlogEntity.class,
+                    cacheData);
+            fillUI(data);
+        }
+
         kjh.get(OSCBLOG_HOST + OSCBLOG_ID, new HttpCallBack() {
             @Override
             public void onSuccess(String t) {
                 super.onSuccess(t);
-                OSCBlogEntity data = Parser.xmlToBean(OSCBlogEntity.class, t);
-                fillUI(data);
+                if (t != null && !t.equals(cacheData)) {
+                    OSCBlogEntity data = Parser.xmlToBean(OSCBlogEntity.class,
+                            t);
+                    fillUI(data);
+                }
             }
         });
     }

@@ -1,5 +1,7 @@
 package org.kymjs.blog.utils;
 
+import android.util.Log;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
@@ -12,8 +14,14 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 public class Parser {
 
     public static <T> T xmlToBean(Class<T> type, String xml) {
-        XStream xStream = new XStream(new DomDriver("UTF-8"));
-        xStream.processAnnotations(type);
-        return (T) xStream.fromXML(xml);
+        T data = null;
+        try {
+            XStream xStream = new XStream(new DomDriver("UTF-8"));
+            xStream.processAnnotations(type);
+            data = (T) xStream.fromXML(xml);
+        } catch (Exception e) {
+            Log.e(Parser.class.getSimpleName(), "xmlToBean()中解析异常");
+        }
+        return data;
     }
 }
