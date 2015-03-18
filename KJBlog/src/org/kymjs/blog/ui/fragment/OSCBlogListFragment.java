@@ -43,6 +43,7 @@ public class OSCBlogListFragment extends TitleBarFragment {
 
     private final String OSCBLOG_HOST = "http://www.oschina.net/action/api/userblog_list?authoruid=";
     private final int BLOGLIST_ID = 1428332;
+    private String cache;
 
     @Override
     protected View inflaterView(LayoutInflater inflater, ViewGroup container,
@@ -115,7 +116,7 @@ public class OSCBlogListFragment extends TitleBarFragment {
      * 首次进入时填充数据
      */
     private void fillUI() {
-        String cache = kjh.getCache(OSCBLOG_HOST + BLOGLIST_ID, null);
+        cache = kjh.getCache(OSCBLOG_HOST + BLOGLIST_ID, null);
         if (!StringUtils.isEmpty(cache)) {
             OSCBlogList dataRes = Parser.xmlToBean(OSCBlogList.class, cache);
             if (adapter == null) {
@@ -137,13 +138,16 @@ public class OSCBlogListFragment extends TitleBarFragment {
             public void onSuccess(String t) {
                 super.onSuccess(t);
                 mRefreshLayout.onPullDownRefreshComplete();
-                OSCBlogList dataRes = Parser.xmlToBean(OSCBlogList.class, t);
-                if (adapter == null) {
-                    adapter = new OSCBlogAdapter(outsideAty, dataRes
-                            .getBloglist());
-                    mListView.setAdapter(adapter);
-                } else {
-                    adapter.refresh(dataRes.getBloglist());
+                if (t != null && !t.equals(cache)) {
+                    OSCBlogList dataRes = Parser
+                            .xmlToBean(OSCBlogList.class, t);
+                    if (adapter == null) {
+                        adapter = new OSCBlogAdapter(outsideAty, dataRes
+                                .getBloglist());
+                        mListView.setAdapter(adapter);
+                    } else {
+                        adapter.refresh(dataRes.getBloglist());
+                    }
                 }
             }
         });
