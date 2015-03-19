@@ -9,6 +9,9 @@
     <dimen name="space_180">180dp</dimen>
 
     
+    <dimen name="size_16">12sp</dimen>
+
+    
     <!-- Splash -->
     <dimen name="splash_head_width">65.0dp</dimen>
     <dimen name="splash_head_height">65.0dp</dimen>

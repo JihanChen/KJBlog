@@ -36,6 +36,8 @@ public class FindFragment extends TitleBarFragment {
     @BindView(id = R.id.find_root)
     private KJScrollView rootView;
 
+    @BindView(id = R.id.find_plugin_1, click = true)
+    private TextView mTvTweet;
     @BindView(id = R.id.find_plugin_2, click = true)
     private TextView mTvTodayMessage;
     @BindView(id = R.id.find_plugin_3, click = true)
@@ -86,6 +88,10 @@ public class FindFragment extends TitleBarFragment {
     protected void widgetClick(View v) {
         super.widgetClick(v);
         switch (v.getId()) {
+        case R.id.find_plugin_1:
+            SimpleBackActivity.postShowWith(outsideAty,
+                    SimpleBackPage.OSC_TWEET_LIST);
+            break;
         case R.id.find_plugin_2:
             SimpleBackActivity.postShowWith(outsideAty, SimpleBackPage.COMMENT);
             break;

@@ -104,8 +104,8 @@
                         <TextView
                             android:id="@+id/find_plugin_1"
                             style="@style/textview_more"
-                            android:drawableTop="@drawable/ic_launcher"
-                            android:text="第一个" />
+                            android:drawableTop="@drawable/selector_mine_tweet"
+                            android:text="@string/tweet" />
                     </RelativeLayout>
 
                     <RelativeLayout

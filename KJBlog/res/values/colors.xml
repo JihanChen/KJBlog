@@ -5,5 +5,7 @@
     
     <color name="list_item_background_normal">#ffff</color>
     <color name="list_item_background_pressed">#efefef</color>
+    
+    <color name="list_item_id_text">#ff008000</color>
 
 </resources>
