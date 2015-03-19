@@ -53,8 +53,9 @@ public class TweetFragment extends TitleBarFragment {
     @Override
     protected void setActionBarRes(ActionBarRes actionBarRes) {
         super.setActionBarRes(actionBarRes);
-        actionBarRes.title = getString(R.string.today_message);
+        actionBarRes.title = getString(R.string.str_tweet_title);
         actionBarRes.backImageId = R.drawable.titlebar_back;
+        actionBarRes.menuImageId = R.drawable.titlebar_add;
     }
 
     @Override
@@ -139,5 +140,10 @@ public class TweetFragment extends TitleBarFragment {
     public void onBackClick() {
         super.onBackClick();
         outsideAty.finish();
+    }
+
+    @Override
+    public void onMenuClick() {
+        super.onMenuClick();
     }
 }

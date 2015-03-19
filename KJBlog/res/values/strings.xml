@@ -33,5 +33,9 @@
     <!-- 发现界面 -->
     <string name="tweet">我要吐槽</string>
     <string name="osc_joke">OSC乱弹</string>
+    
+    <!-- 吐槽界面 -->
+    <string name="str_tweet_title">神吐槽</string>
+    
 
 </resources>
