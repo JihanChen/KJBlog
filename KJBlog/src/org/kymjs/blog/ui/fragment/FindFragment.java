@@ -41,6 +41,10 @@ public class FindFragment extends TitleBarFragment {
     private TextView mTvTodayMessage;
     @BindView(id = R.id.find_plugin_3, click = true)
     private TextView mTvJokeList;
+    @BindView(id = R.id.find_plugin_4, click = true)
+    private TextView mTvActive;
+    @BindView(id = R.id.find_plugin_5, click = true)
+    private TextView mTvZhaoPin;
 
     @Override
     protected View inflaterView(LayoutInflater inflater, ViewGroup container,
@@ -97,7 +101,10 @@ public class FindFragment extends TitleBarFragment {
             SimpleBackActivity.postShowWith(outsideAty,
                     SimpleBackPage.OSC_BLOG_LIST);
             break;
-
+        case R.id.find_plugin_4:
+            break;
+        case R.id.find_plugin_5:
+            break;
         default:
             break;
         }

@@ -170,7 +170,7 @@
                             android:id="@+id/find_plugin_4"
                             style="@style/textview_more"
                             android:drawableTop="@drawable/ic_launcher"
-                            android:text="第四个" />
+                            android:text="@string/monkey_active" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -183,20 +183,21 @@
                             android:id="@+id/find_plugin_5"
                             style="@style/textview_more"
                             android:drawableTop="@drawable/ic_launcher"
-                            android:text="问卷调查" />
+                            android:text="@string/zhaopin" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="0.0dip"
                         android:layout_height="fill_parent"
                         android:layout_weight="1.0"
-                        android:background="@null" >
+                        android:background="@null"
+                        android:visibility="gone" >
 
                         <TextView
                             android:id="@+id/find_plugin_6"
                             style="@style/textview_more"
                             android:drawableTop="@drawable/ic_launcher"
-                            android:text="第几个" />
+                            android:text="暂无" />
                     </RelativeLayout>
                 </LinearLayout>
 

@@ -19,6 +19,7 @@ import android.webkit.WebView;
 import android.widget.TextView;
 
 /**
+ * OSC博客详情界面
  * 
  * @author kymjs (https://github.com/kymjs)
  * 
