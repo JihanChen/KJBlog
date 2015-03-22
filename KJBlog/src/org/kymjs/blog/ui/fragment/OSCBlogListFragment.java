@@ -15,6 +15,7 @@ import org.kymjs.kjframe.KJHttp;
 import org.kymjs.kjframe.http.HttpCallBack;
 import org.kymjs.kjframe.http.HttpConfig;
 import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.utils.KJLoger;
 import org.kymjs.kjframe.utils.StringUtils;
 
 import android.graphics.drawable.ColorDrawable;
@@ -32,6 +33,8 @@ import android.widget.ListView;
  * @author kymjs
  */
 public class OSCBlogListFragment extends TitleBarFragment {
+
+    public static final String TAG = OSCBlogListFragment.class.getSimpleName();
 
     @BindView(id = R.id.listview)
     private PullToRefreshList mRefreshLayout;
@@ -137,6 +140,7 @@ public class OSCBlogListFragment extends TitleBarFragment {
             @Override
             public void onSuccess(String t) {
                 super.onSuccess(t);
+                KJLoger.debug(TAG + "网络请求：" + t);
                 mRefreshLayout.onPullDownRefreshComplete();
                 if (t != null && !t.equals(cache)) {
                     OSCBlogList dataRes = Parser

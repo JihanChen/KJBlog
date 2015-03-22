@@ -41,5 +41,7 @@
     <string name="zhaopin">高薪招聘</string>
     <string name="record_sound_notfound">糟糕，小屁孩把声音弄丢了</string>
     
+    <!-- 吐槽界面 -->
+    <string name="str_active_title">猿活动</string>
 
 </resources>

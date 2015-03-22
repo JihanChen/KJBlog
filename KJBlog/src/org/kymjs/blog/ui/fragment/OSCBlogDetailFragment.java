@@ -9,6 +9,7 @@ import org.kymjs.kjframe.KJHttp;
 import org.kymjs.kjframe.http.HttpCallBack;
 import org.kymjs.kjframe.http.HttpConfig;
 import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.utils.KJLoger;
 import org.kymjs.kjframe.utils.StringUtils;
 
 import android.os.Bundle;
@@ -25,6 +26,9 @@ import android.widget.TextView;
  * 
  */
 public class OSCBlogDetailFragment extends TitleBarFragment {
+
+    public static final String TAG = OSCBlogDetailFragment.class
+            .getSimpleName();
 
     @BindView(id = R.id.blogdetail_webview)
     private WebView mWebView;
@@ -92,6 +96,7 @@ public class OSCBlogDetailFragment extends TitleBarFragment {
             @Override
             public void onSuccess(String t) {
                 super.onSuccess(t);
+                KJLoger.debug(TAG + "网络请求：" + t);
                 if (t != null && !t.equals(cacheData)) {
                     OSCBlogEntity data = Parser.xmlToBean(OSCBlogEntity.class,
                             t);

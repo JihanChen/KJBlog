@@ -41,6 +41,8 @@ import android.widget.ListView;
  */
 public class TweetFragment extends TitleBarFragment {
 
+    public static final String TAG = TweetFragment.class.getSimpleName();
+
     @BindView(id = R.id.listview)
     private PullToRefreshList mRefreshLayout;
     private ListView mListView;
@@ -134,6 +136,7 @@ public class TweetFragment extends TitleBarFragment {
             @Override
             public void onSuccess(String t) {
                 super.onSuccess(t);
+                KJLoger.debug(TAG + "网络请求" + t);
                 mRefreshLayout.onPullDownRefreshComplete();
                 List<Tweet> datas = Parser.xmlToBean(TweetsList.class, t)
                         .getList();

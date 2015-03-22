@@ -102,6 +102,8 @@ public class FindFragment extends TitleBarFragment {
                     SimpleBackPage.OSC_BLOG_LIST);
             break;
         case R.id.find_plugin_4:
+            SimpleBackActivity.postShowWith(outsideAty,
+                    SimpleBackPage.OSC_ACTIVE);
             break;
         case R.id.find_plugin_5:
             break;

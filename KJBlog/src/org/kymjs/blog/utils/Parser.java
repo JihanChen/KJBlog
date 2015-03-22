@@ -21,7 +21,6 @@ public class Parser {
             try {
                 data = type.newInstance();
             } catch (Exception ee) {
-                ee.printStackTrace();
             }
         }
         return data;
