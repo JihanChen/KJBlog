@@ -1,7 +1,5 @@
 package org.kymjs.blog.utils;
 
-import android.util.Log;
-
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
@@ -20,7 +18,11 @@ public class Parser {
             xStream.processAnnotations(type);
             data = (T) xStream.fromXML(xml);
         } catch (Exception e) {
-            Log.e(Parser.class.getSimpleName(), "xmlToBean()中解析异常");
+            try {
+                data = type.newInstance();
+            } catch (Exception ee) {
+                ee.printStackTrace();
+            }
         }
         return data;
     }
