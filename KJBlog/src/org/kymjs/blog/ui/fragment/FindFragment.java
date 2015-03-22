@@ -45,6 +45,8 @@ public class FindFragment extends TitleBarFragment {
     private TextView mTvActive;
     @BindView(id = R.id.find_plugin_5, click = true)
     private TextView mTvZhaoPin;
+    @BindView(id = R.id.find_plugin_6, click = true)
+    private TextView mTvSticky;
 
     @Override
     protected View inflaterView(LayoutInflater inflater, ViewGroup container,
@@ -106,6 +108,8 @@ public class FindFragment extends TitleBarFragment {
                     SimpleBackPage.OSC_ACTIVE);
             break;
         case R.id.find_plugin_5:
+            break;
+        case R.id.find_plugin_6:
             break;
         default:
             break;

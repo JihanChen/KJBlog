@@ -43,5 +43,6 @@
     
     <!-- 吐槽界面 -->
     <string name="str_active_title">猿活动</string>
+    <string name="sticky">随手记</string>
 
 </resources>

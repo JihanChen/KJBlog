@@ -169,7 +169,7 @@
                         <TextView
                             android:id="@+id/find_plugin_4"
                             style="@style/textview_more"
-                            android:drawableTop="@drawable/ic_launcher"
+                            android:drawableTop="@drawable/selector_mine_active"
                             android:text="@string/monkey_active" />
                     </RelativeLayout>
 
@@ -182,7 +182,7 @@
                         <TextView
                             android:id="@+id/find_plugin_5"
                             style="@style/textview_more"
-                            android:drawableTop="@drawable/ic_launcher"
+                            android:drawableTop="@drawable/selector_mine_advertise"
                             android:text="@string/zhaopin" />
                     </RelativeLayout>
 
@@ -195,9 +195,8 @@
                         <TextView
                             android:id="@+id/find_plugin_6"
                             style="@style/textview_more"
-                            android:drawableTop="@drawable/ic_launcher"
-                            android:text="暂无"
-                            android:visibility="gone" />
+                            android:drawableTop="@drawable/selector_mine_sticky"
+                            android:text="@string/sticky" />
                     </RelativeLayout>
                 </LinearLayout>
 
