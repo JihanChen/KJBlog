@@ -190,14 +190,14 @@
                         android:layout_width="0.0dip"
                         android:layout_height="fill_parent"
                         android:layout_weight="1.0"
-                        android:background="@null"
-                        android:visibility="gone" >
+                        android:background="@null" >
 
                         <TextView
                             android:id="@+id/find_plugin_6"
                             style="@style/textview_more"
                             android:drawableTop="@drawable/ic_launcher"
-                            android:text="暂无" />
+                            android:text="暂无"
+                            android:visibility="gone" />
                     </RelativeLayout>
                 </LinearLayout>
 

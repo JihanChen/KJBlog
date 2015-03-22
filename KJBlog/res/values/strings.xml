@@ -36,8 +36,10 @@
     
     <!-- 吐槽界面 -->
     <string name="str_tweet_title">神吐槽</string>
+    <string name="str_tweet_pub_record">来一发</string>
     <string name="monkey_active">猿活动</string>
     <string name="zhaopin">高薪招聘</string>
+    <string name="record_sound_notfound">糟糕，小屁孩把声音弄丢了</string>
     
 
 </resources>

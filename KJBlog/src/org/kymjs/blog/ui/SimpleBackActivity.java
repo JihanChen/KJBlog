@@ -5,6 +5,7 @@ import org.kymjs.blog.domain.SimpleBackPage;
 import org.kymjs.blog.ui.fragment.TitleBarFragment;
 import org.kymjs.kjframe.ui.KJFragment;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -85,5 +86,41 @@ public class SimpleBackActivity extends TitleBarActivity {
      */
     public static void postShowWith(Context cxt, SimpleBackPage page) {
         postShowWith(cxt, page, null);
+    }
+
+    /**
+     * 跳转到SimpleBackActivity时，只能使用该方法跳转
+     * 
+     * @param cxt
+     *            从哪个Activity跳转
+     * @param code
+     *            启动码
+     * @param page
+     *            要显示的Fragment
+     * @param data
+     *            传递的Bundle数据
+     */
+    public static void postShowForResult(Fragment fragment, int code,
+            SimpleBackPage page, Bundle data) {
+        Intent intent = new Intent(fragment.getActivity(),
+                SimpleBackActivity.class);
+        intent.putExtra(CONTENT_KEY, page.getValue());
+        intent.putExtra(DATA_KEY, data);
+        fragment.startActivityForResult(intent, code);
+    }
+
+    /**
+     * 跳转到SimpleBackActivity时，只能使用该方法跳转
+     * 
+     * @param cxt
+     *            从哪个Activity跳转
+     * @param code
+     *            启动码
+     * @param page
+     *            要显示的Fragment
+     */
+    public static void postShowForResult(Fragment fragment, int code,
+            SimpleBackPage page) {
+        postShowForResult(fragment, code, page, null);
     }
 }

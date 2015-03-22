@@ -56,6 +56,17 @@ public class KJAnimations {
     }
 
     /**
+     * 缩放 Scale
+     */
+    public static Animation getScaleAnimation(float scaleXY, long durationMillis) {
+        ScaleAnimation scale = new ScaleAnimation(1.0f, scaleXY, 1.0f, scaleXY,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                0.5f);
+        scale.setDuration(durationMillis);
+        return scale;
+    }
+
+    /**
      * 位移 Translate
      */
     public static Animation getTranslateAnimation(float fromXDelta,
@@ -75,6 +86,13 @@ public class KJAnimations {
                 600));
         set.addAnimation(getAlphaAnimation(0.8F, 1, 600));
         v.setAnimation(set);
+    }
+
+    public static Animation clickAnimation(float scaleXY, long durationMillis) {
+        AnimationSet set = new AnimationSet(true);
+        set.addAnimation(getScaleAnimation(scaleXY, durationMillis));
+        set.setDuration(durationMillis);
+        return set;
     }
 
     public static void shakeCurtain(View v) {

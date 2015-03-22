@@ -10,6 +10,7 @@ public class AppConfig {
     public static String saveFolder = "KJBlog";
     public static String httpCachePath = saveFolder + "/httpCache";
     public static String imgCachePath = saveFolder + "/imageCache";
+    public static String audioPath = saveFolder + "/audio";
 
     public static String CACHE_TIME_KEY = "cache_time_key";
 
