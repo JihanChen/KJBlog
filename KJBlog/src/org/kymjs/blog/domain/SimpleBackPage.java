@@ -1,6 +1,8 @@
 package org.kymjs.blog.domain;
 
 import org.kymjs.blog.ui.fragment.ActiveFragment;
+import org.kymjs.blog.ui.fragment.NoteBookFragment;
+import org.kymjs.blog.ui.fragment.NoteEditFragment;
 import org.kymjs.blog.ui.fragment.OSCBlogDetailFragment;
 import org.kymjs.blog.ui.fragment.OSCBlogListFragment;
 import org.kymjs.blog.ui.fragment.TweetFragment;
@@ -24,7 +26,11 @@ public enum SimpleBackPage {
 
     OSC_TWEET_SEND(5, TweetRecordFragment.class),
 
-    OSC_ACTIVE(6, ActiveFragment.class);
+    OSC_ACTIVE(6, ActiveFragment.class),
+
+    STICKY(7, NoteBookFragment.class),
+
+    STICKY_EDIT(8, NoteEditFragment.class);
 
     private Class<?> clazz;
     private int value;

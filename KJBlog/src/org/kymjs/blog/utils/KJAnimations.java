@@ -142,7 +142,7 @@ public class KJAnimations {
      *            动画时间
      */
     public static void openAnimation(RelativeLayout relativeLayout,
-            ImageView background, ImageView menu, long durationMillis) {
+            ImageView menu, long durationMillis) {
         relativeLayout.setVisibility(View.VISIBLE);
         for (int i = 1; i < relativeLayout.getChildCount(); i++) {
             ImageView imageView = null;
@@ -180,8 +180,7 @@ public class KJAnimations {
      *            动画时间
      */
     public static void closeAnimation(final RelativeLayout relativeLayout,
-            final ImageView background, final ImageView menu,
-            long durationMillis) {
+            final ImageView menu, long durationMillis) {
         for (int i = 1; i < relativeLayout.getChildCount(); i++) {
             ImageView imageView = null;
             if (relativeLayout.getChildAt(i) instanceof ImageView) {

@@ -95,5 +95,17 @@
         <item name="android:textSize">16sp</item>
         <item name="android:layout_marginLeft">3dp</item>
     </style>
+    
+     <style name="note_detail_menu">
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_width">30dp</item>
+    </style>
+    
+      <style name="note_detail_menu_item" parent="note_detail_menu">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:padding">2dp</item>
+    </style>
 
 </resources>

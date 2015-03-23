@@ -110,6 +110,7 @@ public class FindFragment extends TitleBarFragment {
         case R.id.find_plugin_5:
             break;
         case R.id.find_plugin_6:
+            SimpleBackActivity.postShowWith(outsideAty, SimpleBackPage.STICKY);
             break;
         default:
             break;
