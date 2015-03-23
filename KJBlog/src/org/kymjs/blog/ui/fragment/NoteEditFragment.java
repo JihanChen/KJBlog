@@ -184,6 +184,10 @@ public class NoteEditFragment extends TitleBarFragment implements
      */
     private void save() {
         editData.setContent(mEtContent.getText().toString());
-        kjdb.save(editData);
+        if (editData.getId() != 0) {
+            kjdb.update(editData);
+        } else {
+            kjdb.save(editData);
+        }
     }
 }

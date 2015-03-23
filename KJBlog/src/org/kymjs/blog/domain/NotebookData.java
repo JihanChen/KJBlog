@@ -2,6 +2,8 @@ package org.kymjs.blog.domain;
 
 import java.io.Serializable;
 
+import org.kymjs.kjframe.database.annotate.Id;
+
 /**
  * 便签数据bean（有重载equals()方法）
  * 
@@ -11,6 +13,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class NotebookData implements Serializable {
 
+    @Id
     private int id;
     private String date;
     private String content;

@@ -96,8 +96,11 @@ public class NoteBookFragment extends TitleBarFragment implements
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            kjdb.dropDb();
-                            kjdb.save(adapter.getDatas());
+                            datas = adapter.getDatas();
+                            for (int i = 1; i < datas.size() + 1; i++) {
+                                datas.get(i - 1).setId(i);
+                                kjdb.update(datas.get(i - 1), "id=" + i);
+                            }
                         }
                     }).start();
                 }

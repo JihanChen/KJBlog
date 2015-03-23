@@ -20,34 +20,37 @@
         style="@style/note_detail_menu_item"
         android:layout_alignLeft="@+id/note_detail_img_menu"
         android:layout_below="@+id/note_detail_img_menu"
-        android:src="#ffcef3d4" />
+        android:src="@drawable/icon_green" />
 
     <org.kymjs.kjframe.widget.RoundImageView
         android:id="@+id/note_detail_img_blue"
         style="@style/note_detail_menu_item"
         android:layout_alignLeft="@+id/note_detail_img_menu"
         android:layout_below="@+id/note_detail_img_green"
-        android:src="#ffb9e5f2" />
+        android:src="@drawable/icon_blue" />
 
     <org.kymjs.kjframe.widget.RoundImageView
         android:id="@+id/note_detail_img_purple"
         style="@style/note_detail_menu_item"
         android:layout_alignLeft="@+id/note_detail_img_menu"
         android:layout_below="@+id/note_detail_img_blue"
-        android:src="#ffede7e9" />
+        android:background="@android:color/transparent"
+        android:src="@drawable/icon_purple" />
 
     <org.kymjs.kjframe.widget.RoundImageView
         android:id="@+id/note_detail_img_yellow"
         style="@style/note_detail_menu_item"
         android:layout_alignLeft="@+id/note_detail_img_menu"
         android:layout_below="@+id/note_detail_img_purple"
-        android:src="#fffbf5b9" />
+        android:background="@android:color/transparent"
+        android:src="@drawable/icon_yellow" />
 
     <org.kymjs.kjframe.widget.RoundImageView
         android:id="@+id/note_detail_img_red"
         style="@style/note_detail_menu_item"
         android:layout_alignLeft="@+id/note_detail_img_menu"
         android:layout_below="@+id/note_detail_img_yellow"
-        android:src="#fffcd4d3" />
+        android:background="@android:color/transparent"
+        android:src="@drawable/icon_red" />
 
 </RelativeLayout>
