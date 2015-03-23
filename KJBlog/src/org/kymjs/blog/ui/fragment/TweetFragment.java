@@ -3,6 +3,7 @@ package org.kymjs.blog.ui.fragment;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
 import org.kymjs.blog.R;
@@ -50,8 +51,8 @@ public class TweetFragment extends TitleBarFragment {
     private TweetAdapter adapter;
 
     private KJHttp kjh;
-    private final TreeSet<Tweet> tweets = new TreeSet<Tweet>();
-    private final String OSCTWEET_HOST = "http://www.oschina.net/action/api/tweet_list";
+    private final Set<Tweet> tweets = new TreeSet<Tweet>();
+    private final String OSCTWEET_HOST = "http://www.oschina.net/action/api/tweet_list?pageSize=20&pageIndex=";
 
     public static final int REQUEST_CODE_RECORD = 1;
     public static final String CONTENT_KEY = "Tweet_content_key";
@@ -129,10 +130,7 @@ public class TweetFragment extends TitleBarFragment {
     }
 
     private void refresh(int page) {
-        HttpParams params = new HttpParams();
-        params.put("pageIndex", page);
-        params.put("pageSize", "20");
-        kjh.get(OSCTWEET_HOST, params, new HttpCallBack() {
+        kjh.get(OSCTWEET_HOST + page, new HttpCallBack() {
             @Override
             public void onSuccess(String t) {
                 super.onSuccess(t);

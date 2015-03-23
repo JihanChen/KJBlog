@@ -1,8 +1,9 @@
 package org.kymjs.blog.adapter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.TreeSet;
+import java.util.Set;
 
 import org.kymjs.blog.R;
 import org.kymjs.blog.domain.Tweet;
@@ -23,25 +24,21 @@ public class TweetAdapter extends BaseAdapter {
 
     private final KJBitmap kjb;
 
-    private TreeSet<Tweet> datas;
     private List<Tweet> datasList;
 
-    public TweetAdapter(Context cxt, TreeSet<Tweet> datas) {
+    public TweetAdapter(Context cxt, Set<Tweet> datas) {
         if (datas == null) {
-            datas = new TreeSet<Tweet>();
+            datas = new HashSet<Tweet>(0);
         }
         kjb = KJBitmap.create();
         this.cxt = cxt;
-        this.datas = datas;
-
         datasList = new ArrayList<Tweet>(datas);
     }
 
-    public void refresh(TreeSet<Tweet> datas) {
+    public void refresh(Set<Tweet> datas) {
         if (datas == null) {
-            datas = new TreeSet<Tweet>();
+            datas = new HashSet<Tweet>(0);
         }
-        this.datas = datas;
         datasList = new ArrayList<Tweet>(datas);
         notifyDataSetChanged();
     }
