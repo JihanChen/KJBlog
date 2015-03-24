@@ -9,6 +9,7 @@ import org.kymjs.blog.utils.KJAnimations;
 import org.kymjs.kjframe.ui.BindView;
 import org.kymjs.kjframe.ui.KJActivityStack;
 
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -141,7 +142,7 @@ public class Main extends TitleBarActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
-        if (this instanceof Main) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (isOnKeyBacking) {
                 mMainLoopHandler.removeCallbacks(onBackTimeRunnable);
                 isOnKeyBacking = false;
@@ -154,7 +155,8 @@ public class Main extends TitleBarActivity {
                 mMainLoopHandler.postDelayed(onBackTimeRunnable, 2000);
                 return true;
             }
+        } else {
+            return super.onKeyDown(keyCode, event);
         }
-        return super.onKeyDown(keyCode, event);
     };
 }

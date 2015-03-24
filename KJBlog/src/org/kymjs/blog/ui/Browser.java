@@ -193,15 +193,16 @@ public class Browser extends TitleBarActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        switch (event.getAction()) {
-        case KeyEvent.KEYCODE_BACK:
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (mWebView.canGoBack()) {
                 mWebView.goBack();
-                return true;
+            } else {
+                finish();
             }
-            break;
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
         }
-        return super.onKeyDown(keyCode, event);
     }
 
     /**
@@ -261,12 +262,6 @@ public class Browser extends TitleBarActivity {
         @Override
         public void onProgressChanged(WebView view, int newProgress) { // 进度
             super.onProgressChanged(view, newProgress);
-            // if (newProgress == 100) {
-            // mProgress.setVisibility(View.GONE);
-            // } else {
-            // mProgress.setVisibility(View.VISIBLE);
-            // mProgress.setProgress(newProgress);
-            // }
             if (newProgress > 90) {
                 mProgress.setVisibility(View.GONE);
             }

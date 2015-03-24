@@ -151,6 +151,6 @@ public class ActiveFragment extends TitleBarFragment implements
                 ((Active) adapter.getItem(position)).getUrl());
         it.putExtra(Browser.BROWSER_TITLE_KEY,
                 ((Active) adapter.getItem(position)).getTitle());
-        outsideAty.skipActivity(outsideAty, it);
+        outsideAty.showActivity(outsideAty, it);
     }
 }

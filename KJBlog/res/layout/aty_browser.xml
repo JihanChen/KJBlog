@@ -23,9 +23,9 @@
     <LinearLayout
         android:id="@+id/browser_bottom"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
-        android:background="#66006600"
+        android:background="@drawable/bottombar_bg"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
         android:paddingRight="20dp" >
@@ -36,7 +36,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="14dp"
-            android:src="@drawable/icon" />
+            android:src="@drawable/iconfont_xiangzuo" />
 
         <ImageView
             android:id="@+id/browser_forward"
@@ -44,7 +44,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="14dp"
-            android:src="@drawable/icon" />
+            android:src="@drawable/iconfont_xiangyou" />
 
         <ImageView
             android:id="@+id/browser_refresh"
@@ -52,7 +52,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="14dp"
-            android:src="@drawable/icon" />
+            android:src="@drawable/iconfont_shuaxin" />
 
         <ImageView
             android:id="@+id/browser_system_browser"
@@ -60,7 +60,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="14dp"
-            android:src="@drawable/icon" />
+            android:src="@drawable/iconfont_wangluo" />
     </LinearLayout>
 
 </RelativeLayout>
