@@ -2,6 +2,7 @@ package org.kymjs.blog.ui.fragment;
 
 import org.kymjs.blog.R;
 import org.kymjs.blog.adapter.WeChatAdapter;
+import org.kymjs.kjframe.KJHttp;
 import org.kymjs.kjframe.ui.BindView;
 
 import android.os.Bundle;
@@ -25,6 +26,8 @@ public class WeChatFragment extends TitleBarFragment {
     @BindView(id = R.id.wechat_listview)
     private ListView mList;
 
+    private KJHttp kjh;
+
     @Override
     protected View inflaterView(LayoutInflater inflater, ViewGroup container,
             Bundle bundle) {
@@ -37,6 +40,12 @@ public class WeChatFragment extends TitleBarFragment {
         super.setActionBarRes(actionBarRes);
         actionBarRes.title = getString(R.string.today_message);
         actionBarRes.backImageId = R.drawable.titlebar_back;
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        kjh = new KJHttp();
     }
 
     @Override

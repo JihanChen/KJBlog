@@ -35,7 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="14dp"
+            android:padding="10dp"
             android:src="@drawable/iconfont_xiangzuo" />
 
         <ImageView
@@ -43,7 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="14dp"
+            android:padding="10dp"
             android:src="@drawable/iconfont_xiangyou" />
 
         <ImageView
@@ -51,7 +51,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="14dp"
+            android:padding="10dp"
             android:src="@drawable/iconfont_shuaxin" />
 
         <ImageView
@@ -59,7 +59,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="14dp"
+            android:padding="10dp"
             android:src="@drawable/iconfont_wangluo" />
     </LinearLayout>
 
