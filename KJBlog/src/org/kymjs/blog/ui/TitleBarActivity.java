@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public abstract class TitleBarActivity extends KJActivity {
     public TextView mTvTitle;
     public TextView mTvDoubleClickTip;
     public ImageView mImgMenu;
+    public RelativeLayout mRlTitleBar;
 
     protected final Handler mMainLoopHandler = new Handler(
             Looper.getMainLooper());
@@ -48,6 +50,7 @@ public abstract class TitleBarActivity extends KJActivity {
     @Override
     protected void onStart() {
         try {
+            mRlTitleBar = (RelativeLayout) findViewById(R.id.titlebar);
             mImgBack = (ImageView) findViewById(R.id.titlebar_img_back);
             mTvTitle = (TextView) findViewById(R.id.titlebar_text_title);
             mTvDoubleClickTip = (TextView) findViewById(R.id.titlebar_text_exittip);

@@ -2,7 +2,9 @@ package org.kymjs.blog.ui.fragment;
 
 import org.kymjs.blog.R;
 import org.kymjs.blog.adapter.ActiveAdapter;
+import org.kymjs.blog.domain.Active;
 import org.kymjs.blog.domain.ActiveList;
+import org.kymjs.blog.ui.Browser;
 import org.kymjs.blog.ui.widget.listview.FooterLoadingLayout;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase.OnRefreshListener;
@@ -15,11 +17,14 @@ import org.kymjs.kjframe.ui.BindView;
 import org.kymjs.kjframe.utils.KJLoger;
 import org.kymjs.kjframe.utils.StringUtils;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 /**
@@ -28,7 +33,8 @@ import android.widget.ListView;
  * @author kymjs
  * 
  */
-public class ActiveFragment extends TitleBarFragment {
+public class ActiveFragment extends TitleBarFragment implements
+        OnItemClickListener {
 
     public static final String TAG = ActiveFragment.class.getSimpleName();
 
@@ -73,6 +79,7 @@ public class ActiveFragment extends TitleBarFragment {
         mListView = mRefreshLayout.getRefreshView();
         mListView.setDivider(new ColorDrawable(android.R.color.transparent));
         mListView.setSelector(new ColorDrawable(android.R.color.transparent));
+        mListView.setOnItemClickListener(this);
         mRefreshLayout.setPullLoadEnabled(true);
         ((FooterLoadingLayout) mRefreshLayout.getFooterLoadingLayout())
                 .setNoMoreDataText("暂时还没有其他活动");
@@ -119,7 +126,6 @@ public class ActiveFragment extends TitleBarFragment {
                 if (t != null && !t.equals(cache)) {
                     ActiveList dataRes = Parser.xmlToBean(ActiveList.class, t);
                     if (adapter == null) {
-                        KJLoger.debug("2" + dataRes.getEvents());
                         adapter = new ActiveAdapter(outsideAty, dataRes
                                 .getEvents());
                         mListView.setAdapter(adapter);
@@ -137,4 +143,14 @@ public class ActiveFragment extends TitleBarFragment {
         outsideAty.finish();
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+            long id) {
+        Intent it = new Intent(outsideAty, Browser.class);
+        it.putExtra(Browser.BROWSER_KEY,
+                ((Active) adapter.getItem(position)).getUrl());
+        it.putExtra(Browser.BROWSER_TITLE_KEY,
+                ((Active) adapter.getItem(position)).getTitle());
+        outsideAty.skipActivity(outsideAty, it);
+    }
 }
