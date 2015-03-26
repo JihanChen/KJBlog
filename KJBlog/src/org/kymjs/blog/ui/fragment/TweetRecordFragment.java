@@ -6,10 +6,12 @@ import org.kymjs.blog.ui.widget.RecordButton.OnFinishedRecordListener;
 import org.kymjs.blog.ui.widget.RecordButtonUtil.OnPlayListener;
 import org.kymjs.kjframe.ui.BindView;
 import org.kymjs.kjframe.utils.DensityUtils;
+import org.kymjs.kjframe.utils.StringUtils;
 
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.Spannable;
@@ -31,8 +33,6 @@ import android.widget.TextView;
  */
 public class TweetRecordFragment extends TitleBarFragment {
 
-    @BindView(id = R.id.tweet_layout_record)
-    RelativeLayout mLayout;
     @BindView(id = R.id.tweet_btn_record)
     RecordButton mBtnRecort;
     @BindView(id = R.id.tweet_time_record)
@@ -43,19 +43,17 @@ public class TweetRecordFragment extends TitleBarFragment {
     EditText mEtSpeech;
     @BindView(id = R.id.tweet_img_volume)
     ImageView mImgVolume;
+    @BindView(id = R.id.tweet_img_add, click = true)
+    ImageView mImgAdd;
+    @BindView(id = R.id.tweet_layout_record, click = true)
+    RelativeLayout mLayout;
 
     public static int MAX_LEN = 160;
 
     private AnimationDrawable drawable; // 录音播放时的动画背景
 
     private final String strSpeech = "#语音动弹#";
-
-    @Override
-    public void onClick(View v) {
-        if (v == mLayout) {
-            mBtnRecort.playRecord();
-        }
-    }
+    private String imageUri;
 
     @Override
     protected View inflaterView(LayoutInflater inflater, ViewGroup container,
@@ -79,10 +77,15 @@ public class TweetRecordFragment extends TitleBarFragment {
         Intent intent = new Intent();
         intent.putExtra(TweetFragment.CONTENT_KEY, mEtSpeech.getText()
                 .toString());
-        intent.putExtra(TweetFragment.AUDIOPATH_KEY,
-                mBtnRecort.getCurrentAudioPath());
-        getActivity().setResult(TweetFragment.REQUEST_CODE_RECORD, intent);
-        getActivity().finish();
+        if (!StringUtils.isEmpty(imageUri)) {
+            intent.putExtra(TweetFragment.IMAGEPATH_KEY, imageUri);
+            outsideAty.setResult(TweetFragment.REQUEST_CODE_IMAGE, intent);
+        } else {
+            intent.putExtra(TweetFragment.AUDIOPATH_KEY,
+                    mBtnRecort.getCurrentAudioPath());
+            outsideAty.setResult(TweetFragment.REQUEST_CODE_RECORD, intent);
+        }
+        outsideAty.finish();
     }
 
     @Override
@@ -93,7 +96,6 @@ public class TweetRecordFragment extends TitleBarFragment {
         params.width = DensityUtils.getScreenW(getActivity());
         params.height = (int) (DensityUtils.getScreenH(getActivity()) * 0.4);
         mBtnRecort.setLayoutParams(params);
-        mLayout.setOnClickListener(this);
 
         mBtnRecort.setOnFinishedRecordListener(new OnFinishedRecordListener() {
             @Override
@@ -104,6 +106,8 @@ public class TweetRecordFragment extends TitleBarFragment {
                 } else {
                     mTvTime.setText(recordTime + "\"");
                 }
+                mImgAdd.setVisibility(View.GONE);
+                imageUri = null;
             }
 
             @Override
@@ -154,5 +158,32 @@ public class TweetRecordFragment extends TitleBarFragment {
                 }
             }
         });
+    }
+
+    @Override
+    protected void widgetClick(View v) {
+        super.widgetClick(v);
+        switch (v.getId()) {
+        case R.id.tweet_layout_record:
+            mBtnRecort.playRecord();
+            break;
+        case R.id.tweet_img_add:
+            Intent intent = new Intent(Intent.ACTION_PICK, null);
+            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                    "image/*");
+            startActivityForResult(intent, 111);
+            break;
+        default:
+            break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 111) {
+            mImgAdd.setImageURI(data.getData());
+            imageUri = data.getDataString();
+        }
     }
 }

@@ -64,6 +64,16 @@
             android:textSize="18sp" />
     </RelativeLayout>
 
+    <ImageView
+        android:id="@+id/tweet_img_add"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignLeft="@+id/tweet_edit_record"
+        android:layout_below="@+id/tweet_edit_record"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@null"
+        android:src="@drawable/selector_image_add" />
+
     <org.kymjs.blog.ui.widget.RecordButton
         android:id="@+id/tweet_btn_record"
         android:layout_width="wrap_content"

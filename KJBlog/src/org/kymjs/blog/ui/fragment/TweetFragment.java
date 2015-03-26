@@ -21,14 +21,14 @@ import org.kymjs.kjframe.http.HttpCallBack;
 import org.kymjs.kjframe.http.HttpConfig;
 import org.kymjs.kjframe.http.HttpParams;
 import org.kymjs.kjframe.ui.BindView;
-import org.kymjs.kjframe.ui.ViewInject;
+import org.kymjs.kjframe.utils.FileUtils;
 import org.kymjs.kjframe.utils.KJLoger;
 import org.kymjs.kjframe.utils.StringUtils;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +55,7 @@ public class TweetFragment extends TitleBarFragment {
     private final String OSCTWEET_HOST = "http://www.oschina.net/action/api/tweet_list?pageSize=20&pageIndex=";
 
     public static final int REQUEST_CODE_RECORD = 1;
+    public static final int REQUEST_CODE_IMAGE = 2;
     public static final String CONTENT_KEY = "Tweet_content_key";
     public static final String AUDIOPATH_KEY = "Tweet_audiopath_key";
     public static final String IMAGEPATH_KEY = "Tweet_imagepath_key";
@@ -175,7 +176,13 @@ public class TweetFragment extends TitleBarFragment {
             handleSubmit(data.getStringExtra(CONTENT_KEY), null,
                     data.getStringExtra(AUDIOPATH_KEY));
             break;
-
+        case REQUEST_CODE_IMAGE:
+            handleSubmit(
+                    data.getStringExtra(CONTENT_KEY),
+                    FileUtils.uri2File(outsideAty,
+                            Uri.parse(data.getStringExtra(IMAGEPATH_KEY))),
+                    null);
+            break;
         default:
             break;
         }
@@ -184,35 +191,24 @@ public class TweetFragment extends TitleBarFragment {
     /**
      * 发布动弹
      */
-    private void handleSubmit(String strSpeech, String imageFilePath,
-            String audioPath) {
-        if (StringUtils.isEmpty(strSpeech)) {
-            ViewInject.toast("不能发布空吐槽");
-            return;
-        }
-        Tweet tweet = new Tweet();
-        tweet.setAuthorid(2332925);
-        tweet.setAudioPath(audioPath);
-        tweet.setImageFilePath(imageFilePath);
-        tweet.setBody(strSpeech + "————来自[爱看博客]Android客户端");
-
+    private void handleSubmit(String strSpeech, File imageFile, String audioPath) {
         HttpConfig config = new HttpConfig();
         config.cacheTime = 0;
         config.setCookieString("oscid=8N57Os9FG%2F%2B%2FFIA9vyogCJYPf0yMQGHmZhyzKMyuza2hL%2BW4xL7DPVVS%2B1BREZZzJGVMZrm4jNnkRHJmiDzNhjZIjp4pKbDtS4hUVFfAysLMq%2Fy5vIojQA%3D%3D;JSESSIONID=9B7tJ9RSZ4YYbdRhvg2xcTQ7skNJBwK3tMzdttnZwJpqmtx1d6hn!-25520330;");
         KJHttp kjh = new KJHttp(config);
         HttpParams params = new HttpParams();
-        params.put("uid", tweet.getAuthorid());
-        params.put("msg", tweet.getBody());
+        params.put("uid", 2332925);
+        params.put("msg", strSpeech + "————来自[爱看博客]客户端");
 
-        if (!TextUtils.isEmpty(tweet.getImageFilePath())) {
+        if (imageFile != null && imageFile.exists()) {
             try {
-                params.put("img", new File(tweet.getImageFilePath()));
+                params.put("img", imageFile);
             } catch (FileNotFoundException e) {
             }
         }
-        if (!StringUtils.isEmpty(tweet.getAudioPath())) {
+        if (!StringUtils.isEmpty(audioPath)) {
             try {
-                params.put("amr", new File(tweet.getAudioPath()));
+                params.put("amr", new File(audioPath));
             } catch (FileNotFoundException e) {
             }
         }
