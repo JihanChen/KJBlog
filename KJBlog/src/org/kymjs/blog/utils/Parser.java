@@ -44,7 +44,7 @@ public class Parser {
                 BlogAuthor data = new BlogAuthor();
                 JSONObject obj = jsonArray.getJSONObject(i);
                 data.setHead(obj.optString("image", ""));
-                data.setId(obj.optString("id", "863548"));
+                data.setId(obj.optInt("id", 863548));
                 data.setName(obj.optString("name", "张涛"));
                 data.setDescription(obj.optString("description", "暂无简介"));
                 datas.add(data);

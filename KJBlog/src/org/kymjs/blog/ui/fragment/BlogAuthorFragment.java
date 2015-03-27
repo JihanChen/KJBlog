@@ -1,9 +1,10 @@
 package org.kymjs.blog.ui.fragment;
 
+import java.util.List;
+
 import org.kymjs.blog.R;
-import org.kymjs.blog.adapter.OSCBlogAdapter;
-import org.kymjs.blog.domain.OSCBlog;
-import org.kymjs.blog.domain.OSCBlogList;
+import org.kymjs.blog.adapter.BlogAuthorAdapter;
+import org.kymjs.blog.domain.BlogAuthor;
 import org.kymjs.blog.domain.SimpleBackPage;
 import org.kymjs.blog.ui.SimpleBackActivity;
 import org.kymjs.blog.ui.widget.listview.FooterLoadingLayout;
@@ -27,64 +28,45 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-/**
- * 第三方博客列表
- * 
- * @author kymjs
- */
-public class OSCBlogListFragment extends TitleBarFragment {
+public class BlogAuthorFragment extends TitleBarFragment {
 
-    public static final String TAG = OSCBlogListFragment.class.getSimpleName();
+    public static final String TAG = BlogAuthorFragment.class.getSimpleName();
+
+    public static final String AUTHOR_NAME_KEY = "author_name_key";
 
     @BindView(id = R.id.listview)
     private PullToRefreshList mRefreshLayout;
     private ListView mListView;
 
-    private OSCBlogAdapter adapter;
+    private BlogAuthorAdapter adapter;
 
     private KJHttp kjh;
 
-    private final String OSCBLOG_HOST = "http://www.oschina.net/action/api/userblog_list?authoruid=";
-    private int BLOGLIST_ID = 1428332;
+    private final String OSCBLOG_HOST = "http://www.kymjs.com/json_blog_author";
     private String cache;
-    private SimpleBackActivity aty;
-    private String titleBarName;
-
-    public static String BLOGLIST_KEY = "osc_blog_id_key";
 
     @Override
     protected View inflaterView(LayoutInflater inflater, ViewGroup container,
             Bundle bundle) {
-        View root = View.inflate(outsideAty,
-                R.layout.frag_pull_refresh_listview, null);
-        aty = (SimpleBackActivity) getActivity();
-        return root;
+        View rootView = inflater.inflate(R.layout.frag_pull_refresh_listview,
+                container, false);
+        return rootView;
+    }
+
+    @Override
+    protected void setActionBarRes(ActionBarRes actionBarRes) {
+        super.setActionBarRes(actionBarRes);
+        actionBarRes.title = getString(R.string.str_follow);
+        actionBarRes.backImageId = R.drawable.titlebar_back;
     }
 
     @Override
     protected void initData() {
         super.initData();
         HttpConfig config = new HttpConfig();
-        int hour = StringUtils.toInt(StringUtils.getDataTime("HH"), 0);
-        if (hour > 7 && hour < 10) { // 如果是在早上7点到10点，这个时候是乱弹更新的时间，就缓存的时间短一点
-            config.cacheTime = 10;
-        } else {
-            config.cacheTime = 300;
-        }
+        config.cacheTime = 300;
         config.useDelayCache = true;
         kjh = new KJHttp(config);
-
-        Bundle bundle = aty.getBundleData();
-        String name = null;
-        if (bundle != null) {
-            BLOGLIST_ID = bundle.getInt(BLOGLIST_KEY, 1428332);
-            name = bundle.getString(BlogAuthorFragment.AUTHOR_NAME_KEY);
-        }
-        if (StringUtils.isEmpty(name)) {
-            titleBarName = getString(R.string.osc_joke);
-        } else {
-            titleBarName = name + "的博客";
-        }
     }
 
     @Override
@@ -96,18 +78,18 @@ public class OSCBlogListFragment extends TitleBarFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
-                if (parent.getAdapter() instanceof OSCBlogAdapter) {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("oscblog_id", ((OSCBlog) parent.getAdapter()
-                            .getItem(position)).getId());
-                    SimpleBackActivity.postShowWith(outsideAty,
-                            SimpleBackPage.OSC_BLOG_DETAIL, bundle);
-                }
+                Bundle bundle = new Bundle();
+                bundle.putInt(OSCBlogListFragment.BLOGLIST_KEY,
+                        ((BlogAuthor) adapter.getItem(position)).getId());
+                bundle.putString(AUTHOR_NAME_KEY,
+                        ((BlogAuthor) adapter.getItem(position)).getName());
+                SimpleBackActivity.postShowWith(outsideAty,
+                        SimpleBackPage.OSC_BLOG_LIST, bundle);
             }
         });
         mRefreshLayout.setPullLoadEnabled(true);
         ((FooterLoadingLayout) mRefreshLayout.getFooterLoadingLayout())
-                .setNoMoreDataText("旧笑话就不要看了吧");
+                .setNoMoreDataText("学习不可贪多哦");
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener<ListView>() {
             @Override
             public void onPullDownToRefresh(
@@ -126,49 +108,37 @@ public class OSCBlogListFragment extends TitleBarFragment {
     }
 
     private void fillUI() {
-        cache = kjh.getCache(OSCBLOG_HOST + BLOGLIST_ID, null);
+        cache = kjh.getCache(OSCBLOG_HOST, null);
         if (!StringUtils.isEmpty(cache)) {
-            OSCBlogList dataRes = Parser.xmlToBean(OSCBlogList.class, cache);
+            List<BlogAuthor> datas = Parser.getBlogAuthor(cache);
             if (adapter == null) {
-                adapter = new OSCBlogAdapter(outsideAty, dataRes.getBloglist());
+                adapter = new BlogAuthorAdapter(outsideAty, datas);
                 mListView.setAdapter(adapter);
             } else {
-                adapter.refresh(dataRes.getBloglist());
+                adapter.refresh(datas);
             }
         }
         refresh();
     }
 
     private void refresh() {
-        kjh.get(OSCBLOG_HOST + BLOGLIST_ID, new HttpCallBack() {
+        kjh.get(OSCBLOG_HOST, new HttpCallBack() {
             @Override
             public void onSuccess(String t) {
                 super.onSuccess(t);
                 KJLoger.debug(TAG + "网络请求：" + t);
                 mRefreshLayout.onPullDownRefreshComplete();
                 if (t != null && !t.equals(cache)) {
-                    OSCBlogList dataRes = Parser
-                            .xmlToBean(OSCBlogList.class, t);
+                    List<BlogAuthor> datas = Parser.getBlogAuthor(t);
                     if (adapter == null) {
-                        adapter = new OSCBlogAdapter(outsideAty, dataRes
-                                .getBloglist());
+                        adapter = new BlogAuthorAdapter(outsideAty, datas);
                         mListView.setAdapter(adapter);
                     } else {
-                        adapter.refresh(dataRes.getBloglist());
+                        adapter.refresh(datas);
                     }
                 }
             }
         });
-    }
-
-    /**
-     * 将在onResume方法中调用
-     */
-    @Override
-    protected void setActionBarRes(ActionBarRes actionBarRes) {
-        super.setActionBarRes(actionBarRes);
-        actionBarRes.title = titleBarName;
-        actionBarRes.backImageId = R.drawable.titlebar_back;
     }
 
     @Override
@@ -176,5 +146,4 @@ public class OSCBlogListFragment extends TitleBarFragment {
         super.onBackClick();
         outsideAty.finish();
     }
-
 }
