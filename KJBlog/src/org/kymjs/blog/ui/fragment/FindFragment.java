@@ -44,7 +44,7 @@ public class FindFragment extends TitleBarFragment {
     @BindView(id = R.id.find_plugin_4, click = true)
     private TextView mTvActive;
     @BindView(id = R.id.find_plugin_5, click = true)
-    private TextView mTvZhaoPin;
+    private TextView mTvFollow;
     @BindView(id = R.id.find_plugin_6, click = true)
     private TextView mTvSticky;
 
@@ -108,6 +108,8 @@ public class FindFragment extends TitleBarFragment {
                     SimpleBackPage.OSC_ACTIVE);
             break;
         case R.id.find_plugin_5:
+            SimpleBackActivity.postShowWith(outsideAty,
+                    SimpleBackPage.BLOG_AUTHOR);
             break;
         case R.id.find_plugin_6:
             SimpleBackActivity.postShowWith(outsideAty, SimpleBackPage.STICKY);

@@ -1,5 +1,14 @@
 package org.kymjs.blog.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.kymjs.blog.domain.BlogAuthor;
+import org.kymjs.kjframe.utils.KJLoger;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
@@ -24,5 +33,26 @@ public class Parser {
             }
         }
         return data;
+    }
+
+    public static List<BlogAuthor> getBlogAuthor(String json) {
+        List<BlogAuthor> datas = new ArrayList<BlogAuthor>();
+
+        try {
+            JSONArray jsonArray = new JSONArray(json);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                BlogAuthor data = new BlogAuthor();
+                JSONObject obj = jsonArray.getJSONObject(i);
+                data.setHead(obj.optString("image", ""));
+                data.setId(obj.optString("id", "863548"));
+                data.setName(obj.optString("name", "张涛"));
+                data.setDescription(obj.optString("description", "暂无简介"));
+                datas.add(data);
+            }
+        } catch (JSONException e) {
+            KJLoger.debug("getBlogAuthor()解析异常");
+        }
+
+        return datas;
     }
 }

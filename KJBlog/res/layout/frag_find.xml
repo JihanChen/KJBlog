@@ -183,7 +183,7 @@
                             android:id="@+id/find_plugin_5"
                             style="@style/textview_more"
                             android:drawableTop="@drawable/selector_mine_advertise"
-                            android:text="@string/zhaopin" />
+                            android:text="@string/follow" />
                     </RelativeLayout>
 
                     <RelativeLayout

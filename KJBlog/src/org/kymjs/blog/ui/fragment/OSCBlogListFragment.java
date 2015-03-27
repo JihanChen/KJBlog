@@ -115,9 +115,6 @@ public class OSCBlogListFragment extends TitleBarFragment {
         fillUI();
     }
 
-    /**
-     * 首次进入时填充数据
-     */
     private void fillUI() {
         cache = kjh.getCache(OSCBLOG_HOST + BLOGLIST_ID, null);
         if (!StringUtils.isEmpty(cache)) {
@@ -132,9 +129,6 @@ public class OSCBlogListFragment extends TitleBarFragment {
         refresh();
     }
 
-    /**
-     * 刷新ListView数据
-     */
     private void refresh() {
         kjh.get(OSCBLOG_HOST + BLOGLIST_ID, new HttpCallBack() {
             @Override

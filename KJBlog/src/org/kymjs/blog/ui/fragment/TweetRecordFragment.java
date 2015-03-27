@@ -52,7 +52,7 @@ public class TweetRecordFragment extends TitleBarFragment {
 
     private AnimationDrawable drawable; // 录音播放时的动画背景
 
-    private final String strSpeech = "#语音动弹#";
+    // private final String strSpeech = "#语音动弹#";
     private String imageUri;
 
     @Override
