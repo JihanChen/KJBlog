@@ -42,7 +42,7 @@
                 android:layout_weight="1"
                 android:drawableTop="@drawable/icon"
                 android:gravity="center"
-                android:text="哈哈" />
+                android:text="开源实验室" />
         </LinearLayout>
 
         <RelativeLayout

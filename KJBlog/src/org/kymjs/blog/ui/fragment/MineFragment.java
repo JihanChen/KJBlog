@@ -87,9 +87,10 @@ public class MineFragment extends TitleBarFragment {
         case R.id.mine_tv_collect:
             break;
         case R.id.mine_tv_other:
+            doJoin("http://www.kymjs.com/");
             break;
         case R.id.mine_tv_join:
-            doJoin();
+            doJoin("http://jq.qq.com/?_wv=1027&k=XblWhv");
             break;
         case R.id.mine_rl_push:
             isChanged = true;
@@ -109,7 +110,7 @@ public class MineFragment extends TitleBarFragment {
         }
     }
 
-    private void doJoin() {
+    private void doJoin(String url) {
         // intent.setData(Uri.parse("http://weixin.qq.com/r/Q0gBGfTEsqnNrbB69x1R"));
         // 怎样才能打开指定的Activity？通过反编译已经获取到Activity的参数key但是没有启动权限
         // ComponentName componetName = new ComponentName("com.tencent.mm",
@@ -130,7 +131,7 @@ public class MineFragment extends TitleBarFragment {
 
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("http://jq.qq.com/?_wv=1027&k=XblWhv"));
+        intent.setData(Uri.parse(url));
         startActivity(intent);
     }
 
