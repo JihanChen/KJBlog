@@ -7,12 +7,15 @@ import java.util.Set;
 
 import org.kymjs.blog.R;
 import org.kymjs.blog.domain.Tweet;
+import org.kymjs.blog.ui.ImageActivity;
 import org.kymjs.blog.ui.widget.CollapsibleTextView;
 import org.kymjs.kjframe.KJBitmap;
 import org.kymjs.kjframe.utils.StringUtils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -102,8 +105,22 @@ public class TweetAdapter extends BaseAdapter {
             holder.img_pic.setVisibility(View.GONE);
         } else {
             holder.img_pic.setVisibility(View.VISIBLE);
-            kjb.display(holder.img_pic, data.getImgBig());
+            kjb.display(holder.img_pic, data.getImgBig(),
+                    R.drawable.default_egt);
+            onPicClick(holder.img_pic, data.getImgBig());
         }
         return convertView;
+    }
+
+    private void onPicClick(View view, final String url) {
+        view.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra(ImageActivity.URL_KEY, url);
+                intent.setClass(cxt, ImageActivity.class);
+                cxt.startActivity(intent);
+            }
+        });
     }
 }

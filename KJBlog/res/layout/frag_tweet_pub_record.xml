@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f9f9f9" >
+    android:background="#fafafa" >
 
     <EditText
         android:id="@+id/tweet_edit_record"
@@ -71,7 +71,9 @@
         android:layout_alignLeft="@+id/tweet_edit_record"
         android:layout_below="@+id/tweet_edit_record"
         android:layout_marginTop="20dp"
+        android:background="@drawable/splash_box_bg"
         android:contentDescription="@null"
+        android:padding="2dp"
         android:src="@drawable/selector_image_add" />
 
     <org.kymjs.blog.ui.widget.RecordButton

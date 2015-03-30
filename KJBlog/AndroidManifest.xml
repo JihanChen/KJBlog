@@ -38,6 +38,9 @@
         <activity android:name="org.kymjs.blog.ui.Main" />
         <activity android:name="org.kymjs.blog.ui.SimpleBackActivity" />
         <activity android:name="org.kymjs.blog.ui.Browser" />
+        <activity
+            android:name="org.kymjs.blog.ui.ImageActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
 
         <!-- KJPush，一个广播一个Service -->
 

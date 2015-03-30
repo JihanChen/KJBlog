@@ -124,9 +124,7 @@ public class TweetFragment extends TitleBarFragment {
      */
     private void refresh() {
         double page = tweets.size() / 20;
-        if (page % 1 != 0) {
-            page += 1;
-        }
+        page += 1.9; // 因为服务器返回的可能会少于20条，所以采用小数进一法加载下一页
         refresh((int) page);
     }
 
@@ -234,6 +232,5 @@ public class TweetFragment extends TitleBarFragment {
                         // 设置上传动画失败图标
                     }
                 });
-
     }
 }
