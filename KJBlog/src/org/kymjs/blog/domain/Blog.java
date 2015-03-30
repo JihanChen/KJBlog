@@ -14,6 +14,7 @@ public class Blog implements Serializable {
     private String id; // 个人博客列表唯一标识
     private String title; // 博客标题
     private String url; // 博客地址
+    private String author; // 博主
     private String imageUrl; // 博客中的图片地址
     private String description; // 博客摘要
     private String date; // 博客发布日期 yyyy-mm-dd
@@ -26,6 +27,14 @@ public class Blog implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getTitle() {

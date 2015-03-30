@@ -5,10 +5,12 @@ import java.util.List;
 
 import org.kymjs.blog.R;
 import org.kymjs.blog.domain.EverydayMessage;
+import org.kymjs.blog.ui.Browser;
 import org.kymjs.kjframe.KJBitmap;
 import org.kymjs.kjframe.utils.StringUtils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -26,7 +28,7 @@ import android.widget.TextView;
  */
 public class WeChatAdapter extends BaseAdapter {
     private final Context cxt;
-    private final List<EverydayMessage> datas;
+    private List<EverydayMessage> datas;
     private final KJBitmap kjb = KJBitmap.create();
 
     public WeChatAdapter(Context cxt, List<EverydayMessage> datas) {
@@ -35,6 +37,14 @@ public class WeChatAdapter extends BaseAdapter {
             datas = new ArrayList<EverydayMessage>(0);
         }
         this.datas = datas;
+    }
+
+    public void refresh(List<EverydayMessage> datas) {
+        if (datas == null) {
+            datas = new ArrayList<EverydayMessage>(0);
+        }
+        this.datas = datas;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -101,6 +111,9 @@ public class WeChatAdapter extends BaseAdapter {
             holder.singleLayout.setVisibility(View.GONE);
             holder.layoutHead.setVisibility(View.VISIBLE);
             initMsgItem(holder.root, itemCount, data);
+            holder.layoutHead
+                    .setOnClickListener(getItemMessageClickListener(data
+                            .getUrl()));
         } else {
             // 单图文消息
             holder.singleLayout.setVisibility(View.VISIBLE);
@@ -108,6 +121,9 @@ public class WeChatAdapter extends BaseAdapter {
             holder.singleDescription.setText(data.getDescription());
             holder.singleTitle.setText(data.getTitle());
             kjb.display(holder.singleImg, data.getImgUrl());
+            holder.singleLayout
+                    .setOnClickListener(getItemMessageClickListener(data
+                            .getUrl()));
         }
         holder.tiem.setText(StringUtils.friendlyTime(data.getTime()));
         return v;
@@ -166,7 +182,10 @@ public class WeChatAdapter extends BaseAdapter {
         return new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent();
+                intent.putExtra(Browser.BROWSER_KEY, url);
+                intent.setClass(cxt, Browser.class);
+                cxt.startActivity(intent);
             }
         };
     }

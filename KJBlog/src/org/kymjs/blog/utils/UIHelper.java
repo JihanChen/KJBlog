@@ -1,11 +1,15 @@
 package org.kymjs.blog.utils;
 
+import org.kymjs.blog.domain.SimpleBackPage;
+import org.kymjs.blog.ui.Browser;
+import org.kymjs.blog.ui.SimpleBackActivity;
 import org.kymjs.kjframe.utils.StringUtils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
@@ -121,11 +125,23 @@ public class UIHelper {
      * 监听webview上的图片
      */
     public interface OnWebViewImageListener {
-
         /**
          * 点击webview上的图片，传入该缩略图的大图Url
          */
         void showImagePreview(String bigImageUrl);
     }
 
+    public static void toBrowser(Context cxt, String url) {
+        if (url != null && url.indexOf("oschina") > 0) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("oscblog_id",
+                    StringUtils.toInt(url.substring(url.lastIndexOf('/') + 1)));
+            SimpleBackActivity.postShowWith(cxt,
+                    SimpleBackPage.OSC_BLOG_DETAIL, bundle);
+        } else {
+            Intent intent = new Intent(cxt, Browser.class);
+            intent.putExtra(Browser.BROWSER_KEY, url);
+            cxt.startActivity(intent);
+        }
+    }
 }

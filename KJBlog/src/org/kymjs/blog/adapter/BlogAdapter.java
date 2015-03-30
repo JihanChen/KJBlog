@@ -27,7 +27,7 @@ public class BlogAdapter extends BaseAdapter implements StickyHeadAdapter,
         SectionIndexer {
 
     private final Context cxt;
-    private final List<Blog> datas;
+    private List<Blog> datas;
     private final KJBitmap kjb;
     private int[] stickyHeadIndex;
 
@@ -59,6 +59,15 @@ public class BlogAdapter extends BaseAdapter implements StickyHeadAdapter,
         for (int i = 0; i < tempIndex.size(); i++) {
             stickyHeadIndex[i] = tempIndex.get(i);
         }
+    }
+
+    public void refresh(List<Blog> datas) {
+        if (datas == null) {
+            datas = new ArrayList<Blog>(1);
+        }
+        this.datas = datas;
+        initMessageDataList();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -120,7 +129,7 @@ public class BlogAdapter extends BaseAdapter implements StickyHeadAdapter,
         holder.tv_title.setText(data.getTitle());
         holder.tv_description.setText(data.getDescription());
         holder.tv_author.setText("张涛");
-        holder.tv_date.setText(data.getDate());
+        holder.tv_date.setText(StringUtils.friendlyTime(data.getDate()));
         String url = data.getImageUrl();
         if (StringUtils.isEmpty(url)) {
             holder.img_image.setVisibility(View.GONE);

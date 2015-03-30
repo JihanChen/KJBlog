@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * 膜拜大神的大神列表
+ * 大神列表
  * 
  * @author kymjs
  * 

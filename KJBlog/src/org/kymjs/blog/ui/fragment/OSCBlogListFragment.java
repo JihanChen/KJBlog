@@ -66,7 +66,7 @@ public class OSCBlogListFragment extends TitleBarFragment {
         super.initData();
         HttpConfig config = new HttpConfig();
         int hour = StringUtils.toInt(StringUtils.getDataTime("HH"), 0);
-        if (hour > 7 && hour < 10) { // 如果是在早上7点到10点，这个时候是乱弹更新的时间，就缓存的时间短一点
+        if (hour > 7 && hour < 10) { // 如果是在早上7点到10点，就缓存的时间短一点
             config.cacheTime = 10;
         } else {
             config.cacheTime = 300;

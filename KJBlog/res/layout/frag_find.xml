@@ -127,7 +127,8 @@
                             android:layout_alignRight="@+id/find_plugin_2"
                             android:layout_alignTop="@+id/find_plugin_2"
                             android:contentDescription="@string/app_name"
-                            android:src="@drawable/bg_count_tip" />
+                            android:src="@drawable/bg_count_tip"
+                            android:visibility="gone" />
                     </RelativeLayout>
 
                     <RelativeLayout

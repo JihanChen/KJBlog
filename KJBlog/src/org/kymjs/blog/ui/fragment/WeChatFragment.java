@@ -1,10 +1,19 @@
 package org.kymjs.blog.ui.fragment;
 
+import java.util.List;
+
 import org.kymjs.blog.R;
 import org.kymjs.blog.adapter.WeChatAdapter;
+import org.kymjs.blog.domain.EverydayMessage;
+import org.kymjs.blog.utils.Parser;
 import org.kymjs.kjframe.KJHttp;
+import org.kymjs.kjframe.http.HttpCallBack;
+import org.kymjs.kjframe.http.HttpConfig;
 import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.utils.KJLoger;
+import org.kymjs.kjframe.utils.StringUtils;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,10 +32,17 @@ import android.widget.ListView;
  */
 public class WeChatFragment extends TitleBarFragment {
 
+    public static final String TAG = WeChatFragment.class.getSimpleName();
+
     @BindView(id = R.id.wechat_listview)
-    private ListView mList;
+    private ListView mListView;
+
+    private WeChatAdapter adapter;
 
     private KJHttp kjh;
+
+    private final String EVERYDAY_HOST = "http://www.kymjs.com/json_every_message";
+    private String cache;
 
     @Override
     protected View inflaterView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +61,10 @@ public class WeChatFragment extends TitleBarFragment {
     @Override
     protected void initData() {
         super.initData();
-        kjh = new KJHttp();
+        HttpConfig config = new HttpConfig();
+        config.cacheTime = 300;
+        config.useDelayCache = true;
+        kjh = new KJHttp(config);
     }
 
     @Override
@@ -57,6 +76,36 @@ public class WeChatFragment extends TitleBarFragment {
     @Override
     protected void initWidget(View parentView) {
         super.initWidget(parentView);
-        mList.setAdapter(new WeChatAdapter(outsideAty, null));
+        mListView.setDivider(new ColorDrawable(android.R.color.transparent));
+        cache = kjh.getCache(EVERYDAY_HOST, null);
+        if (!StringUtils.isEmpty(cache)) {
+            List<EverydayMessage> datas = Parser.getEveryDayMsg(cache);
+            if (adapter == null) {
+                adapter = new WeChatAdapter(outsideAty, datas);
+                mListView.setAdapter(adapter);
+            } else {
+                adapter.refresh(datas);
+            }
+        }
+        refresh();
+    }
+
+    private void refresh() {
+        kjh.get(EVERYDAY_HOST, new HttpCallBack() {
+            @Override
+            public void onSuccess(String t) {
+                super.onSuccess(t);
+                KJLoger.debug(TAG + "网络请求：" + t);
+                if (t != null && !t.equals(cache)) {
+                    List<EverydayMessage> datas = Parser.getEveryDayMsg(t);
+                    if (adapter == null) {
+                        adapter = new WeChatAdapter(outsideAty, datas);
+                        mListView.setAdapter(adapter);
+                    } else {
+                        adapter.refresh(datas);
+                    }
+                }
+            }
+        });
     }
 }

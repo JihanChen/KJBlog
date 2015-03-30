@@ -134,7 +134,6 @@ public class TweetFragment extends TitleBarFragment {
             public void onSuccess(String t) {
                 super.onSuccess(t);
                 KJLoger.debug(TAG + "网络请求" + t);
-                mRefreshLayout.onPullDownRefreshComplete();
                 List<Tweet> datas = Parser.xmlToBean(TweetsList.class, t)
                         .getList();
                 tweets.addAll(datas);

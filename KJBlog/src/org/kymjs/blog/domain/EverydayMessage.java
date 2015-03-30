@@ -16,6 +16,7 @@ public class EverydayMessage implements Serializable {
     private String title; // 单图文标题
     private String description; // 单图文描述
     private String imgUrl; // 单图文图片链接
+    private String url; // 单图文链接
     private boolean hasItem; // 是否多图文
 
     private List<String> urlList; // 每日推送地址集
@@ -29,6 +30,14 @@ public class EverydayMessage implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getDescription() {
