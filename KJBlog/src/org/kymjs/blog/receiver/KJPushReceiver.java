@@ -1,5 +1,8 @@
 package org.kymjs.blog.receiver;
 
+import org.kymjs.blog.AppConfig;
+import org.kymjs.kjframe.KJHttp;
+import org.kymjs.kjframe.http.HttpCallBack;
 import org.kymjs.kjframe.utils.SystemTool;
 import org.kymjs.push.KJPushConfig;
 import org.kymjs.push.core.KJPushManager;
@@ -17,6 +20,8 @@ import android.os.Handler;
  * 
  */
 public class KJPushReceiver extends PushReceiver {
+
+    private final KJHttp kjh = new KJHttp();
 
     static Handler handle = new Handler() {};
     Runnable stopPush = new Runnable() {
@@ -48,7 +53,20 @@ public class KJPushReceiver extends PushReceiver {
     }
 
     @Override
-    public void onPullData(Context context, Intent intent) {
-
+    public void onTryPullData(final Context context, Intent intent) {
+        super.onTryPullData(context, intent);
+        kjh.get("http://www.kymjs.com/new_message", new HttpCallBack() {
+            @Override
+            public void onSuccess(String t) {
+                super.onSuccess(t);
+                if ("true".equalsIgnoreCase(t)) {
+                    context.sendBroadcast(new Intent(
+                            AppConfig.PUSH_BROADCAST_ACTION));
+                }
+            }
+        });
     }
+
+    @Override
+    public void onPullData(Context context, Intent intent) {}
 }
