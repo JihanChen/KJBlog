@@ -1,6 +1,8 @@
 package org.kymjs.blog.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
@@ -38,6 +40,12 @@ public class Tweet implements Serializable, Comparable<Tweet> {
     private String imgBig;
     @XStreamAlias("attach")
     private String attach;
+    @XStreamAlias("likeCount")
+    private String likeCount;
+    @XStreamAlias("isLike")
+    private String isLike;
+    @XStreamAlias("likeList")
+    private List<User> likeList = new ArrayList<Tweet.User>();
 
     private String imageFilePath;
     private String audioPath;
@@ -48,6 +56,30 @@ public class Tweet implements Serializable, Comparable<Tweet> {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(String likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public String getIsLike() {
+        return isLike;
+    }
+
+    public void setIsLike(String isLike) {
+        this.isLike = isLike;
+    }
+
+    public List<User> getLikeList() {
+        return likeList;
+    }
+
+    public void setLikeList(List<User> likeList) {
+        this.likeList = likeList;
     }
 
     public String getAttach() {
@@ -160,4 +192,38 @@ public class Tweet implements Serializable, Comparable<Tweet> {
         }
     }
 
+    @XStreamAlias("user")
+    public class User {
+        @XStreamAlias("name")
+        String name;
+        @XStreamAlias("uid")
+        String uid;
+        @XStreamAlias("portrait")
+        String portrait;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getUid() {
+            return uid;
+        }
+
+        public void setUid(String uid) {
+            this.uid = uid;
+        }
+
+        public String getPortrait() {
+            return portrait;
+        }
+
+        public void setPortrait(String portrait) {
+            this.portrait = portrait;
+        }
+
+    }
 }

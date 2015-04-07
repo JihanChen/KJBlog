@@ -16,7 +16,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 public class TweetsList implements Serializable {
     @XStreamAlias("id")
     private int id;
-    @XStreamAlias("tweetcount")
+    @XStreamAlias("tweetCount")
     private int tweetCount;
     @XStreamAlias("pagesize")
     private int pagesize;

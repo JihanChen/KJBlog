@@ -262,7 +262,7 @@ public class Browser extends TitleBarActivity {
         @Override
         public void onProgressChanged(WebView view, int newProgress) { // 进度
             super.onProgressChanged(view, newProgress);
-            if (newProgress > 90) {
+            if (newProgress > 60) {
                 mProgress.setVisibility(View.GONE);
             }
         }
