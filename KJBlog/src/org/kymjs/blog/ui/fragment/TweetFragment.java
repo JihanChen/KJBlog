@@ -1,7 +1,6 @@
 package org.kymjs.blog.ui.fragment;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -82,7 +81,7 @@ public class TweetFragment extends TitleBarFragment {
         HttpConfig config = new HttpConfig();
         config.cacheTime = 0;
         config.useDelayCache = false;
-        kjh = new KJHttp(config);
+        kjh = KJHttp.create(config);
     }
 
     @Override
@@ -191,29 +190,25 @@ public class TweetFragment extends TitleBarFragment {
     private void handleSubmit(String strSpeech, File imageFile, String audioPath) {
         HttpConfig config = new HttpConfig();
         config.cacheTime = 0;
-        config.setCookieString("oscid=8N57Os9FG%2F%2B%2FFIA9vyogCJYPf0yMQGHmZhyzKMyuza2hL%2BW4xL7DPVVS%2B1BREZZzJGVMZrm4jNnkRHJmiDzNhjZIjp4pKbDtS4hUVFfAysLMq%2Fy5vIojQA%3D%3D;JSESSIONID=9B7tJ9RSZ4YYbdRhvg2xcTQ7skNJBwK3tMzdttnZwJpqmtx1d6hn!-25520330;");
-        KJHttp kjh = new KJHttp(config);
+        KJHttp kjh = KJHttp.create(config);
         HttpParams params = new HttpParams();
+        params.putHeaders(
+                "cookie",
+                "oscid=8N57Os9FG%2F%2B%2FFIA9vyogCJYPf0yMQGHmZhyzKMyuza2hL%2BW4xL7DPVVS%2B1BREZZzJGVMZrm4jNnkRHJmiDzNhjZIjp4pKbDtS4hUVFfAysLMq%2Fy5vIojQA%3D%3D;JSESSIONID=9B7tJ9RSZ4YYbdRhvg2xcTQ7skNJBwK3tMzdttnZwJpqmtx1d6hn!-25520330;");
         params.put("uid", 2332925);
         params.put("msg", strSpeech + "————来自[爱看博客]客户端");
 
         if (imageFile != null && imageFile.exists()) {
-            try {
-                params.put("img", imageFile);
-            } catch (FileNotFoundException e) {
-            }
+            params.put("img", imageFile);
         }
         if (!StringUtils.isEmpty(audioPath)) {
-            try {
-                params.put("amr", new File(audioPath));
-            } catch (FileNotFoundException e) {
-            }
+            params.put("amr", new File(audioPath));
         }
         kjh.post("http://www.oschina.net/action/api/tweet_pub", params,
                 new HttpCallBack() {
                     @Override
-                    public void onPreStart() {
-                        super.onPreStart();
+                    public void onPreStar() {
+                        super.onPreStar();
                         // 设置上传动画
                     }
 
@@ -225,9 +220,8 @@ public class TweetFragment extends TitleBarFragment {
                     }
 
                     @Override
-                    public void onFailure(Throwable t, int errorNo,
-                            String strMsg) {
-                        super.onFailure(t, errorNo, strMsg);
+                    public void onFailure(int errorNo, String strMsg) {
+                        super.onFailure(errorNo, strMsg);
                         // 设置上传动画失败图标
                     }
                 });

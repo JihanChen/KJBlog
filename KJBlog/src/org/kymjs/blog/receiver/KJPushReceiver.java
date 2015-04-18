@@ -21,7 +21,7 @@ import android.os.Handler;
  */
 public class KJPushReceiver extends PushReceiver {
 
-    private final KJHttp kjh = new KJHttp();
+    private final KJHttp kjh = KJHttp.create();
 
     static Handler handle = new Handler() {};
     Runnable stopPush = new Runnable() {
