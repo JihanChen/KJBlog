@@ -38,7 +38,7 @@
             android:layout_height="120dp"
             android:contentDescription="@null"
             android:scaleType="centerCrop"
-            android:src="@drawable/main_home_bg" />
+            android:src="@drawable/main_maron_bg" />
 
         <TextView
             android:id="@+id/item_wechat_tv_head"
@@ -82,7 +82,7 @@
             android:layout_below="@+id/item_wechat_tv_single"
             android:contentDescription="@null"
             android:scaleType="centerCrop"
-            android:src="@drawable/main_home_bg" />
+            android:src="@drawable/main_maron_bg" />
 
         <TextView
             android:id="@+id/item_wechat_tv_single_content"

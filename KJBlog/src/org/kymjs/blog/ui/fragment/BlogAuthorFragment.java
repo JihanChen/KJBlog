@@ -108,7 +108,7 @@ public class BlogAuthorFragment extends TitleBarFragment {
     }
 
     private void fillUI() {
-        cache = kjh.getCache(OSCBLOG_HOST, null);
+        cache = kjh.getStringCache(OSCBLOG_HOST);
         if (!StringUtils.isEmpty(cache)) {
             List<BlogAuthor> datas = Parser.getBlogAuthor(cache);
             if (adapter == null) {

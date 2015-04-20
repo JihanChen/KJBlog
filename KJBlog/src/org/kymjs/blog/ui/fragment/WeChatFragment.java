@@ -77,7 +77,7 @@ public class WeChatFragment extends TitleBarFragment {
     protected void initWidget(View parentView) {
         super.initWidget(parentView);
         mListView.setDivider(new ColorDrawable(android.R.color.transparent));
-        cache = kjh.getCache(EVERYDAY_HOST, null);
+        cache = kjh.getStringCache(EVERYDAY_HOST);
         if (!StringUtils.isEmpty(cache)) {
             List<EverydayMessage> datas = Parser.getEveryDayMsg(cache);
             if (adapter == null) {

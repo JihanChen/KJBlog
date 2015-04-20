@@ -116,7 +116,7 @@ public class BlogFragment extends TitleBarFragment {
     }
 
     private void fillUI() {
-        cache = kjh.getCache(MY_BLOG_HOST, null);
+        cache = kjh.getStringCache(MY_BLOG_HOST);
         if (!StringUtils.isEmpty(cache)) {
             List<Blog> datas = Parser.getBlogList(cache);
             adapter = new BlogAdapter(aty, datas);

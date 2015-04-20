@@ -3,7 +3,7 @@
     android:id="@+id/splash_layout_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_home_bg" >
+    android:background="@drawable/main_maron_bg" >
 
     <TextView
         android:id="@+id/splash_tv_logo"

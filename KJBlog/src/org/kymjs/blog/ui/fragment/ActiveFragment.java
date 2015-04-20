@@ -102,7 +102,7 @@ public class ActiveFragment extends TitleBarFragment implements
      * 首次进入时填充数据
      */
     private void fillUI() {
-        cache = kjh.getCache(ACTIVE_HOST, null);
+        cache = kjh.getStringCache(ACTIVE_HOST);
         if (!StringUtils.isEmpty(cache)) {
             ActiveList dataRes = Parser.xmlToBean(ActiveList.class, cache);
             if (adapter == null) {

@@ -126,7 +126,7 @@ public class OSCBlogListFragment extends TitleBarFragment {
     }
 
     private void fillUI() {
-        cache = kjh.getCache(OSCBLOG_HOST + BLOGLIST_ID, null);
+        cache = kjh.getStringCache(OSCBLOG_HOST + BLOGLIST_ID);
         if (!StringUtils.isEmpty(cache)) {
             OSCBlogList dataRes = Parser.xmlToBean(OSCBlogList.class, cache);
             if (adapter == null) {

@@ -1,20 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<org.kymjs.kjframe.widget.KJSlidingMenu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_group"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@drawable/main_bg"
+    android:scrollbars="none" >
 
-    <FrameLayout
-        android:id="@+id/main_content"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/bottombar_height"
-        android:layout_marginTop="@dimen/title_topmargin" />
+        android:orientation="horizontal" >
 
-    <include
-        android:id="@+id/titlebar"
-        layout="@layout/main_titlebar" />
+        <LinearLayout
+            android:id="@+id/main_menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
 
-    <include layout="@layout/main_bottombar" />
+            <TextView
+                android:id="@+id/textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击" />
+        </LinearLayout>
 
-</RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:id="@+id/main_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/bottombar_height"
+                android:layout_marginTop="@dimen/title_topmargin" />
+
+            <include
+                android:id="@+id/titlebar"
+                layout="@layout/main_titlebar" />
+
+            <include layout="@layout/main_bottombar" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</org.kymjs.kjframe.widget.KJSlidingMenu>
