@@ -41,7 +41,7 @@ public class WeChatFragment extends TitleBarFragment {
 
     private KJHttp kjh;
 
-    private final String EVERYDAY_HOST = "http://www.kymjs.com/json_every_message";
+    private final String EVERYDAY_HOST = "http://www.kymjs.com/api/json_every_message";
     private String cache;
 
     @Override

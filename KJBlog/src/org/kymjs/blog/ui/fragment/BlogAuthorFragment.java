@@ -42,7 +42,7 @@ public class BlogAuthorFragment extends TitleBarFragment {
 
     private KJHttp kjh;
 
-    private final String OSCBLOG_HOST = "http://www.kymjs.com/json_blog_author";
+    private final String OSCBLOG_HOST = "http://www.kymjs.com/api/json_blog_author";
     private String cache;
 
     @Override

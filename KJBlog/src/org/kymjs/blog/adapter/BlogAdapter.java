@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.kymjs.blog.R;
 import org.kymjs.blog.domain.Blog;
-import org.kymjs.blog.ui.widget.listview.StickyHeadAdapter;
 import org.kymjs.kjframe.KJBitmap;
 import org.kymjs.kjframe.utils.StringUtils;
 
@@ -14,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 /**
@@ -23,13 +21,11 @@ import android.widget.TextView;
  * @author kymjs (https://github.com/kymjs)
  * @since 2015-3
  */
-public class BlogAdapter extends BaseAdapter implements StickyHeadAdapter,
-        SectionIndexer {
+public class BlogAdapter extends BaseAdapter {
 
     private final Context cxt;
     private List<Blog> datas;
     private final KJBitmap kjb;
-    private int[] stickyHeadIndex;
 
     public BlogAdapter(Context cxt, List<Blog> datas) {
         this.cxt = cxt;
@@ -38,27 +34,6 @@ public class BlogAdapter extends BaseAdapter implements StickyHeadAdapter,
             datas = new ArrayList<Blog>(1);
         }
         this.datas = datas;
-        initMessageDataList();
-    }
-
-    /**
-     * 初始化与每日推荐相关的数据
-     */
-    private void initMessageDataList() {
-        List<Integer> tempIndex = new ArrayList<Integer>(7);
-        String lastDate = datas.get(0).getDate();
-        tempIndex.add(0);
-
-        for (int i = 1; i < datas.size(); i++) {
-            if (!datas.get(i).getDate().equals(lastDate)) {
-                lastDate = datas.get(i).getDate();
-                tempIndex.add(i);
-            }
-        }
-        stickyHeadIndex = new int[tempIndex.size()];
-        for (int i = 0; i < tempIndex.size(); i++) {
-            stickyHeadIndex[i] = tempIndex.get(i);
-        }
     }
 
     public void refresh(List<Blog> datas) {
@@ -66,7 +41,6 @@ public class BlogAdapter extends BaseAdapter implements StickyHeadAdapter,
             datas = new ArrayList<Blog>(1);
         }
         this.datas = datas;
-        initMessageDataList();
         notifyDataSetChanged();
     }
 
@@ -140,77 +114,9 @@ public class BlogAdapter extends BaseAdapter implements StickyHeadAdapter,
         return convertView;
     }
 
-    /**
-     * 在第几个显示stickyHeadView
-     */
-    @Override
-    public int getPositionForSection(int sectionIndex) {
-        if (stickyHeadIndex.length == 0) {
-            return 0;
-        }
-
-        if (sectionIndex >= stickyHeadIndex.length) {
-            sectionIndex = stickyHeadIndex.length - 1;
-        } else if (sectionIndex < 0) {
-            sectionIndex = 0;
-        }
-        return stickyHeadIndex[sectionIndex];
-    }
-
-    /**
-     * 在0-position中，显示多少个stickyHeadView，类似getCount()
-     */
-    @Override
-    public int getSectionForPosition(int position) {
-        for (int i = 0; i < stickyHeadIndex.length; i++) {
-            if (position < stickyHeadIndex[i]) {
-                return i - 1;
-            }
-        }
-        return stickyHeadIndex.length - 1;
-    }
-
     static class HeadViewHolder {
         ImageView img_tip_tody;
         TextView tv_title;
         TextView tv_description;
-    }
-
-    @Override
-    public View getHeaderView(int position, View convertView, ViewGroup parent) {
-        HeadViewHolder hesdHolder = null;
-        if (convertView == null) {
-            convertView = View.inflate(cxt, R.layout.item_list_blog_stackyhead,
-                    null);
-            hesdHolder = new HeadViewHolder();
-            hesdHolder.img_tip_tody = (ImageView) convertView
-                    .findViewById(R.id.item_blog_tip_tody);
-            convertView.setTag(hesdHolder);
-        } else {
-            hesdHolder = (HeadViewHolder) convertView.getTag();
-        }
-
-        if (position == 0) {
-            hesdHolder.img_tip_tody.setVisibility(View.VISIBLE);
-        } else {
-            hesdHolder.img_tip_tody.setVisibility(View.GONE);
-        }
-        return convertView;
-    }
-
-    /**
-     * 类似于getItem()
-     */
-    @Override
-    public Object[] getSections() {
-        return null;
-    }
-
-    /**
-     * 类似于getItemId()
-     */
-    @Override
-    public String getHeaderId(int position) {
-        return datas.get(position).getDate();
     }
 }

@@ -1,7 +1,7 @@
 package org.kymjs.blog.utils;
 
 import org.kymjs.blog.domain.SimpleBackPage;
-import org.kymjs.blog.ui.Browser;
+import org.kymjs.blog.ui.MyBlogBrowser;
 import org.kymjs.blog.ui.SimpleBackActivity;
 import org.kymjs.kjframe.utils.StringUtils;
 
@@ -138,9 +138,13 @@ public class UIHelper {
                     StringUtils.toInt(url.substring(url.lastIndexOf('/') + 1)));
             SimpleBackActivity.postShowWith(cxt,
                     SimpleBackPage.OSC_BLOG_DETAIL, bundle);
+        } else if (url.startsWith("http://blog.kymjs.com/")) {
+            Intent intent = new Intent(cxt, MyBlogBrowser.class);
+            intent.putExtra(MyBlogBrowser.BROWSER_KEY, url);
+            cxt.startActivity(intent);
         } else {
-            Intent intent = new Intent(cxt, Browser.class);
-            intent.putExtra(Browser.BROWSER_KEY, url);
+            Intent intent = new Intent(cxt, MyBlogBrowser.class);
+            intent.putExtra(MyBlogBrowser.BROWSER_KEY, url);
             cxt.startActivity(intent);
         }
     }
