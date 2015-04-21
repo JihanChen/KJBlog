@@ -7,13 +7,12 @@ import java.util.Set;
 
 import org.kymjs.blog.R;
 import org.kymjs.blog.domain.Tweet;
-import org.kymjs.blog.ui.ImageActivity;
 import org.kymjs.blog.ui.widget.CollapsibleTextView;
+import org.kymjs.blog.utils.UIHelper;
 import org.kymjs.kjframe.KJBitmap;
 import org.kymjs.kjframe.utils.StringUtils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -116,10 +115,7 @@ public class TweetAdapter extends BaseAdapter {
         view.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.putExtra(ImageActivity.URL_KEY, url);
-                intent.setClass(cxt, ImageActivity.class);
-                cxt.startActivity(intent);
+                UIHelper.toGallery(cxt, url);
             }
         });
     }

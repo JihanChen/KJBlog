@@ -5,12 +5,11 @@ import java.util.List;
 
 import org.kymjs.blog.R;
 import org.kymjs.blog.domain.EverydayMessage;
-import org.kymjs.blog.ui.Browser;
+import org.kymjs.blog.utils.UIHelper;
 import org.kymjs.kjframe.KJBitmap;
 import org.kymjs.kjframe.utils.StringUtils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -110,6 +109,8 @@ public class WeChatAdapter extends BaseAdapter {
             // 多图文消息
             holder.singleLayout.setVisibility(View.GONE);
             holder.layoutHead.setVisibility(View.VISIBLE);
+            holder.title.setText(data.getTitle());
+            kjb.display(holder.img, data.getImgUrl());
             initMsgItem(holder.root, itemCount, data);
             holder.layoutHead
                     .setOnClickListener(getItemMessageClickListener(data
@@ -182,10 +183,7 @@ public class WeChatAdapter extends BaseAdapter {
         return new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.putExtra(Browser.BROWSER_KEY, url);
-                intent.setClass(cxt, Browser.class);
-                cxt.startActivity(intent);
+                UIHelper.toBrowser(cxt, url);
             }
         };
     }

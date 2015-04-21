@@ -1,6 +1,10 @@
 package org.kymjs.blog.ui;
 
+import java.util.List;
+
 import org.kymjs.blog.R;
+import org.kymjs.blog.domain.CollectData;
+import org.kymjs.kjframe.KJDB;
 import org.kymjs.kjframe.ui.BindView;
 import org.kymjs.kjframe.ui.ViewInject;
 import org.kymjs.kjframe.utils.StringUtils;
@@ -38,9 +42,40 @@ public class MyBlogBrowser extends TitleBarActivity {
     private String mCurrentUrl = DEFAULT;
     private String strTitle;
 
+    private final CollectData data = new CollectData();
+    private KJDB kjdb;
+
     @Override
     public void setRootView() {
         setContentView(R.layout.aty_browser);
+    }
+
+    @Override
+    protected void onBackClick() {
+        super.onBackClick();
+        finish();
+    }
+
+    @Override
+    protected void onMenuClick() {
+        super.onMenuClick();
+        Object tag = mImgMenu.getTag();
+        // 如果有tag，且tag为真，则把tag改为false取消收藏
+        if (tag != null && tag instanceof Boolean) {
+            if ((Boolean) tag) {
+                mImgMenu.setTag(Boolean.valueOf(false));
+                mImgMenu.setImageResource(R.drawable.titlebar_unstar);
+                kjdb.deleteByWhere(CollectData.class, "url='" + mCurrentUrl
+                        + "'");
+                return;
+            }
+        }
+        // 如果没有tag或tag为假，则把tag改为true收藏本链接
+        mImgMenu.setTag(Boolean.valueOf(true));
+        mImgMenu.setImageResource(R.drawable.titlebar_star);
+        data.setName(mWebView.getTitle());
+        data.setUrl(mCurrentUrl);
+        kjdb.save(data);
     }
 
     @Override
@@ -56,20 +91,33 @@ public class MyBlogBrowser extends TitleBarActivity {
                 strTitle = getString(R.string.app_name);
             }
         }
+        kjdb = KJDB.create(aty);
     }
 
     @Override
     public void initWidget() {
         super.initWidget();
         initWebView();
+        mProgress.setVisibility(View.GONE);
         findViewById(R.id.browser_bottom).setVisibility(View.GONE);
         mWebView.loadUrl(mCurrentUrl);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mImgMenu.setTag(Boolean.valueOf(false));
+        mImgMenu.setImageResource(R.drawable.titlebar_unstar);
+        if (!StringUtils.isEmpty(strTitle)) {
+            mTvTitle.setText(strTitle);
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         mWebView.onResume();
+
     }
 
     @Override
@@ -118,9 +166,7 @@ public class MyBlogBrowser extends TitleBarActivity {
      * @param url
      *            链接地址
      */
-    protected void onUrlLoading(WebView view, String url) {
-        mProgress.setVisibility(View.VISIBLE);
-    }
+    protected void onUrlLoading(WebView view, String url) {}
 
     /**
      * 链接载入成功后会被调用
@@ -132,9 +178,14 @@ public class MyBlogBrowser extends TitleBarActivity {
      */
     protected void onUrlFinished(WebView view, String url) {
         mCurrentUrl = url;
-        mProgress.setVisibility(View.GONE);
-        if (aty != null && mWebView != null) { // 必须做判断，由于webview加载属于耗时操作，可能会本Activity已经关闭了才被调用
-            mTvTitle.setText(mWebView.getTitle());
+        List<CollectData> datas = kjdb.findAllByWhere(CollectData.class,
+                "url='" + url + "'");
+        if (datas != null && datas.size() != 0) {
+            mImgMenu.setImageResource(R.drawable.titlebar_star);
+            mImgMenu.setTag(Boolean.valueOf(true));
+        } else {
+            mImgMenu.setImageResource(R.drawable.titlebar_unstar);
+            mImgMenu.setTag(Boolean.valueOf(false));
         }
     }
 
@@ -161,7 +212,8 @@ public class MyBlogBrowser extends TitleBarActivity {
      *            web页面标题
      */
     protected void onWebTitle(WebView view, String title) {
-        if (aty != null && mWebView != null) { // 必须做判断，由于webview加载属于耗时操作，可能会本Activity已经关闭了才被调用
+        if (StringUtils.isEmpty(strTitle) && mTvTitle != null
+                && mWebView != null) {
             mTvTitle.setText(mWebView.getTitle());
         }
     }
@@ -208,9 +260,6 @@ public class MyBlogBrowser extends TitleBarActivity {
         @Override
         public void onProgressChanged(WebView view, int newProgress) { // 进度
             super.onProgressChanged(view, newProgress);
-            if (newProgress > 60) {
-                mProgress.setVisibility(View.GONE);
-            }
         }
     }
 

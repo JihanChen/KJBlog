@@ -22,9 +22,10 @@ import android.widget.ListView;
 
 /**
  * 仿照公众号推送界面创建的每日推送列表<br>
- * 有关本界面还有一段很有意思的故事：最初做这个界面的时候，出于偷懒，并没有打算自己写，在网上搜索到了一篇写这种布局的博客，博主叫秦元培。(http://
+ * 为什么有些人对外表现的那么大家风范乐于分享，可是私底下却什么都不肯说呢，难道仅仅是因为指导一个人得不到那种被众人膜拜的感觉吗？<br>
+ * 有关本界面有一段很有意思的故事：最初做这个界面的时候，出于偷懒，并没有打算自己写，在网上搜索到了一篇写这种布局的博客，博主叫秦元培。(http://
  * blog.csdn.net/qinyuanpei/article/details/17734755)。心想，这次又可以少写好多代码了。
- * 可是博客内并没有提供项目介绍的sample,于是根据博客中QQ信息加发送了好友请求:你好，刚看了你的博客，麻烦你能发一份Demo给我吗。结果被拒绝了。。。<br>
+ * 可是博客内并没有提供项目介绍的sample,于是根据博客中QQ信息发送了好友请求:你好，刚看了你的博客，麻烦你能发一份Demo给我吗。结果被拒绝了。。。<br>
  * 诶，还是自己写吧,于是才有了这个界面
  * 
  * @author kymjs (https://github.com/kymjs)
@@ -76,6 +77,8 @@ public class WeChatFragment extends TitleBarFragment {
     @Override
     protected void initWidget(View parentView) {
         super.initWidget(parentView);
+        mListView.setStackFromBottom(true);
+        mListView.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
         mListView.setDivider(new ColorDrawable(android.R.color.transparent));
         cache = kjh.getStringCache(EVERYDAY_HOST);
         if (!StringUtils.isEmpty(cache)) {
@@ -83,6 +86,7 @@ public class WeChatFragment extends TitleBarFragment {
             if (adapter == null) {
                 adapter = new WeChatAdapter(outsideAty, datas);
                 mListView.setAdapter(adapter);
+                mListView.scrollTo(0, mListView.getBottom());
             } else {
                 adapter.refresh(datas);
             }

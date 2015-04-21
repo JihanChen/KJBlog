@@ -8,14 +8,12 @@ import org.kymjs.blog.ui.fragment.TitleBarFragment;
 import org.kymjs.blog.utils.KJAnimations;
 import org.kymjs.kjframe.ui.BindView;
 import org.kymjs.kjframe.ui.KJActivityStack;
-import org.kymjs.kjframe.widget.KJSlidingMenu;
 
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
 /**
  * 应用主界面
@@ -24,11 +22,6 @@ import android.widget.TextView;
  * @since 2015-3
  */
 public class Main extends TitleBarActivity {
-
-    @BindView(id = R.id.main_group)
-    private KJSlidingMenu mSliding;
-    @BindView(id = R.id.textview, click = true)
-    private TextView mText;
 
     @BindView(id = R.id.bottombar_content1, click = true)
     private RadioButton mRbtnContent1;
@@ -62,7 +55,6 @@ public class Main extends TitleBarActivity {
     @Override
     public void initWidget() {
         super.initWidget();
-        mSliding.setShowAnim(true);
         changeFragment(contentFragment1);
     }
 
@@ -162,9 +154,8 @@ public class Main extends TitleBarActivity {
                 mMainLoopHandler.postDelayed(onBackTimeRunnable, 2000);
             }
             return true;
-        } else if (keyCode == KeyEvent.KEYCODE_MENU) {
-            mSliding.changeMenu();
-            return true;
+            // } else if (keyCode == KeyEvent.KEYCODE_MENU) {
+            // return true;
         } else {
             return super.onKeyDown(keyCode, event);
         }

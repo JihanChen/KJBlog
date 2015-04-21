@@ -5,11 +5,13 @@ import java.util.List;
 
 import org.kymjs.blog.R;
 import org.kymjs.blog.domain.Blog;
+import org.kymjs.blog.utils.UIHelper;
 import org.kymjs.kjframe.KJBitmap;
 import org.kymjs.kjframe.utils.StringUtils;
 
 import android.content.Context;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -108,8 +110,9 @@ public class BlogAdapter extends BaseAdapter {
         if (StringUtils.isEmpty(url)) {
             holder.img_image.setVisibility(View.GONE);
         } else {
-            kjb.display(holder.img_image, url);
+            kjb.display(holder.img_image, url, R.drawable.default_egt);
             holder.img_image.setVisibility(View.VISIBLE);
+            onPicClick(holder.img_image, url);
         }
         return convertView;
     }
@@ -118,5 +121,14 @@ public class BlogAdapter extends BaseAdapter {
         ImageView img_tip_tody;
         TextView tv_title;
         TextView tv_description;
+    }
+
+    private void onPicClick(View view, final String url) {
+        view.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UIHelper.toGallery(cxt, url);
+            }
+        });
     }
 }

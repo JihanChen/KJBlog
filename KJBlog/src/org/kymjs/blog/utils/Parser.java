@@ -80,8 +80,9 @@ public class Parser {
                 JSONObject obj = jsonArray.getJSONObject(i);
                 data.setId(obj.optString("id", "-1"));
                 data.setDescription(obj.optString("description", "暂无简介"));
-                data.setTitle(obj.optString("title", "暂无标题"));
-                data.setImgUrl(obj.optString("imgurl", ""));
+                data.setTitle(obj.optString("title", "欢迎访问我的博客"));
+                data.setImgUrl(obj.optString("imgurl",
+                        "http://www.kymjs.com/assets/img/372102.jpg"));
                 data.setUrl(obj.optString("url", "http://blog.kymjs.com/"));
                 data.setHasItem(obj.optBoolean("hasitem", false));
 

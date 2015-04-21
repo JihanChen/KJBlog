@@ -1,10 +1,14 @@
 package org.kymjs.blog.ui.fragment;
 
+import java.util.List;
+
 import org.kymjs.blog.R;
+import org.kymjs.blog.domain.CollectData;
 import org.kymjs.blog.domain.OSCBlogEntity;
 import org.kymjs.blog.ui.SimpleBackActivity;
 import org.kymjs.blog.utils.Parser;
 import org.kymjs.blog.utils.UIHelper;
+import org.kymjs.kjframe.KJDB;
 import org.kymjs.kjframe.KJHttp;
 import org.kymjs.kjframe.http.HttpCallBack;
 import org.kymjs.kjframe.http.HttpConfig;
@@ -44,6 +48,8 @@ public class OSCBlogDetailFragment extends TitleBarFragment {
 
     private KJHttp kjh;
     private String cacheData;
+    private KJDB kjdb;
+    private final CollectData data = new CollectData();
 
     private SimpleBackActivity aty;
 
@@ -60,6 +66,16 @@ public class OSCBlogDetailFragment extends TitleBarFragment {
         super.setActionBarRes(actionBarRes);
         actionBarRes.title = getString(R.string.blog_detail);
         actionBarRes.backImageId = R.drawable.titlebar_back;
+        List<CollectData> datas = kjdb.findAllByWhere(CollectData.class,
+                "url='" + OSCBLOG_HOST + OSCBLOG_ID + "'");
+        if (datas != null && datas.size() != 0) {
+            actionBarRes.menuImageId = R.drawable.titlebar_star;
+            outsideAty.mImgMenu.setTag(Boolean.valueOf(true));
+        } else {
+            actionBarRes.menuImageId = R.drawable.titlebar_unstar;
+            outsideAty.mImgMenu.setTag(Boolean.valueOf(false));
+        }
+
     }
 
     @Override
@@ -69,8 +85,31 @@ public class OSCBlogDetailFragment extends TitleBarFragment {
     }
 
     @Override
+    public void onMenuClick() {
+        super.onMenuClick();
+        Object tag = outsideAty.mImgMenu.getTag();
+        // 如果有tag，且tag为真，则把tag改为false取消收藏
+        if (tag != null && tag instanceof Boolean) {
+            if ((Boolean) tag) {
+                outsideAty.mImgMenu.setTag(Boolean.valueOf(false));
+                setMenuImage(R.drawable.titlebar_unstar);
+                kjdb.deleteByWhere(CollectData.class, "url='" + OSCBLOG_HOST
+                        + OSCBLOG_ID + "'");
+                return;
+            }
+        }
+        // 如果没有tag或tag为假，则把tag改为true收藏本链接
+        outsideAty.mImgMenu.setTag(Boolean.valueOf(true));
+        setMenuImage(R.drawable.titlebar_star);
+        data.setName(mWebView.getTitle());
+        data.setUrl(OSCBLOG_HOST + OSCBLOG_ID);
+        kjdb.save(data);
+    }
+
+    @Override
     protected void initData() {
         super.initData();
+        kjdb = KJDB.create(outsideAty);
         Bundle outData = aty.getBundleData();
         if (outData != null) {
             OSCBLOG_ID = outData.getInt("oscblog_id", 295001);

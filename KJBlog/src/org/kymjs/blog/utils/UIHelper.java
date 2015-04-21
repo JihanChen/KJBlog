@@ -1,6 +1,8 @@
 package org.kymjs.blog.utils;
 
 import org.kymjs.blog.domain.SimpleBackPage;
+import org.kymjs.blog.ui.Browser;
+import org.kymjs.blog.ui.ImageActivity;
 import org.kymjs.blog.ui.MyBlogBrowser;
 import org.kymjs.blog.ui.SimpleBackActivity;
 import org.kymjs.kjframe.utils.StringUtils;
@@ -132,19 +134,37 @@ public class UIHelper {
     }
 
     public static void toBrowser(Context cxt, String url) {
-        if (url != null && url.indexOf("oschina") > 0) {
+        if (StringUtils.isEmpty(url)) {
+            return;
+        }
+        if (url.indexOf("oschina") > 0) {
             Bundle bundle = new Bundle();
             bundle.putInt("oscblog_id",
                     StringUtils.toInt(url.substring(url.lastIndexOf('/') + 1)));
             SimpleBackActivity.postShowWith(cxt,
                     SimpleBackPage.OSC_BLOG_DETAIL, bundle);
-        } else if (url.startsWith("http://blog.kymjs.com/")) {
+        } else if (url.indexOf("blog.kymjs.com") > 0) {
             Intent intent = new Intent(cxt, MyBlogBrowser.class);
+            intent.putExtra(MyBlogBrowser.BROWSER_KEY, url);
+            intent.putExtra(MyBlogBrowser.BROWSER_TITLE_KEY, "博客详情");
+            cxt.startActivity(intent);
+        } else if (url.indexOf("www.kymjs.com") > 0) {
+            Intent intent = new Intent(cxt, MyBlogBrowser.class);
+            intent.putExtra(MyBlogBrowser.BROWSER_TITLE_KEY, "开源实验室");
             intent.putExtra(MyBlogBrowser.BROWSER_KEY, url);
             cxt.startActivity(intent);
         } else {
-            Intent intent = new Intent(cxt, MyBlogBrowser.class);
+            Intent intent = new Intent(cxt, Browser.class);
             intent.putExtra(MyBlogBrowser.BROWSER_KEY, url);
+            cxt.startActivity(intent);
+        }
+    }
+
+    public static void toGallery(Context cxt, String url) {
+        if (!StringUtils.isEmpty(url)) {
+            Intent intent = new Intent();
+            intent.putExtra(ImageActivity.URL_KEY, url);
+            intent.setClass(cxt, ImageActivity.class);
             cxt.startActivity(intent);
         }
     }
