@@ -61,7 +61,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:contentDescription="@string/app_name"
-                android:maxHeight="250dp"
+                android:maxHeight="100dp"
                 android:scaleType="fitStart" />
 
             <RelativeLayout

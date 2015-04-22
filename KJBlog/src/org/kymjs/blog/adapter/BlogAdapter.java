@@ -110,7 +110,7 @@ public class BlogAdapter extends BaseAdapter {
         if (StringUtils.isEmpty(url)) {
             holder.img_image.setVisibility(View.GONE);
         } else {
-            kjb.display(holder.img_image, url, R.drawable.default_egt);
+            kjb.display(holder.img_image, url, R.drawable.pic_bg);
             holder.img_image.setVisibility(View.VISIBLE);
             onPicClick(holder.img_image, url);
         }

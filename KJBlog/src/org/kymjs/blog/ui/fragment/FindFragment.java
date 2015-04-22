@@ -3,10 +3,13 @@ package org.kymjs.blog.ui.fragment;
 import org.kymjs.blog.AppContext;
 import org.kymjs.blog.R;
 import org.kymjs.blog.domain.SimpleBackPage;
+import org.kymjs.blog.ui.Login;
 import org.kymjs.blog.ui.SimpleBackActivity;
 import org.kymjs.blog.ui.TitleBarActivity;
 import org.kymjs.blog.ui.widget.KJScrollView;
 import org.kymjs.blog.ui.widget.KJScrollView.OnViewTopPull;
+import org.kymjs.blog.utils.UIHelper;
+import org.kymjs.kjframe.KJBitmap;
 import org.kymjs.kjframe.ui.BindView;
 import org.kymjs.kjframe.widget.RoundImageView;
 
@@ -28,7 +31,7 @@ public class FindFragment extends TitleBarFragment {
 
     @BindView(id = R.id.find_img_zone)
     private ImageView mImgZone;
-    @BindView(id = R.id.find_img_head)
+    @BindView(id = R.id.find_img_head, click = true)
     private RoundImageView mImgHead;
     @BindView(id = R.id.find_tv_name)
     private TextView mTvName;
@@ -114,8 +117,21 @@ public class FindFragment extends TitleBarFragment {
         case R.id.find_plugin_6:
             SimpleBackActivity.postShowWith(outsideAty, SimpleBackPage.STICKY);
             break;
+        case R.id.find_img_head:
+            if (UIHelper.getUser(outsideAty).getUid() == 2332925) {
+                outsideAty.showActivity(outsideAty, Login.class);
+            }
+            break;
         default:
             break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        KJBitmap.create().display(mImgHead,
+                UIHelper.getUser(outsideAty).getPortrait());
+        mTvName.setText(UIHelper.getUser(outsideAty).getName());
     }
 }

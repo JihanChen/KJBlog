@@ -101,6 +101,11 @@
         <item name="android:layout_width">30dp</item>
     </style>
     
+     <style name="text_style_uid">
+        <item name="android:textColor">#ff666666</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    
       <style name="note_detail_menu_item" parent="note_detail_menu">
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>

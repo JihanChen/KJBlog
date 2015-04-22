@@ -104,8 +104,7 @@ public class TweetAdapter extends BaseAdapter {
             holder.img_pic.setVisibility(View.GONE);
         } else {
             holder.img_pic.setVisibility(View.VISIBLE);
-            kjb.display(holder.img_pic, data.getImgBig(),
-                    R.drawable.default_egt);
+            kjb.display(holder.img_pic, data.getImgBig(), R.drawable.pic_bg);
             onPicClick(holder.img_pic, data.getImgBig());
         }
         return convertView;

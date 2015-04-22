@@ -33,6 +33,8 @@ public class Parser {
             try {
                 data = type.newInstance();
             } catch (Exception ee) {
+            } finally {
+                Log.e("kymjs", "xml解析异常");
             }
         }
         return data;

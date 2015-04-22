@@ -12,7 +12,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="8dp"
-        android:text="@string/www_kymjs_org"
+        android:text="@string/www_kymjs_com"
         android:textColor="@android:color/white"
         android:textSize="14sp" />
 

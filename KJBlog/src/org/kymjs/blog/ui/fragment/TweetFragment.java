@@ -15,6 +15,7 @@ import org.kymjs.blog.ui.widget.listview.PullToRefreshBase;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase.OnRefreshListener;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshList;
 import org.kymjs.blog.utils.Parser;
+import org.kymjs.blog.utils.UIHelper;
 import org.kymjs.kjframe.KJHttp;
 import org.kymjs.kjframe.http.HttpCallBack;
 import org.kymjs.kjframe.http.HttpConfig;
@@ -34,7 +35,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 /**
- * [我要吐槽]界面
+ * [吐槽]界面
  * 
  * @author kymjs
  * 
@@ -192,10 +193,8 @@ public class TweetFragment extends TitleBarFragment {
         config.cacheTime = 0;
         KJHttp kjh = KJHttp.create(config);
         HttpParams params = new HttpParams();
-        params.putHeaders(
-                "cookie",
-                "oscid=8N57Os9FG%2F%2B%2FFIA9vyogCJYPf0yMQGHmZhyzKMyuza2hL%2BW4xL7DPVVS%2B1BREZZzJGVMZrm4jNnkRHJmiDzNhjZIjp4pKbDtS4hUVFfAysLMq%2Fy5vIojQA%3D%3D;JSESSIONID=9B7tJ9RSZ4YYbdRhvg2xcTQ7skNJBwK3tMzdttnZwJpqmtx1d6hn!-25520330;");
-        params.put("uid", 2332925);
+        params.putHeaders("cookie", UIHelper.getUser(outsideAty).getCookie());
+        params.put("uid", UIHelper.getUser(outsideAty).getUid());
         params.put("msg", strSpeech + "————来自[爱看博客]客户端");
 
         if (imageFile != null && imageFile.exists()) {

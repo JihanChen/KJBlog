@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">爱看博客</string>
-    <string name="www_kymjs_org">www_kymjs_org</string>
+    <string name="www_kymjs_com">www.kymjs.com</string>
     
     
     <string name="splash_content">你好，我是作者kymjs。
@@ -46,5 +46,9 @@
     
     <!-- 关注大神界面 -->
     <string name="str_follow">关注大神</string>
+    
+    <!-- 误操作提示 -->
+    <string name="account_not_empty">账号不能为空</string>
+    <string name="password_not_empty">密码不能为空</string>
     
 </resources>

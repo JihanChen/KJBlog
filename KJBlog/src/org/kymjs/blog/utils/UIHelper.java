@@ -1,10 +1,14 @@
 package org.kymjs.blog.utils;
 
+import java.util.List;
+
 import org.kymjs.blog.domain.SimpleBackPage;
+import org.kymjs.blog.domain.User;
 import org.kymjs.blog.ui.Browser;
 import org.kymjs.blog.ui.ImageActivity;
 import org.kymjs.blog.ui.MyBlogBrowser;
 import org.kymjs.blog.ui.SimpleBackActivity;
+import org.kymjs.kjframe.KJDB;
 import org.kymjs.kjframe.utils.StringUtils;
 
 import android.annotation.SuppressLint;
@@ -20,6 +24,8 @@ import android.webkit.WebViewClient;
 import android.widget.ZoomButtonsController;
 
 public class UIHelper {
+    private static User user = null;
+
     /** 全局web样式 */
     // 链接样式文件，代码块高亮的处理
     public final static String linkCss = "<script type=\"text/javascript\" src=\"file:///android_asset/shCore.js\"></script>"
@@ -167,5 +173,33 @@ public class UIHelper {
             intent.setClass(cxt, ImageActivity.class);
             cxt.startActivity(intent);
         }
+    }
+
+    public static void saveUser(Context cxt, User u) {
+        KJDB kjdb = KJDB.create(cxt);
+        kjdb.deleteByWhere(User.class, "");
+        user = u;
+        kjdb.save(u);
+    }
+
+    public static User getUser(Context cxt) {
+        if (user != null) {
+            return user;
+        }
+        KJDB kjdb = KJDB.create(cxt);
+        List<User> datas = kjdb.findAll(User.class);
+        if (datas != null && datas.size() > 0) {
+            user = datas.get(0);
+        } else {
+            user = new User();
+            user.setUid(2332925);
+            user.setPortrait("http://www.kymjs.com/assets/img/head_def.png");
+            user.setName("爱看博客用户");
+            user.setPwd("");
+            user.setAccount("");
+            user.setCookie("oscid=8N57Os9FG%2F%2B%2FFIA9vyogCJYPf0yMQGHmZhyzKMyuza2hL%2BW4xL7DPVVS%2B1BREZZzJGVMZrm4jNnkRHJmiDzNhjZIjp4pKbDtS4hUVFfAysLMq%2Fy5vIojQA%3D%3D;JSESSIONID=9B7tJ9RSZ4YYbdRhvg2xcTQ7skNJBwK3tMzdttnZwJpqmtx1d6hn!-25520330;");
+            kjdb.save(user);
+        }
+        return user;
     }
 }
