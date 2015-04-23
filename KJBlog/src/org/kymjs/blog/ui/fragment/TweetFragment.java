@@ -195,7 +195,8 @@ public class TweetFragment extends TitleBarFragment {
         HttpParams params = new HttpParams();
         params.putHeaders("cookie", UIHelper.getUser(outsideAty).getCookie());
         params.put("uid", UIHelper.getUser(outsideAty).getUid());
-        params.put("msg", strSpeech + "————来自[爱看博客]客户端");
+        params.put("msg", strSpeech);
+        // params.put("msg", strSpeech + "————来自[爱看博客]APP");
 
         if (imageFile != null && imageFile.exists()) {
             params.put("img", imageFile);

@@ -96,7 +96,7 @@ public class TweetAdapter extends BaseAdapter {
         if (end > 0) {
             headUrl = headUrl.substring(0, end);
         }
-        kjb.display(holder.img_head, headUrl, R.drawable.head_def, 135, 135);
+        kjb.display(holder.img_head, headUrl, 135, 135, R.drawable.head_def);
         holder.tv_name.setText(data.getAuthor());
         holder.tv_content.setText(data.getBody());
         holder.tv_date.setText(StringUtils.friendlyTime(data.getPubDate()));
@@ -104,7 +104,8 @@ public class TweetAdapter extends BaseAdapter {
             holder.img_pic.setVisibility(View.GONE);
         } else {
             holder.img_pic.setVisibility(View.VISIBLE);
-            kjb.display(holder.img_pic, data.getImgBig(), R.drawable.pic_bg);
+            kjb.displayWithLoadBitmap(holder.img_pic, data.getImgBig(),
+                    R.drawable.pic_bg);
             onPicClick(holder.img_pic, data.getImgBig());
         }
         return convertView;

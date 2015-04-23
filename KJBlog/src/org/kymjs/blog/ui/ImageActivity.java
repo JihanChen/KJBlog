@@ -37,19 +37,18 @@ public class ImageActivity extends KJActivity {
     @Override
     public void initWidget() {
         super.initWidget();
-        kjb.setCallback(new BitmapCallBack() {
+        kjb.display(mImg, url, new BitmapCallBack() {
             @Override
-            public void onPreLoad(View view) {
-                super.onPreLoad(view);
+            public void onPreLoad() {
+                super.onPreLoad();
                 mProgressBar.setVisibility(View.VISIBLE);
             }
 
             @Override
-            public void onFinish(View view) {
-                super.onFinish(view);
+            public void onFinish() {
+                super.onFinish();
                 mProgressBar.setVisibility(View.GONE);
             }
         });
-        kjb.display(mImg, url);
     }
 }
