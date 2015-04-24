@@ -69,7 +69,7 @@ public class ActiveFragment extends TitleBarFragment implements
         super.initData();
         HttpConfig config = new HttpConfig();
         config.useDelayCache = false;
-        kjh = KJHttp.create(config);
+        kjh = new KJHttp(config);
     }
 
     @Override

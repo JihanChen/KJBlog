@@ -31,7 +31,7 @@ public class BlogAdapter extends BaseAdapter {
 
     public BlogAdapter(Context cxt, List<Blog> datas) {
         this.cxt = cxt;
-        kjb = KJBitmap.create();
+        kjb = new KJBitmap();
         if (datas == null) {
             datas = new ArrayList<Blog>(1);
         }

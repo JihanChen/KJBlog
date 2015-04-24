@@ -72,7 +72,7 @@ public class OSCBlogListFragment extends TitleBarFragment {
             config.cacheTime = 300;
         }
         config.useDelayCache = true;
-        kjh = KJHttp.create(config);
+        kjh = new KJHttp(config);
 
         Bundle bundle = aty.getBundleData();
         String name = null;

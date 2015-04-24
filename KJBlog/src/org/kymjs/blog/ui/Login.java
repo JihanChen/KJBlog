@@ -159,7 +159,7 @@ public class Login extends KJActivity {
         if (!inputCheck()) {
             return;
         }
-        KJHttp kjh = KJHttp.create();
+        KJHttp kjh = new KJHttp();
         HttpParams params = new HttpParams();
         params.put("username", mEtUid.getText().toString());
         params.put("pwd", mEtPwd.getText().toString());

@@ -82,7 +82,7 @@ public class TweetFragment extends TitleBarFragment {
         HttpConfig config = new HttpConfig();
         config.cacheTime = 0;
         config.useDelayCache = false;
-        kjh = KJHttp.create(config);
+        kjh = new KJHttp(config);
     }
 
     @Override
@@ -191,7 +191,7 @@ public class TweetFragment extends TitleBarFragment {
     private void handleSubmit(String strSpeech, File imageFile, String audioPath) {
         HttpConfig config = new HttpConfig();
         config.cacheTime = 0;
-        KJHttp kjh = KJHttp.create(config);
+        KJHttp kjh = new KJHttp(config);
         HttpParams params = new HttpParams();
         params.putHeaders("cookie", UIHelper.getUser(outsideAty).getCookie());
         params.put("uid", UIHelper.getUser(outsideAty).getUid());

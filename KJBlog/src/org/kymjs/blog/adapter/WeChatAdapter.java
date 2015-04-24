@@ -28,7 +28,7 @@ import android.widget.TextView;
 public class WeChatAdapter extends BaseAdapter {
     private final Context cxt;
     private List<EverydayMessage> datas;
-    private final KJBitmap kjb = KJBitmap.create();
+    private final KJBitmap kjb = new KJBitmap();
 
     public WeChatAdapter(Context cxt, List<EverydayMessage> datas) {
         this.cxt = cxt;

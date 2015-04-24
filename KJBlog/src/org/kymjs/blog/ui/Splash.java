@@ -117,7 +117,7 @@ public class Splash extends KJActivity {
                 AppConfig.SPLASH_CONTENT_KEY,
                 getString(R.string.splash_content));
 
-        KJBitmap kjb = KJBitmap.create();
+        KJBitmap kjb = new KJBitmap();
         kjb.display(mRlRoot, rootBgPath);
         kjb.display(mImgHead, headImgPath);
         kjb.display(mRlBox, boxBgPath);

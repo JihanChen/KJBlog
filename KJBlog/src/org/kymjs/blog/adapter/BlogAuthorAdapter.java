@@ -32,7 +32,7 @@ public class BlogAuthorAdapter extends BaseAdapter {
         }
         this.cxt = cxt;
         this.datas = datas;
-        this.kjb = KJBitmap.create();
+        this.kjb = new KJBitmap();
     }
 
     public void refresh(List<BlogAuthor> datas) {

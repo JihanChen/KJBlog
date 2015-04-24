@@ -116,7 +116,7 @@ public class OSCBlogDetailFragment extends TitleBarFragment {
         }
         HttpConfig config = new HttpConfig();
         config.cacheTime = 300;
-        kjh = KJHttp.create(config);
+        kjh = new KJHttp(config);
         cacheData = kjh.getStringCache(OSCBLOG_HOST + OSCBLOG_ID);
     }
 

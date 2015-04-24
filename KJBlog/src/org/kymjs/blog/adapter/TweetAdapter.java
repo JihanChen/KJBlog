@@ -24,7 +24,7 @@ public class TweetAdapter extends BaseAdapter {
 
     private final Context cxt;
 
-    private final KJBitmap kjb;
+    private final KJBitmap kjb = new KJBitmap();
 
     private List<Tweet> datasList;
 
@@ -32,7 +32,6 @@ public class TweetAdapter extends BaseAdapter {
         if (datas == null) {
             datas = new HashSet<Tweet>(0);
         }
-        kjb = KJBitmap.create();
         this.cxt = cxt;
         datasList = new ArrayList<Tweet>(datas);
     }

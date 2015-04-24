@@ -18,7 +18,7 @@ public class ActiveAdapter extends BaseAdapter {
 
     private final Context cxt;
     private List<Active> datas;
-    private final KJBitmap kjb;
+    private final KJBitmap kjb = new KJBitmap();
 
     public ActiveAdapter(Context cxt, List<Active> datas) {
         if (datas == null) {
@@ -26,7 +26,6 @@ public class ActiveAdapter extends BaseAdapter {
         }
         this.cxt = cxt;
         this.datas = datas;
-        kjb = KJBitmap.create();
     }
 
     public void refresh(List<Active> datas) {
