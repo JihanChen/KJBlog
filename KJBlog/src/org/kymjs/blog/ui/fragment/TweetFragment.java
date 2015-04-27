@@ -113,7 +113,7 @@ public class TweetFragment extends TitleBarFragment {
      * 首次进入时填充数据
      */
     private void fillUI() {
-        refresh();
+        refresh(0);
     }
 
     /**

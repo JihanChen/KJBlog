@@ -2,7 +2,6 @@ package org.kymjs.blog.ui.fragment;
 
 import org.kymjs.blog.R;
 import org.kymjs.blog.adapter.ActiveAdapter;
-import org.kymjs.blog.domain.Active;
 import org.kymjs.blog.domain.ActiveList;
 import org.kymjs.blog.ui.Browser;
 import org.kymjs.blog.ui.widget.listview.FooterLoadingLayout;
@@ -106,7 +105,8 @@ public class ActiveFragment extends TitleBarFragment implements
         if (!StringUtils.isEmpty(cache)) {
             ActiveList dataRes = Parser.xmlToBean(ActiveList.class, cache);
             if (adapter == null) {
-                adapter = new ActiveAdapter(outsideAty, dataRes.getEvents());
+                adapter = new ActiveAdapter(mListView, dataRes.getEvents(),
+                        R.layout.item_list_active);
                 mListView.setAdapter(adapter);
             } else {
                 adapter.refresh(dataRes.getEvents());
@@ -125,8 +125,8 @@ public class ActiveFragment extends TitleBarFragment implements
                 if (t != null && !t.equals(cache)) {
                     ActiveList dataRes = Parser.xmlToBean(ActiveList.class, t);
                     if (adapter == null) {
-                        adapter = new ActiveAdapter(outsideAty, dataRes
-                                .getEvents());
+                        adapter = new ActiveAdapter(mListView, dataRes
+                                .getEvents(), R.layout.item_list_active);
                         mListView.setAdapter(adapter);
                     } else {
                         adapter.refresh(dataRes.getEvents());
@@ -146,10 +146,9 @@ public class ActiveFragment extends TitleBarFragment implements
     public void onItemClick(AdapterView<?> parent, View view, int position,
             long id) {
         Intent it = new Intent(outsideAty, Browser.class);
-        it.putExtra(Browser.BROWSER_KEY,
-                ((Active) adapter.getItem(position)).getUrl());
-        it.putExtra(Browser.BROWSER_TITLE_KEY,
-                ((Active) adapter.getItem(position)).getTitle());
+        it.putExtra(Browser.BROWSER_KEY, adapter.getItem(position).getUrl());
+        it.putExtra(Browser.BROWSER_TITLE_KEY, adapter.getItem(position)
+                .getTitle());
         outsideAty.showActivity(outsideAty, it);
     }
 }

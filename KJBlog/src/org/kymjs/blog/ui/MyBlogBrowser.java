@@ -277,6 +277,14 @@ public class MyBlogBrowser extends TitleBarActivity {
             super.onPageFinished(view, url);
             onUrlFinished(view, url);
         }
+
+        @Override
+        public void onReceivedError(WebView view, int errorCode,
+                String description, String failingUrl) {
+            super.onReceivedError(view, errorCode, description, failingUrl);
+            ViewInject.toast("没有找到数据");
+            mWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+        }
     }
 
     /**

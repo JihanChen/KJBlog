@@ -42,7 +42,7 @@ public class LoginData implements Serializable {
     @XStreamAlias("result")
     public class Result {
 
-        @XStreamAlias("errorMessage")
+        @XStreamAlias("errorCode")
         private int errorCode;
         @XStreamAlias("errorMessage")
         private String errorMessage;

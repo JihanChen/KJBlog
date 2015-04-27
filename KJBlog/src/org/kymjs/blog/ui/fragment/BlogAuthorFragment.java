@@ -79,10 +79,10 @@ public class BlogAuthorFragment extends TitleBarFragment {
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
                 Bundle bundle = new Bundle();
-                bundle.putInt(OSCBlogListFragment.BLOGLIST_KEY,
-                        ((BlogAuthor) adapter.getItem(position)).getId());
-                bundle.putString(AUTHOR_NAME_KEY,
-                        ((BlogAuthor) adapter.getItem(position)).getName());
+                bundle.putInt(OSCBlogListFragment.BLOGLIST_KEY, adapter
+                        .getItem(position).getId());
+                bundle.putString(AUTHOR_NAME_KEY, adapter.getItem(position)
+                        .getName());
                 SimpleBackActivity.postShowWith(outsideAty,
                         SimpleBackPage.OSC_BLOG_LIST, bundle);
             }
@@ -112,7 +112,8 @@ public class BlogAuthorFragment extends TitleBarFragment {
         if (!StringUtils.isEmpty(cache)) {
             List<BlogAuthor> datas = Parser.getBlogAuthor(cache);
             if (adapter == null) {
-                adapter = new BlogAuthorAdapter(outsideAty, datas);
+                adapter = new BlogAuthorAdapter(mListView, datas,
+                        R.layout.item_blog_author);
                 mListView.setAdapter(adapter);
             } else {
                 adapter.refresh(datas);
@@ -131,7 +132,8 @@ public class BlogAuthorFragment extends TitleBarFragment {
                 if (t != null && !t.equals(cache)) {
                     List<BlogAuthor> datas = Parser.getBlogAuthor(t);
                     if (adapter == null) {
-                        adapter = new BlogAuthorAdapter(outsideAty, datas);
+                        adapter = new BlogAuthorAdapter(mListView, datas,
+                                R.layout.item_blog_author);
                         mListView.setAdapter(adapter);
                     } else {
                         adapter.refresh(datas);

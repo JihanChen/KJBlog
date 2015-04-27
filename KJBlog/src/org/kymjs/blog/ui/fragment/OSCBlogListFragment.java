@@ -130,7 +130,8 @@ public class OSCBlogListFragment extends TitleBarFragment {
         if (!StringUtils.isEmpty(cache)) {
             OSCBlogList dataRes = Parser.xmlToBean(OSCBlogList.class, cache);
             if (adapter == null) {
-                adapter = new OSCBlogAdapter(outsideAty, dataRes.getBloglist());
+                adapter = new OSCBlogAdapter(mListView, dataRes.getBloglist(),
+                        R.layout.item_list_blog);
                 mListView.setAdapter(adapter);
             } else {
                 adapter.refresh(dataRes.getBloglist());
@@ -150,8 +151,8 @@ public class OSCBlogListFragment extends TitleBarFragment {
                     OSCBlogList dataRes = Parser
                             .xmlToBean(OSCBlogList.class, t);
                     if (adapter == null) {
-                        adapter = new OSCBlogAdapter(outsideAty, dataRes
-                                .getBloglist());
+                        adapter = new OSCBlogAdapter(mListView, dataRes
+                                .getBloglist(), R.layout.item_list_blog);
                         mListView.setAdapter(adapter);
                     } else {
                         adapter.refresh(dataRes.getBloglist());

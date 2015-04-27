@@ -95,8 +95,7 @@ public class BlogFragment extends TitleBarFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
-                UIHelper.toBrowser(aty,
-                        ((Blog) adapter.getItem(position)).getUrl());
+                UIHelper.toBrowser(aty, adapter.getItem(position).getUrl());
             }
         });
 
@@ -119,7 +118,7 @@ public class BlogFragment extends TitleBarFragment {
         cache = kjh.getStringCache(MY_BLOG_HOST);
         if (!StringUtils.isEmpty(cache)) {
             List<Blog> datas = Parser.getBlogList(cache);
-            adapter = new BlogAdapter(aty, datas);
+            adapter = new BlogAdapter(mList, datas, R.layout.item_list_blog);
             mList.setAdapter(adapter);
         }
         refresh();
@@ -133,7 +132,8 @@ public class BlogFragment extends TitleBarFragment {
                 if (t != null) {
                     List<Blog> datas = Parser.getBlogList(t);
                     if (adapter == null) {
-                        adapter = new BlogAdapter(outsideAty, datas);
+                        adapter = new BlogAdapter(mList, datas,
+                                R.layout.item_list_blog);
                         mList.setAdapter(adapter);
                     } else {
                         adapter.refresh(datas);

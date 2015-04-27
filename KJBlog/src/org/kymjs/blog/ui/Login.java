@@ -9,10 +9,12 @@ import org.kymjs.blog.utils.UIHelper;
 import org.kymjs.kjframe.KJActivity;
 import org.kymjs.kjframe.KJHttp;
 import org.kymjs.kjframe.http.HttpCallBack;
+import org.kymjs.kjframe.http.HttpConfig;
 import org.kymjs.kjframe.http.HttpParams;
 import org.kymjs.kjframe.ui.BindView;
 import org.kymjs.kjframe.ui.ViewInject;
 import org.kymjs.kjframe.utils.DensityUtils;
+import org.kymjs.kjframe.utils.KJLoger;
 import org.kymjs.kjframe.utils.StringUtils;
 import org.kymjs.kjframe.widget.RoundImageView;
 
@@ -159,7 +161,9 @@ public class Login extends KJActivity {
         if (!inputCheck()) {
             return;
         }
-        KJHttp kjh = new KJHttp();
+        HttpConfig config = new HttpConfig();
+        config.cacheTime = 0;
+        KJHttp kjh = new KJHttp(config);
         HttpParams params = new HttpParams();
         params.put("username", mEtUid.getText().toString());
         params.put("pwd", mEtPwd.getText().toString());
@@ -171,6 +175,7 @@ public class Login extends KJActivity {
                         String cookie = headers.get("Set-Cookie");
                         if (t != null) {
                             String str = new String(t);
+                            KJLoger.debug("登陆网络请求：" + new String(t));
                             LoginData data = Parser.xmlToBean(LoginData.class,
                                     str);
                             try {

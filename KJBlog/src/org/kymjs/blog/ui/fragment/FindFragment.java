@@ -118,7 +118,8 @@ public class FindFragment extends TitleBarFragment {
             SimpleBackActivity.postShowWith(outsideAty, SimpleBackPage.STICKY);
             break;
         case R.id.find_img_head:
-            if (UIHelper.getUser(outsideAty).getUid() == 2332925) {
+            int id = UIHelper.getUser(outsideAty).getUid();
+            if (id == 2332925 || id == 1) {
                 outsideAty.showActivity(outsideAty, Login.class);
             }
             break;
