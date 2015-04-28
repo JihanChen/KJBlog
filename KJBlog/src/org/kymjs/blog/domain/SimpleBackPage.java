@@ -1,5 +1,6 @@
 package org.kymjs.blog.domain;
 
+import org.kymjs.blog.ui.fragment.AboutFragment;
 import org.kymjs.blog.ui.fragment.ActiveFragment;
 import org.kymjs.blog.ui.fragment.BlogAuthorFragment;
 import org.kymjs.blog.ui.fragment.NoteBookFragment;
@@ -33,7 +34,9 @@ public enum SimpleBackPage {
 
     STICKY_EDIT(8, NoteEditFragment.class),
 
-    BLOG_AUTHOR(9, BlogAuthorFragment.class);
+    BLOG_AUTHOR(9, BlogAuthorFragment.class),
+
+    ABOUT(10, AboutFragment.class);
 
     private Class<?> clazz;
     private int value;

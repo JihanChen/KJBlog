@@ -21,13 +21,11 @@ import org.kymjs.kjframe.http.HttpCallBack;
 import org.kymjs.kjframe.http.HttpConfig;
 import org.kymjs.kjframe.http.HttpParams;
 import org.kymjs.kjframe.ui.BindView;
-import org.kymjs.kjframe.utils.FileUtils;
 import org.kymjs.kjframe.utils.KJLoger;
 import org.kymjs.kjframe.utils.StringUtils;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -175,11 +173,8 @@ public class TweetFragment extends TitleBarFragment {
                     data.getStringExtra(AUDIOPATH_KEY));
             break;
         case REQUEST_CODE_IMAGE:
-            handleSubmit(
-                    data.getStringExtra(CONTENT_KEY),
-                    FileUtils.uri2File(outsideAty,
-                            Uri.parse(data.getStringExtra(IMAGEPATH_KEY))),
-                    null);
+            handleSubmit(data.getStringExtra(CONTENT_KEY),
+                    new File(data.getStringExtra(IMAGEPATH_KEY)), null);
             break;
         default:
             break;
@@ -196,8 +191,7 @@ public class TweetFragment extends TitleBarFragment {
         HttpParams params = new HttpParams();
         params.putHeaders("cookie", UIHelper.getUser(outsideAty).getCookie());
         params.put("uid", UIHelper.getUser(outsideAty).getUid());
-        params.put("msg", strSpeech);
-        // params.put("msg", strSpeech + "————来自[爱看博客]APP");
+        params.put("msg", strSpeech + "————来自[爱看博客]APP");
 
         if (imageFile != null && imageFile.exists()) {
             params.put("img", imageFile);
@@ -216,7 +210,7 @@ public class TweetFragment extends TitleBarFragment {
                     @Override
                     public void onSuccess(String t) {
                         super.onSuccess(t);
-                        KJLoger.debug(t);
+                        KJLoger.debug("发表动弹:" + t);
                         // 隐藏上传动画
                     }
 

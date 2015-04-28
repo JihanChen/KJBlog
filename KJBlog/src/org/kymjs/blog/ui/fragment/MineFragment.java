@@ -1,12 +1,17 @@
 package org.kymjs.blog.ui.fragment;
 
+import java.io.File;
+
 import org.kymjs.blog.AppConfig;
 import org.kymjs.blog.R;
+import org.kymjs.blog.domain.SimpleBackPage;
+import org.kymjs.blog.ui.SimpleBackActivity;
+import org.kymjs.kjframe.http.KJAsyncTask;
 import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.ui.ViewInject;
+import org.kymjs.kjframe.utils.FileUtils;
 import org.kymjs.kjframe.utils.PreferenceHelper;
 import org.kymjs.kjframe.utils.SystemTool;
-import org.kymjs.push.core.KJPushManager;
-import org.kymjs.push.core.PushReceiver;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -67,6 +72,7 @@ public class MineFragment extends TitleBarFragment {
     @Override
     protected void initWidget(View parentView) {
         super.initWidget(parentView);
+        mRlExit.setVisibility(View.GONE);
         mTvVersion.setText("当前版本" + SystemTool.getAppVersion(outsideAty));
         mCbox.setChecked(PreferenceHelper.readBoolean(outsideAty,
                 AppConfig.PUSH_SWITCH_FILE, AppConfig.PUSH_SWITCH_KEY));
@@ -97,13 +103,22 @@ public class MineFragment extends TitleBarFragment {
             mCbox.setChecked(!mCbox.isChecked());
             break;
         case R.id.mine_rl_about:
+            SimpleBackActivity.postShowWith(outsideAty, SimpleBackPage.ABOUT);
             break;
         case R.id.mine_rl_clean:
+            KJAsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    File folder = FileUtils.getSaveFolder(AppConfig.saveFolder);
+                    deleteFile(folder);
+                }
+            });
+            ViewInject.toast("缓存正在清除");
             break;
         case R.id.mine_rl_feedback:
+            doJoin("http://jq.qq.com/?_wv=1027&k=XblWhv");
             break;
         case R.id.mine_rl_exit:
-            // KJActivityStack.create().AppExit(outsideAty);
             break;
         default:
             break;
@@ -135,18 +150,33 @@ public class MineFragment extends TitleBarFragment {
         startActivity(intent);
     }
 
-    @Override
-    public void onDestroy() {
-        if (isChanged) {
-            boolean isOpen = PreferenceHelper.readBoolean(outsideAty,
-                    AppConfig.PUSH_SWITCH_FILE, AppConfig.PUSH_SWITCH_KEY);
-            if (isOpen) {
-                KJPushManager.create()
-                        .startWork(outsideAty, PushReceiver.class);
-            } else {
-                KJPushManager.create().stopWork();
+    //
+    // @Override
+    // public void onDestroy() {
+    // if (isChanged) {
+    // boolean isOpen = PreferenceHelper.readBoolean(outsideAty,
+    // AppConfig.PUSH_SWITCH_FILE, AppConfig.PUSH_SWITCH_KEY);
+    // if (isOpen) {
+    // KJPushManager.create()
+    // .startWork(outsideAty, PushReceiver.class);
+    // } else {
+    // KJPushManager.create().stopWork();
+    // }
+    // }
+    // super.onDestroy();
+    // }
+
+    private void deleteFile(File file) {
+        if (file.exists()) {
+            if (file.isFile()) {
+                file.delete();
+            } else if (file.isDirectory()) {
+                File files[] = file.listFiles();
+                for (int i = 0; i < files.length; i++) {
+                    this.deleteFile(files[i]);
+                }
             }
+            file.delete();
         }
-        super.onDestroy();
     }
 }

@@ -107,7 +107,7 @@ public class OSCBlogListFragment extends TitleBarFragment {
         });
         mRefreshLayout.setPullLoadEnabled(true);
         ((FooterLoadingLayout) mRefreshLayout.getFooterLoadingLayout())
-                .setNoMoreDataText("旧笑话就不要看了吧");
+                .setNoMoreDataText("太旧的文章就不要看了吧~");
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener<ListView>() {
             @Override
             public void onPullDownToRefresh(

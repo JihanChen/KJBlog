@@ -23,4 +23,7 @@
     <dimen name="titlebar_height">45dp</dimen>
     <dimen name="bottombar_height">60dp</dimen>
     
+    <!-- About -->
+    <dimen name="tv_size_big_large">18.0sp</dimen>
+    <dimen name="tv_size_large">16.0sp</dimen>
 </resources>

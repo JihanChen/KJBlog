@@ -60,7 +60,6 @@ public class ActiveFragment extends TitleBarFragment implements
         super.setActionBarRes(actionBarRes);
         actionBarRes.title = getString(R.string.str_active_title);
         actionBarRes.backImageId = R.drawable.titlebar_back;
-        actionBarRes.menuImageId = R.drawable.titlebar_add;
     }
 
     @Override
@@ -80,7 +79,7 @@ public class ActiveFragment extends TitleBarFragment implements
         mListView.setOnItemClickListener(this);
         mRefreshLayout.setPullLoadEnabled(true);
         ((FooterLoadingLayout) mRefreshLayout.getFooterLoadingLayout())
-                .setNoMoreDataText("暂时还没有其他活动");
+                .setNoMoreDataText("暂时还没有更多活动");
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener<ListView>() {
             @Override
             public void onPullDownToRefresh(
