@@ -5,8 +5,8 @@ import java.util.List;
 import org.kymjs.blog.R;
 import org.kymjs.blog.domain.Active;
 import org.kymjs.kjframe.KJBitmap;
-import org.kymjs.kjframe.utils.AdapterHolder;
-import org.kymjs.kjframe.utils.KJAdapter;
+import org.kymjs.kjframe.widget.AdapterHolder;
+import org.kymjs.kjframe.widget.KJAdapter;
 
 import android.graphics.Bitmap;
 import android.widget.AbsListView;

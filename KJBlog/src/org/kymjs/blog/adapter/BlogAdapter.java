@@ -6,9 +6,9 @@ import org.kymjs.blog.R;
 import org.kymjs.blog.domain.Blog;
 import org.kymjs.blog.utils.UIHelper;
 import org.kymjs.kjframe.KJBitmap;
-import org.kymjs.kjframe.utils.AdapterHolder;
-import org.kymjs.kjframe.utils.KJAdapter;
 import org.kymjs.kjframe.utils.StringUtils;
+import org.kymjs.kjframe.widget.AdapterHolder;
+import org.kymjs.kjframe.widget.KJAdapter;
 
 import android.view.View;
 import android.view.View.OnClickListener;

@@ -5,9 +5,9 @@ import java.util.List;
 import org.kymjs.blog.R;
 import org.kymjs.blog.domain.OSCBlog;
 import org.kymjs.blog.utils.TimeUtils;
-import org.kymjs.kjframe.utils.AdapterHolder;
-import org.kymjs.kjframe.utils.KJAdapter;
 import org.kymjs.kjframe.utils.StringUtils;
+import org.kymjs.kjframe.widget.AdapterHolder;
+import org.kymjs.kjframe.widget.KJAdapter;
 
 import android.view.View;
 import android.widget.AbsListView;
