@@ -23,7 +23,7 @@
             android:layout_centerHorizontal="true"
             android:contentDescription="@string/app_name"
             android:scaleType="fitXY"
-            android:src="@drawable/head_def" />
+            android:src="@drawable/default_head" />
 
         <TextView
             android:id="@+id/find_tv_name"

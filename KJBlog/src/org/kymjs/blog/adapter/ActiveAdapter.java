@@ -8,7 +8,6 @@ import org.kymjs.kjframe.KJBitmap;
 import org.kymjs.kjframe.widget.AdapterHolder;
 import org.kymjs.kjframe.widget.KJAdapter;
 
-import android.graphics.Bitmap;
 import android.widget.AbsListView;
 
 public class ActiveAdapter extends KJAdapter<Active> {
@@ -21,12 +20,8 @@ public class ActiveAdapter extends KJAdapter<Active> {
     @Override
     public void convert(AdapterHolder helper, Active item, boolean isScrolling) {
         if (isScrolling) {
-            Bitmap cache = kjb.getMemoryCache(item.getCover());
-            if (cache == null) {
-                helper.setImageResource(R.id.iv_event_img, R.drawable.pic_bg);
-            } else {
-                helper.setImageBitmap(R.id.iv_event_img, cache);
-            }
+            kjb.displayCacheOrDefult(helper.getView(R.id.iv_event_img),
+                    item.getCover(), R.drawable.pic_bg);
         } else {
             helper.setImageByUrl(kjb, R.id.iv_event_img, item.getCover());
         }

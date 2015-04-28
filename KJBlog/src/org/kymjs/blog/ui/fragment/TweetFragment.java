@@ -138,7 +138,8 @@ public class TweetFragment extends TitleBarFragment {
                         .getList();
                 tweets.addAll(datas);
                 if (adapter == null) {
-                    adapter = new TweetAdapter(outsideAty, tweets);
+                    adapter = new TweetAdapter(mListView, tweets,
+                            R.layout.item_list_tweet);
                     mListView.setAdapter(adapter);
                 } else {
                     adapter.refresh(tweets);

@@ -50,9 +50,13 @@ public class BlogAdapter extends KJAdapter<Blog> {
         if (StringUtils.isEmpty(url)) {
             image.setVisibility(View.GONE);
         } else {
-            kjb.display(image, url, 480, 420, R.drawable.pic_bg);
             image.setVisibility(View.VISIBLE);
             onPicClick(image, url);
+            if (isScrolling) {
+                kjb.displayCacheOrDefult(image, url, R.drawable.pic_bg);
+            } else {
+                kjb.display(image, url, 480, 420, R.drawable.pic_bg);
+            }
         }
         helper.setText(R.id.item_blog_tv_title, item.getTitle());
         helper.setText(R.id.item_blog_tv_description, item.getDescription());

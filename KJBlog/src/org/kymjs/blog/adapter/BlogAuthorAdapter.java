@@ -29,10 +29,15 @@ public class BlogAuthorAdapter extends KJAdapter<BlogAuthor> {
     @Override
     public void convert(AdapterHolder helper, BlogAuthor item,
             boolean isScrolling) {
-        View view = helper.getView(R.id.item_blogauthor_head);
-        kjb.display(view, item.getHead(), 150, 150);
         helper.setText(R.id.item_blogauthor_tv_name, item.getDescription());
         helper.setText(R.id.item_blogauthor_tv_desc, item.getName());
 
+        View view = helper.getView(R.id.item_blogauthor_head);
+        if (isScrolling) {
+            kjb.displayCacheOrDefult(view, item.getHead(),
+                    R.drawable.default_head);
+        } else {
+            kjb.display(view, item.getHead(), 150, 150);
+        }
     }
 }
