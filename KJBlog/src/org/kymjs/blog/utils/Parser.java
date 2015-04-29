@@ -9,7 +9,9 @@ import org.json.JSONObject;
 import org.kymjs.blog.domain.Blog;
 import org.kymjs.blog.domain.BlogAuthor;
 import org.kymjs.blog.domain.EverydayMessage;
+import org.kymjs.kjframe.utils.SystemTool;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.thoughtworks.xstream.XStream;
@@ -146,5 +148,25 @@ public class Parser {
             Log.e("kymjs", "getBlogList()解析异常");
         }
         return datas;
+    }
+
+    /**
+     * 检测更新
+     * 
+     * @param json
+     */
+    public static String checkVersion(Context cxt, String json) {
+        String url = "";
+        try {
+            JSONObject obj = new JSONObject(json);
+            int serverVersion = obj.optInt("version", 0);
+            int currentVersion = SystemTool.getAppVersionCode(cxt);
+            if (serverVersion > currentVersion) {
+                url = obj.optString("url");
+            }
+        } catch (JSONException e) {
+            Log.e("kymjs", "getBlogList()解析异常");
+        }
+        return url;
     }
 }

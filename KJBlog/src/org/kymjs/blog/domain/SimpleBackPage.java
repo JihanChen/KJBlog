@@ -3,6 +3,7 @@ package org.kymjs.blog.domain;
 import org.kymjs.blog.ui.fragment.AboutFragment;
 import org.kymjs.blog.ui.fragment.ActiveFragment;
 import org.kymjs.blog.ui.fragment.BlogAuthorFragment;
+import org.kymjs.blog.ui.fragment.MyCollectFragment;
 import org.kymjs.blog.ui.fragment.NoteBookFragment;
 import org.kymjs.blog.ui.fragment.NoteEditFragment;
 import org.kymjs.blog.ui.fragment.OSCBlogDetailFragment;
@@ -36,7 +37,9 @@ public enum SimpleBackPage {
 
     BLOG_AUTHOR(9, BlogAuthorFragment.class),
 
-    ABOUT(10, AboutFragment.class);
+    ABOUT(10, AboutFragment.class),
+
+    COLLECT(11, MyCollectFragment.class);
 
     private Class<?> clazz;
     private int value;

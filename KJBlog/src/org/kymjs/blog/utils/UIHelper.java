@@ -8,6 +8,7 @@ import org.kymjs.blog.ui.Browser;
 import org.kymjs.blog.ui.ImageActivity;
 import org.kymjs.blog.ui.MyBlogBrowser;
 import org.kymjs.blog.ui.SimpleBackActivity;
+import org.kymjs.blog.ui.fragment.OSCBlogDetailFragment;
 import org.kymjs.kjframe.KJDB;
 import org.kymjs.kjframe.utils.StringUtils;
 
@@ -145,8 +146,7 @@ public class UIHelper {
         }
         if (url.indexOf("oschina") > 0) {
             Bundle bundle = new Bundle();
-            bundle.putInt("oscblog_id",
-                    StringUtils.toInt(url.substring(url.lastIndexOf('/') + 1)));
+            bundle.putString(OSCBlogDetailFragment.DATA_URL_KEY, url);
             SimpleBackActivity.postShowWith(cxt,
                     SimpleBackPage.OSC_BLOG_DETAIL, bundle);
         } else if (url.indexOf("blog.kymjs.com") > 0) {

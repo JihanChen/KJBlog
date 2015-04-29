@@ -1,12 +1,27 @@
 package org.kymjs.blog.ui.fragment;
 
+import java.io.File;
+
+import org.kymjs.blog.AppConfig;
 import org.kymjs.blog.R;
+import org.kymjs.blog.service.UpdateService;
 import org.kymjs.blog.ui.TitleBarActivity;
 import org.kymjs.blog.ui.widget.KJScrollView;
 import org.kymjs.blog.ui.widget.KJScrollView.OnViewTopPull;
+import org.kymjs.blog.utils.Parser;
 import org.kymjs.blog.utils.UIHelper;
+import org.kymjs.kjframe.KJHttp;
+import org.kymjs.kjframe.http.HttpCallBack;
+import org.kymjs.kjframe.http.HttpConfig;
 import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.ui.ViewInject;
+import org.kymjs.kjframe.utils.FileUtils;
+import org.kymjs.kjframe.utils.KJLoger;
+import org.kymjs.kjframe.utils.StringUtils;
+import org.kymjs.kjframe.utils.SystemTool;
 
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +38,7 @@ public class AboutFragment extends TitleBarFragment {
     private RelativeLayout mRlAuthor;
     @BindView(id = R.id.root)
     private KJScrollView rootView;
+    private KJHttp kjh;
 
     @Override
     protected View inflaterView(LayoutInflater inflater, ViewGroup container,
@@ -34,6 +50,14 @@ public class AboutFragment extends TitleBarFragment {
     @Override
     protected void setActionBarRes(ActionBarRes actionBarRes) {
         actionBarRes.title = getString(R.string.about);
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        HttpConfig config = new HttpConfig();
+        config.cacheTime = 0;
+        kjh = new KJHttp(config);
     }
 
     @Override
@@ -69,6 +93,60 @@ public class AboutFragment extends TitleBarFragment {
     }
 
     private void update() {
+        kjh.get("http://www.kymjs.com/api/version", new HttpCallBack() {
+            @Override
+            public void onSuccess(String t) {
+                super.onSuccess(t);
+                KJLoger.debug("检测更新===" + t);
+                checkVersion(t);
+            }
+        });
+    }
 
+    private void checkVersion(String json) {
+        final String url = Parser.checkVersion(outsideAty, json);
+        if (!StringUtils.isEmpty(url)) {
+            if (SystemTool.isWiFi(outsideAty)) {
+                download(url);
+            } else {
+                ViewInject.create().getExitDialog(outsideAty, "检测到新版本，是否更新",
+                        new OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                    int which) {
+                                dialog.dismiss();
+                                download(url);
+                            }
+                        });
+            }
+        }
+    }
+
+    private void download(String url) {
+        final File folder = FileUtils.getSaveFolder(AppConfig.saveFolder);
+        File tempFile = new File(folder + "/kjblog.apk.tmp");
+        if (tempFile.exists()) {
+            tempFile.delete();
+        }
+        ViewInject.toast("正在为你下载新版本");
+        kjh.download(folder + "/kjblog.apk", url, new HttpCallBack() {
+            /**
+             * 下载过程
+             */
+            @Override
+            public void onLoading(long count, long current) {
+                super.onLoading(count, current);
+            }
+
+            /**
+             * 下载完成，开始安装
+             */
+            @Override
+            public void onSuccess(byte[] t) {
+                super.onSuccess(t);
+                SystemTool.installApk(outsideAty, new File(folder
+                        + "/kjblog.apk"));
+            }
+        });
     }
 }

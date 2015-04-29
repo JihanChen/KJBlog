@@ -48,6 +48,8 @@
     <!-- 关注大神界面 -->
     <string name="str_follow">关注大神</string>
     
+    <string name="str_collect">我的收藏</string>
+    
     <!-- 误操作提示 -->
     <string name="account_not_empty">账号不能为空</string>
     <string name="password_not_empty">密码不能为空</string>

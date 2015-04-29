@@ -45,6 +45,8 @@ public class OSCBlogDetailFragment extends TitleBarFragment {
 
     private final String OSCBLOG_HOST = "http://www.oschina.net/action/api/blog_detail?id=";
     private int OSCBLOG_ID = 295001;
+    public static final String DATA_URL_KEY = "osc_blog_key";
+    private String blogUrl;
 
     private KJHttp kjh;
     private String cacheData;
@@ -67,7 +69,7 @@ public class OSCBlogDetailFragment extends TitleBarFragment {
         actionBarRes.title = getString(R.string.blog_detail);
         actionBarRes.backImageId = R.drawable.titlebar_back;
         List<CollectData> datas = kjdb.findAllByWhere(CollectData.class,
-                "url='" + OSCBLOG_HOST + OSCBLOG_ID + "'");
+                "url='" + blogUrl + "'");
         if (datas != null && datas.size() != 0) {
             actionBarRes.menuImageId = R.drawable.titlebar_star;
             outsideAty.mImgMenu.setTag(Boolean.valueOf(true));
@@ -93,16 +95,17 @@ public class OSCBlogDetailFragment extends TitleBarFragment {
             if ((Boolean) tag) {
                 outsideAty.mImgMenu.setTag(Boolean.valueOf(false));
                 setMenuImage(R.drawable.titlebar_unstar);
-                kjdb.deleteByWhere(CollectData.class, "url='" + OSCBLOG_HOST
-                        + OSCBLOG_ID + "'");
+                kjdb.deleteByWhere(CollectData.class, "url='" + blogUrl + "'");
                 return;
             }
         }
         // 如果没有tag或tag为假，则把tag改为true收藏本链接
         outsideAty.mImgMenu.setTag(Boolean.valueOf(true));
         setMenuImage(R.drawable.titlebar_star);
-        data.setName(mWebView.getTitle());
-        data.setUrl(OSCBLOG_HOST + OSCBLOG_ID);
+        if (StringUtils.isEmpty(data.getName())) {
+            data.setName(mWebView.getTitle());
+        }
+        data.setUrl(blogUrl);
         kjdb.save(data);
     }
 
@@ -112,12 +115,17 @@ public class OSCBlogDetailFragment extends TitleBarFragment {
         kjdb = KJDB.create(outsideAty);
         Bundle outData = aty.getBundleData();
         if (outData != null) {
-            OSCBLOG_ID = outData.getInt("oscblog_id", 295001);
+            if (outData.getString(DATA_URL_KEY) != null) {
+                blogUrl = outData.getString(DATA_URL_KEY);
+            } else {
+                OSCBLOG_ID = outData.getInt("oscblog_id", 295001);
+                blogUrl = OSCBLOG_HOST + OSCBLOG_ID;
+            }
         }
         HttpConfig config = new HttpConfig();
         config.cacheTime = 300;
         kjh = new KJHttp(config);
-        cacheData = kjh.getStringCache(OSCBLOG_HOST + OSCBLOG_ID);
+        cacheData = kjh.getStringCache(blogUrl);
     }
 
     @Override
@@ -131,7 +139,7 @@ public class OSCBlogDetailFragment extends TitleBarFragment {
             fillUI(data);
         }
 
-        kjh.get(OSCBLOG_HOST + OSCBLOG_ID, new HttpCallBack() {
+        kjh.get(blogUrl, new HttpCallBack() {
             @Override
             public void onSuccess(String t) {
                 super.onSuccess(t);
@@ -151,6 +159,7 @@ public class OSCBlogDetailFragment extends TitleBarFragment {
      * @param data
      */
     private void fillUI(OSCBlogEntity data) {
+        this.data.setName(data.getBlog().getTitle());
         mTvAuthor.setText(data.getBlog().getAuthorname());
         mTvBlogTitle.setText(data.getBlog().getTitle());
         mTvTime.setText(StringUtils.friendlyTime(data.getBlog().getPubDate()));

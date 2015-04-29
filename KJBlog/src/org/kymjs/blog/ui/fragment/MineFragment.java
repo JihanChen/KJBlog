@@ -73,7 +73,7 @@ public class MineFragment extends TitleBarFragment {
     protected void initWidget(View parentView) {
         super.initWidget(parentView);
         mRlExit.setVisibility(View.GONE);
-        mTvVersion.setText("当前版本" + SystemTool.getAppVersion(outsideAty));
+        mTvVersion.setText("当前版本" + SystemTool.getAppVersionName(outsideAty));
         mCbox.setChecked(PreferenceHelper.readBoolean(outsideAty,
                 AppConfig.PUSH_SWITCH_FILE, AppConfig.PUSH_SWITCH_KEY));
         mCbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -91,6 +91,7 @@ public class MineFragment extends TitleBarFragment {
         super.widgetClick(v);
         switch (v.getId()) {
         case R.id.mine_tv_collect:
+            SimpleBackActivity.postShowWith(outsideAty, SimpleBackPage.COLLECT);
             break;
         case R.id.mine_tv_other:
             doJoin("http://www.kymjs.com/");
