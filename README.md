@@ -4,17 +4,17 @@
 
 #简介 
 爱看博客是我的个人博客平台客户端，你也可以访问[http://blog.kymjs.com](http://blog.kymjs.com)查看我的博客。<br>
-更多我的开源项目请查看开源实验室[http://www.kymjs.com](http://www.kymjs.com/);
-APK下载地址 * 爱看博客 *：[http://www.kymjs.com/app/kjblog.apk](http://www.kymjs.com/app/kjblog.apk)<br><br>
+更多我的开源项目请查看开源实验室[http://www.kymjs.com](http://www.kymjs.com/);<br>
+APK下载地址 *爱看博客*：[http://www.kymjs.com/app/kjblog.apk](http://www.kymjs.com/app/kjblog.apk)<br>
 
 同时也欢迎你关注我的微信公众号【Android技术分享】,我会每天发一篇技术博客供你学习。
 [![Android技术分享](http://blog.kymjs.com/images/qrcode.jpg)](http://blog.kymjs.com/)<br>
 
 ## 说明
 本项目所用到的开源框架：<br>
-* KJFrameForAndroid * ：[https://github.com/kymjs/KJFrameForAndroid](https://github.com/kymjs/KJFrameForAndroid)<br>
-* KJPush * ：[http://git.oschina.net/kymjs/KJPush](http://git.oschina.net/kymjs/KJPush)<br>
-* NineOldAndroids * ：[https://github.com/JakeWharton/NineOldAndroids](https://github.com/JakeWharton/NineOldAndroids)<br>
+* *KJFrameForAndroid* ：[https://github.com/kymjs/KJFrameForAndroid](https://github.com/kymjs/KJFrameForAndroid)<br>
+* *KJPush* ：[http://git.oschina.net/kymjs/KJPush](http://git.oschina.net/kymjs/KJPush)<br>
+* *NineOldAndroids* ：[https://github.com/JakeWharton/NineOldAndroids](https://github.com/JakeWharton/NineOldAndroids)<br>
 
 启动Eclipse，点击菜单并导入Android客户端项目，请确保你当前的Android SDK是最新版。<br>
 如果编译出错，请修改项目根目录下的 project.properties 文件。<br>
